@@ -10,7 +10,7 @@
 .header__nav {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  max-width: 1920px;
 
   gap: 20px;
 }

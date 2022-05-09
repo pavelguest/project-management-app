@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AuthorizationBtn from '../AuthorizationBtn';
 import './Header.css';
 
 export const Header = () => (
@@ -14,6 +15,7 @@ export const Header = () => (
       <NavLink to="/board" className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}>
         Board
       </NavLink>
+      <AuthorizationBtn />
     </nav>
   </header>
 );
