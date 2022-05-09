@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import localizationReducers from './reducers/localizatonSlice';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({ localizationReducers });
 
 export const setupStore = () => configureStore({ reducer: rootReducer });
 
