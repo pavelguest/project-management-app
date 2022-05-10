@@ -7,13 +7,19 @@
   color: white;
   background-color: #c6d1e8;
 }
+
 .header__nav {
   display: flex;
   flex-direction: row;
   width: 400px;
-
   gap: 20px;
 }
+
+.header__nav-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
 .nav__link {
   width: 150px;
   padding: 5px;
@@ -22,9 +28,29 @@
   text-decoration: none;
   box-shadow: 1px 1px 10px 1px #000a;
 }
+
 .nav__link:hover {
   color: #334a50;
 }
+
 .active {
   background-color: rgb(214, 88, 88);
+}
+
+/* CREATE BOARD MODAL=============================================================== */
+
+.create-board-wrapper {
+  position: relative;
+}
+
+.create-board-modal {
+  width: 300px;
+  position: absolute;
+  top: 66px;
+  border: solid 1px black;
+  color: black;
+}
+
+.create-board-modal__input {
+  border: solid 1px black;
 }
