@@ -1,0 +1,31 @@
+.create-board-wrapper {
+  position: relative;
+}
+
+.create-board-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  width: 300px;
+  position: absolute;
+  top: 66px;
+  border: solid 1px black;
+  color: black;
+  background-color: white;
+  z-index: 2;
+}
+
+.create-board-modal__input {
+  border: solid 1px black;
+}
+
+.create-board-modal__btn {
+  width: 60px;
+}
+
+.errors-message {
+  color: red;
+  font-size: .6rem;
+}
