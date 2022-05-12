@@ -3,15 +3,17 @@ import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux"
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import boardsSlice, { addNewBoard } from '../../redux/reducers/boardsSlice';
+import { IBoardData } from '../../types/boardsSliceTypes';
 
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
 
-const dispatch = useAppDispatch()
-const { board } = useAppSelector(state => state.boardReducers)
-
 export function RenderModalCreateBoard() {
+  const dispatch = useAppDispatch()
+  const { board } = useAppSelector(state => state.boardReducers);
+
   const {
     register,
     handleSubmit,
@@ -19,7 +21,9 @@ export function RenderModalCreateBoard() {
   } = useForm();
   const onSubmit: SubmitHandler<IBoardForm> = (data) => {
     console.log(data.title);
-    dispatch(addNewBoard(data.title))
+    const newBoard = data.title ? {title: data.title} : {title: ''};
+    dispatch(addNewBoard(newBoard));
+    console.log(board);
     // axios
     //   .post('https://app-management-final.herokuapp.com/boards', {
     //     title: data.title,

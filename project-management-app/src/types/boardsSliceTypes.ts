@@ -2,6 +2,6 @@ export interface IInitialState {
   board: IBoardData[];
 }
 
-interface IBoardData {
+export interface IBoardData {
   title: string;
 }
