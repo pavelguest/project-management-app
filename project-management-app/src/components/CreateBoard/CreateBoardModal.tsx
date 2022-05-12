@@ -2,9 +2,14 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
 import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
+
+const dispatch = useAppDispatch()
+const { board } = useAppSelector(state => state.boardReducers)
 
 export function RenderModalCreateBoard() {
   const {
@@ -14,16 +19,17 @@ export function RenderModalCreateBoard() {
   } = useForm();
   const onSubmit: SubmitHandler<IBoardForm> = (data) => {
     console.log(data.title);
-    axios
-      .post('https://app-management-final.herokuapp.com/boards', {
-        title: data.title,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    dispatch(addNewBoard(data.title))
+    // axios
+    //   .post('https://app-management-final.herokuapp.com/boards', {
+    //     title: data.title,
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
 
   return (
