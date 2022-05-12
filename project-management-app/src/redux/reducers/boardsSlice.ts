@@ -11,8 +11,8 @@ export const boardsSlice = createSlice({
   reducers: {
     addNewBoard: (state, action: PayloadAction<IBoardData>) => {
       state.board.push(action.payload);
-    }
-  }
+    },
+  },
 });
 
 export default boardsSlice.reducer;

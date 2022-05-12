@@ -4,4 +4,5 @@ export interface IInitialState {
 
 export interface IBoardData {
   title: string;
+  id?: string;
 }

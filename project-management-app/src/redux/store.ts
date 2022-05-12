@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import localizationReducers from './reducers/localizatonSlice';
-import boardReducers from './reducers/boardsSlice'
+import boardReducers from './reducers/boardsSlice';
 
 const rootReducer = combineReducers({ localizationReducers, boardReducers });
 
