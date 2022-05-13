@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import AuthorizationBtn from '../AuthorizationBtn';
 import './Header.css';
 import { RenderButton } from '../CreateBoard';
 
@@ -20,6 +21,7 @@ export const Header = () => (
         </NavLink>
       </nav>
       <RenderButton />
+      <AuthorizationBtn />
     </div>
   </header>
 );
