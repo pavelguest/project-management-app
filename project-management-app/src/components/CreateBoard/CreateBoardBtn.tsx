@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { RenderModalCreateBoard } from './CreateBoardModal';
 import './CreateBoardBtn.css';
 

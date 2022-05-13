@@ -2,22 +2,21 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
 import axios from 'axios';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import boardsSlice, { addNewBoard } from '../../redux/reducers/boardsSlice';
+import { useAppDispatch } from '../../hooks/redux';
+import { addNewBoard } from '../../redux/reducers/boardsSlice';
 import { fetchBoardsPostAll } from '../../redux/reducers/ActionCreators';
-// import { IBoardData } from '../../types/boardsSliceTypes';
 
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
 
 export const RenderModalCreateBoard = () => {
   const dispatch = useAppDispatch();
-  const { board } = useAppSelector((state) => state.boardReducers);
+  // const { board } = useAppSelector((state) => state.boardReducers);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors /*, isValid*/ },
   } = useForm();
   const onSubmit: SubmitHandler<IBoardForm> = (data) => {
     // console.log(data.title);
