@@ -1,6 +1,24 @@
+import axios from 'axios';
+import { IBoardForm } from '../../types/headerTypes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';
 import { $authHost, $host } from '.';
+
+const fetchBoardsPostAll = createAsyncThunk(
+  'boards/postAll',
+  async (data: IBoardForm, thunkAPI) => {
+    try {
+      const response = await axios.post('https://app-management-final.herokuapp.com/boards', {
+        title: data.title,
+        id: data.id,
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(`${e}`);
+    }
+  }
+);
 
 interface TPropsAuthRespose {
   name: string;
@@ -12,7 +30,7 @@ export interface ICheckTocken {
   userId: string;
 }
 
-export const fetchRegistr = createAsyncThunk(
+const fetchRegistr = createAsyncThunk(
   'auth/fetchAuth',
   async (props: TPropsAuthRespose, thunkAPI) => {
     try {
@@ -28,7 +46,7 @@ export const fetchRegistr = createAsyncThunk(
   }
 );
 
-export const fetchLogin = createAsyncThunk(
+const fetchLogin = createAsyncThunk(
   'auth/fetchLogin',
   async (props: TPropsAuthRespose, thunkAPI) => {
     try {
@@ -45,16 +63,15 @@ export const fetchLogin = createAsyncThunk(
 );
 
 // Получаем юзера по id, если без ошибки - значит токен валидный
-export const fetchCheck = createAsyncThunk(
-  'auth/fetchCheck',
-  async (props: ICheckTocken, thunkAPI) => {
-    try {
-      const response = await $authHost.get(
-        `https://app-management-final.herokuapp.com/users/${props.userId}`
-      );
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Unauthorized!');
-    }
+const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocken, thunkAPI) => {
+  try {
+    const response = await $authHost.get(
+      `https://app-management-final.herokuapp.com/users/${props.userId}`
+    );
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue('Unauthorized!');
   }
-);
+});
+
+export { fetchBoardsPostAll, fetchRegistr, fetchLogin, fetchCheck };

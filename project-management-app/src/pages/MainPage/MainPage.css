@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+.main-page {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.board {
+  width: 200px;
+  height: 96px;
+  padding: 10px;
+  border: solid 1px black;
+}
