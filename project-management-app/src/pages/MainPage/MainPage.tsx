@@ -10,6 +10,7 @@ export const MainPage = () => {
     dispatch(fetchBoardsGetAll()).then((result) => {
       dispatch(addAllBoards(result.payload));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { board } = useAppSelector((state) => state.boardReducers);

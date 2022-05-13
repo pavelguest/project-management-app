@@ -24,6 +24,7 @@ const App = () => {
     !auth.isAuth && navigate('/');
     auth.isAuth && navigate('/main');
     dispatch(fetchCheck({ userId: id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.isAuth]);
 
   return (
