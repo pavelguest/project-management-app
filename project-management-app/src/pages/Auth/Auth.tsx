@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
-import { matchPath, useLocation } from 'react-router-dom';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchLogin, fetchRegistr } from '../../redux/reducers/actionCreators';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +45,10 @@ type FormInputsTypes = {
 const Auth = () => {
   const classes = useStyles();
   const location = useLocation();
+  const navigate = useNavigate();
   const registrationMatches = matchPath({ path: '/registration', end: true }, location.pathname);
+  const { auth } = useAppSelector((state) => state.authReducers);
+  const dispatch = useAppDispatch();
   const {
     register,
     formState: { errors, isValid },
@@ -53,8 +58,19 @@ const Auth = () => {
     mode: 'all',
   });
 
-  const submit = () => {
-    console.log('submit');
+  const submit = (data: FormInputsTypes) => {
+    if (registrationMatches) {
+      dispatch(fetchRegistr({ name: data.name, login: data.login, password: data.password }));
+      {
+        auth.isAuth && navigate('/main');
+      }
+    }
+    if (!registrationMatches) {
+      dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }));
+      {
+        auth.isAuth && navigate('/main');
+      }
+    }
 
     reset();
   };

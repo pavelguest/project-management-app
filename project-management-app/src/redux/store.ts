@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import localizationReducers from './reducers/localizatonSlice';
+import authReducers from './reducers/authSlice';
 
-const rootReducer = combineReducers({ localizationReducers });
+const rootReducer = combineReducers({ localizationReducers, authReducers });
 
 export const setupStore = () => configureStore({ reducer: rootReducer });
 
