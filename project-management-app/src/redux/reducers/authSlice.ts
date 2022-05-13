@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAuth, IInitialState } from '../../types/authSliceType';
-import { fetchRegistr, fetchLogin, fetchCheck } from './actionCreators';
+import { fetchRegistr, fetchLogin, fetchCheck } from './ActionCreators';
 
 const initialState: IInitialState = {
   auth: {

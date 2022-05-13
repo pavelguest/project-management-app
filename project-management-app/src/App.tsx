@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchCheck, ICheckTocken } from './redux/reducers/actionCreators';
+import { fetchCheck, ICheckTocken } from './redux/reducers/ActionCreators';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 

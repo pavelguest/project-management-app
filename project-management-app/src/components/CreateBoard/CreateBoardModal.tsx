@@ -4,7 +4,7 @@ import './CreateBoardModal.css';
 import axios from 'axios';
 import { useAppDispatch } from '../../hooks/redux';
 import { addNewBoard } from '../../redux/reducers/boardsSlice';
-import { fetchBoardsPostAll } from '../../redux/reducers/actionCreators';
+import { fetchBoardsPostAll } from '../../redux/reducers/ActionCreators';
 
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
