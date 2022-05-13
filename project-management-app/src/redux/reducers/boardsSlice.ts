@@ -12,8 +12,11 @@ export const boardsSlice = createSlice({
     addNewBoard: (state, action: PayloadAction<IBoardData>) => {
       state.board.push(action.payload);
     },
+    addAllBoards: (state, action: PayloadAction<IBoardData[]>) => {
+      state.board = action.payload;
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { addNewBoard } = boardsSlice.actions;
+export const { addNewBoard, addAllBoards } = boardsSlice.actions;

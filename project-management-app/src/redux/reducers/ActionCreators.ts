@@ -19,6 +19,15 @@ const fetchBoardsPostAll = createAsyncThunk(
   }
 );
 
+const fetchBoardsGetAll = createAsyncThunk('boards/getAll', async (_, thunkAPI) => {
+  try {
+    const response = await axios.get('https://app-management-final.herokuapp.com/boards');
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(`${e}`);
+  }
+});
+
 interface TPropsAuthRespose {
   name: string;
   login: string;
@@ -73,4 +82,4 @@ const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocke
   }
 });
 
-export { fetchBoardsPostAll, fetchRegistr, fetchLogin, fetchCheck };
+export { fetchBoardsPostAll, fetchBoardsGetAll, fetchRegistr, fetchLogin, fetchCheck };
