@@ -12,7 +12,6 @@ const fetchBoardsPostAll = createAsyncThunk(
         title: data.title,
         id: data.id,
       });
-      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(`${e}`);
