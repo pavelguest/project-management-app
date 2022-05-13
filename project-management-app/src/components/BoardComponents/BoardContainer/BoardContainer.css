@@ -1,0 +1,14 @@
+.board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+.columns-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
