@@ -10,8 +10,48 @@
 }
 
 .board {
+  position: relative;
   width: 200px;
   height: 96px;
   padding: 10px;
   border: solid 1px black;
 }
+
+.create-board-modal__delete {
+  position: absolute;
+  right: -5px;
+  cursor: pointer;
+}
+
+.board svg {
+  opacity: 0;
+  background: none;
+  transition-delay: 0.5s;
+  transition-duration: 0.5s;
+  transition-property: opacity, transform;
+}
+
+.board svg.active {
+  opacity: 1;
+  transform: translateX(-20px);
+}
+
+.create-board-modal__delete:hover {
+  color: black;
+}
+
+/* .create-board-modal__delete {
+  float: right;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+.board svg {
+  opacity: 0;
+  background: none;
+  transition: opacity 1s 1s;
+}
+
+.board svg.active {
+  opacity: 1;
+} */

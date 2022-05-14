@@ -8,7 +8,7 @@ const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
   async (data: IBoardForm, thunkAPI) => {
     try {
-      const response = await axios.post('https://app-management-final.herokuapp.com/boards', {
+      const response = await $authHost.post('https://app-management-final.herokuapp.com/boards', {
         title: data.title,
         id: data.id,
       });
@@ -21,7 +21,7 @@ const fetchBoardsPostAll = createAsyncThunk(
 
 const fetchBoardsGetAll = createAsyncThunk('boards/getAll', async (_, thunkAPI) => {
   try {
-    const response = await axios.get('https://app-management-final.herokuapp.com/boards');
+    const response = await $authHost.get('https://app-management-final.herokuapp.com/boards');
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(`${e}`);
