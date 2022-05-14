@@ -5,7 +5,7 @@
   padding: 20px;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-color: #c6d1e8;
+  background-color: var(--darck-blue);
 }
 
 .header__nav {
@@ -27,12 +27,13 @@
   color: #000000;
   text-decoration: none;
   box-shadow: 1px 1px 10px 1px #000a;
+  background-color: var(--light-blue);
 }
 
 .nav__link:hover {
-  color: #334a50;
+  color: var(--beige);
 }
 
 .active {
-  background-color: rgb(214, 88, 88);
+  background-color: var(--peach);
 }
