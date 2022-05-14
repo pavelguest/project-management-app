@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
-      background: '#ff1744',
+      background: 'var(--peach)',
     },
     header: {
       textAlign: 'center',
