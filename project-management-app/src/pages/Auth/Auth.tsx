@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchLogin, fetchRegistr } from '../../redux/reducers/ActionCreators';
+import { Alert, Snackbar } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +50,8 @@ const Auth = () => {
   const registrationMatches = matchPath({ path: '/registration', end: true }, location.pathname);
   const { auth } = useAppSelector((state) => state.authReducers);
   const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+
   const {
     register,
     formState: { errors, isValid },
@@ -57,6 +60,10 @@ const Auth = () => {
   } = useForm<FormInputsTypes>({
     mode: 'all',
   });
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const submit = (data: FormInputsTypes) => {
     if (registrationMatches) {
@@ -69,6 +76,7 @@ const Auth = () => {
       dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }));
       {
         auth.isAuth && navigate('/main');
+        !!auth.error && setIsOpen(true);
       }
     }
 
@@ -154,6 +162,11 @@ const Auth = () => {
             Login
           </Button>
         </CardActions>
+        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {auth.error}
+          </Alert>
+        </Snackbar>
       </Card>
     </form>
   );
