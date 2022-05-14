@@ -12,6 +12,7 @@ const initialState: IInitialState = {
     error: '',
     isLoading: true,
     id: '',
+    errorLogin: '',
   },
 };
 
@@ -41,7 +42,7 @@ export const authSlice = createSlice({
     },
     [fetchLogin.fulfilled.type]: (state, action: PayloadAction<IAuth>) => {
       state.auth.isLoading = false;
-      state.auth.error = '';
+      state.auth.errorLogin = '';
       state.auth.userId = action.payload.userId;
       state.auth.login = action.payload.login;
       state.auth.isAuth = !!action.payload.login;
@@ -53,7 +54,7 @@ export const authSlice = createSlice({
     },
     [fetchLogin.rejected.type]: (state, action: PayloadAction<string>) => {
       state.auth.isLoading = false;
-      state.auth.error = action.payload;
+      state.auth.errorLogin = action.payload;
     },
     [fetchCheck.fulfilled.type]: (state, action: PayloadAction<IAuth>) => {
       state.auth.isLoading = false;
@@ -61,9 +62,6 @@ export const authSlice = createSlice({
       state.auth.id = action.payload.id;
       state.auth.login = action.payload.login;
       state.auth.isAuth = !!action.payload.login;
-      console.log(state.auth.isAuth);
-      console.log(action.payload.login);
-      console.log(state.auth.login);
     },
     [fetchCheck.pending.type]: (state) => {
       state.auth.isLoading = true;

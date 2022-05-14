@@ -63,9 +63,11 @@ const fetchLogin = createAsyncThunk(
         password: props.password,
       });
       localStorage.setItem('token', response.data.token);
+      console.log(response);
       return jwt_decode(response.data.token);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e) {
-      return thunkAPI.rejectWithValue('Ошибка авторизации! Повторите попытку');
+      return thunkAPI.rejectWithValue('User was not founded!');
     }
   }
 );
