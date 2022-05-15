@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './AlertDialogModal.css';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';

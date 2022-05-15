@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IInitialState, IBoardData } from '../../types/boardsSliceTypes';
-import { WritableDraft } from 'immer/dist/internal';
 
 const initialState: IInitialState = {
   board: [],
