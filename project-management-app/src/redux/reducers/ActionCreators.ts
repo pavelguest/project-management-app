@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { IBoardForm } from '../../types/headerTypes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';

@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
-import axios from 'axios';
 import { useAppDispatch } from '../../hooks/redux';
 import { addNewBoard } from '../../redux/reducers/boardsSlice';
 import { fetchBoardsPostAll } from '../../redux/reducers/ActionCreators';
