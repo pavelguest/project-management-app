@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
-      background: '#ff1744',
+      background: 'var(--peach)',
     },
     header: {
       textAlign: 'center',
@@ -164,7 +164,7 @@ const Auth = () => {
         </CardActions>
         <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {auth.error}
+            {auth.errorLogin}
           </Alert>
         </Snackbar>
       </Card>
