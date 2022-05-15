@@ -15,8 +15,13 @@ export const boardsSlice = createSlice({
     addAllBoards: (state, action: PayloadAction<IBoardData[]>) => {
       state.board = action.payload;
     },
+    deleteBoard: (state, action: PayloadAction<string>) => {
+      state.board.map((el, index) => {
+        if (el.id === action.payload) state.board.splice(index, 1);
+      });
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { addNewBoard, addAllBoards } = boardsSlice.actions;
+export const { addNewBoard, addAllBoards, deleteBoard } = boardsSlice.actions;

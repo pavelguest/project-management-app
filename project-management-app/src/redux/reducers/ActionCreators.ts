@@ -28,6 +28,17 @@ const fetchBoardsGetAll = createAsyncThunk('boards/getAll', async (_, thunkAPI) 
   }
 });
 
+const fetchBoardDelete = createAsyncThunk('board/delete', async (boardId: string, thunkAPI) => {
+  try {
+    const response = await $authHost.delete(
+      `https://app-management-final.herokuapp.com/boards/${boardId}`
+    );
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(`${e}`);
+  }
+});
+
 interface TPropsAuthRespose {
   name: string;
   login: string;
@@ -82,4 +93,11 @@ const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocke
   }
 });
 
-export { fetchBoardsPostAll, fetchBoardsGetAll, fetchRegistr, fetchLogin, fetchCheck };
+export {
+  fetchBoardsPostAll,
+  fetchBoardsGetAll,
+  fetchBoardDelete,
+  fetchRegistr,
+  fetchLogin,
+  fetchCheck,
+};
