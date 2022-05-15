@@ -1,5 +1,6 @@
 export interface IInitialState {
   board: IBoardData[];
+  deleteModalOpen: boolean;
 }
 
 export interface IBoardData {
