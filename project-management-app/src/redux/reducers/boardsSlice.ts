@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IInitialState, IBoardData } from '../../types/boardsSliceTypes';
+import { WritableDraft } from 'immer/dist/internal';
 
 const initialState: IInitialState = {
   board: [],
   deleteModalOpen: false,
+  boardToDeleteId: '',
 };
 
 export const boardsSlice = createSlice({
@@ -15,6 +17,9 @@ export const boardsSlice = createSlice({
     },
     addAllBoards: (state, action: PayloadAction<IBoardData[]>) => {
       state.board = action.payload;
+    },
+    setBoardToDelete: (state, action: PayloadAction<string>) => {
+      state.boardToDeleteId = action.payload;
     },
     deleteBoard: (state, action: PayloadAction<string>) => {
       state.board.map((el, index) => {
@@ -28,5 +33,5 @@ export const boardsSlice = createSlice({
 });
 
 export default boardsSlice.reducer;
-export const { addNewBoard, addAllBoards, deleteBoard, toggleDeleteModalOpen } =
+export const { addNewBoard, addAllBoards, deleteBoard, toggleDeleteModalOpen, setBoardToDelete } =
   boardsSlice.actions;

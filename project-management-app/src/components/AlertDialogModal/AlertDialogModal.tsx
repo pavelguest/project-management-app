@@ -8,6 +8,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleDeleteModalOpen } from '../../redux/reducers/boardsSlice';
+import { fetchBoardDelete } from '../../redux/reducers/ActionCreators';
+import { deleteBoard } from '../../redux/reducers/boardsSlice';
 
 interface IProps {
   open: boolean;
@@ -15,12 +17,16 @@ interface IProps {
 
 export const AlertDialogModal = (props: IProps) => {
   const dispatch = useAppDispatch();
-  // const { deleteModalOpen } = useAppSelector((state) => state.boardReducers);
+  const { boardToDeleteId } = useAppSelector((state) => state.boardReducers);
 
-  const handleClickOpen = () => {};
-
-  const handleClose = () => {
+  const handleClose = (props: string) => {
     dispatch(toggleDeleteModalOpen(false));
+    if (props === 'confirm') {
+      dispatch(fetchBoardDelete(boardToDeleteId)).then((result) => {
+        console.log(result.meta.arg);
+        dispatch(deleteBoard(result.meta.arg));
+      });
+    }
   };
 
   return (
@@ -30,17 +36,16 @@ export const AlertDialogModal = (props: IProps) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Whould you like to delete that board?'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Let Google help apps determine location. This means sending anonymous location data to
-          Google, even when no apps are running.
+          After deleting you won&apos;t be able to restore all that board&apos;s data!
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={handleClose} autoFocus>
-          Agree
+        <Button onClick={() => handleClose('')}>Cancel</Button>
+        <Button onClick={() => handleClose('confirm')} autoFocus>
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>

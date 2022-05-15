@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import './MainPage.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchBoardDelete, fetchBoardsGetAll } from '../../redux/reducers/ActionCreators';
-import { addAllBoards, deleteBoard, toggleDeleteModalOpen } from '../../redux/reducers/boardsSlice';
+import {
+  addAllBoards,
+  deleteBoard,
+  toggleDeleteModalOpen,
+  setBoardToDelete,
+} from '../../redux/reducers/boardsSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialogModal from '../../components/AlertDialogModal';
 
@@ -17,12 +22,11 @@ export const MainPage = () => {
   }, []);
 
   const handleMouseOverBoard = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // ((event.target as HTMLDivElement).firstChild as HTMLOrSVGImageElement).classList
-    (event.target as HTMLDivElement).className === 'board'
-      ? ((event.target as HTMLDivElement).firstChild as HTMLOrSVGImageElement).classList.add(
-          'active'
-        )
-      : false;
+    if ((event.target as HTMLDivElement).className === 'board') {
+      ((event.target as HTMLDivElement).firstChild as HTMLOrSVGImageElement).classList.add(
+        'active'
+      );
+    }
   };
 
   const handleMouseLeaveBoard = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -37,17 +41,12 @@ export const MainPage = () => {
   };
 
   const handleDeleteBoardModal = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-    dispatch(toggleDeleteModalOpen(true));
-  };
-
-  const handleDeleteBoard = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     if ((event.target as HTMLDivElement).closest('div')) {
-      const boardToDelete = (event.target as HTMLDivElement).closest('div') as HTMLDivElement;
-      dispatch(fetchBoardDelete(boardToDelete.id)).then((result) => {
-        console.log(result.meta.arg);
-        dispatch(deleteBoard(result.meta.arg));
-      });
+      dispatch(
+        setBoardToDelete(((event.target as HTMLDivElement).closest('div') as HTMLDivElement).id)
+      );
     }
+    dispatch(toggleDeleteModalOpen(true));
   };
 
   return (
@@ -82,3 +81,13 @@ export const MainPage = () => {
 //     ? (event.target as HTMLDivElement).closest('div').id
 //     : false
 // );
+
+// const handleDeleteBoard = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+//   if ((event.target as HTMLDivElement).closest('div')) {
+//     const boardToDelete = (event.target as HTMLDivElement).closest('div') as HTMLDivElement;
+//     dispatch(fetchBoardDelete(boardToDelete.id)).then((result) => {
+//       console.log(result.meta.arg);
+//       dispatch(deleteBoard(result.meta.arg));
+//     });
+//   }
+// };
