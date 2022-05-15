@@ -27,9 +27,9 @@ export const MainPage = () => {
     ((event.target as HTMLDivElement).parentElement as HTMLDivElement).childNodes.forEach(
       (el: ChildNode) => {
         const deleteBtn = el.firstChild as HTMLOrSVGImageElement;
-        deleteBtn.classList !== null && deleteBtn.classList !== undefined
-          ? (el.firstChild as HTMLOrSVGImageElement).classList.remove('active')
-          : false;
+        if ((el as HTMLDivElement).className === 'board') {
+          deleteBtn.classList.remove('active');
+        }
       }
     );
   };
