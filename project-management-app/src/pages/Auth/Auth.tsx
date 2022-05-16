@@ -11,6 +11,7 @@ import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchLogin, fetchRegistr } from '../../redux/reducers/ActionCreators';
 import { Alert, Snackbar } from '@mui/material';
+import { FormInputsTypes } from '../../types/formInputsTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,12 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-type FormInputsTypes = {
-  name: string;
-  login: string;
-  password: string;
-};
 
 const Auth = () => {
   const classes = useStyles();

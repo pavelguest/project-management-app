@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAuth, IInitialState } from '../../types/authSliceType';
-import { fetchRegistr, fetchLogin, fetchCheck } from './ActionCreators';
+import { fetchRegistr, fetchLogin, fetchCheck, fetchEdit } from './ActionCreators';
 
 const initialState: IInitialState = {
   auth: {
@@ -46,8 +46,6 @@ export const authSlice = createSlice({
       state.auth.userId = action.payload.userId;
       state.auth.login = action.payload.login;
       state.auth.isAuth = !!action.payload.login;
-      console.log(state.auth.login);
-      console.log(state.auth.isAuth);
     },
     [fetchLogin.pending.type]: (state) => {
       state.auth.isLoading = true;
@@ -69,6 +67,19 @@ export const authSlice = createSlice({
     [fetchCheck.rejected.type]: (state, action: PayloadAction<string>) => {
       state.auth.isLoading = false;
       state.auth.error = action.payload;
+    },
+    [fetchEdit.fulfilled.type]: (state, action: PayloadAction<IAuth>) => {
+      state.auth.isLoading = false;
+      state.auth.errorLogin = '';
+      state.auth.id = action.payload.id;
+      state.auth.login = action.payload.login;
+    },
+    [fetchEdit.pending.type]: (state) => {
+      state.auth.isLoading = true;
+    },
+    [fetchEdit.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.auth.isLoading = false;
+      state.auth.errorLogin = action.payload;
     },
   },
 });
