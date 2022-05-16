@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useDrop } from 'react-dnd';
 import { itemTypes } from '../../../types/BoardTypes';
+import ModalCreateItem from '../ModalCreateItem';
 import './Column.css';
 
 interface IProps {
@@ -21,6 +22,7 @@ export const Column = ({ children, title }: IProps) => {
       <p>{title}</p>
       <div className="columns-wrapper" ref={drop}>
         {children}
+        <ModalCreateItem type={'task'} />
       </div>
     </div>
   );
