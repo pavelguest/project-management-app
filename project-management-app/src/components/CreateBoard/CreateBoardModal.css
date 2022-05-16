@@ -29,3 +29,22 @@
   color: red;
   font-size: .6rem;
 }
+
+.create__btn {
+  padding: 5px;
+  height: 37px;
+  font-size: 20px;
+  color: #000000;
+  text-decoration: none;
+  box-shadow: 1px 1px 10px 1px #000a;
+  background-color: var(--light-blue);
+  font-family:"Roboto";
+}
+
+.create__btn:hover {
+  color: var(--beige);
+}
+
+.create__btn:active {
+  background-color: var(--peach);
+}

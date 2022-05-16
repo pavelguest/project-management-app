@@ -23,8 +23,11 @@ const AuthorizationBtn = () => {
       {auth.isAuth && (
         <Button
           variant="contained"
-          color="primary"
-          style={{ whiteSpace: 'nowrap', boxShadow: '1px 1px 10px 1px #000a' }}
+          style={{
+            whiteSpace: 'nowrap',
+            boxShadow: '1px 1px 10px 1px #000a',
+            backgroundColor: 'var(--blue)',
+          }}
           onClick={logOut}
         >
           Sign Out
@@ -49,8 +52,11 @@ const AuthorizationBtn = () => {
       {auth.isAuth && !mainMatches && (
         <Button
           variant="contained"
-          color="primary"
-          style={{ whiteSpace: 'nowrap', boxShadow: '1px 1px 10px 1px #000a' }}
+          style={{
+            whiteSpace: 'nowrap',
+            boxShadow: '1px 1px 10px 1px #000a',
+            backgroundColor: 'var(--blue)',
+          }}
           onClick={() => navigate('/main')}
         >
           Go to main page

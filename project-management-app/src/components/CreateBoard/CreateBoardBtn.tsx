@@ -11,7 +11,9 @@ export function RenderButton() {
 
   return (
     <div className="create-board-wrapper">
-      <button onClick={handleToggleModal}>Create</button>
+      <button className="create__btn" onClick={handleToggleModal}>
+        Create
+      </button>
       {showModal && <RenderModalCreateBoard />}
       {showModal && <div className="overlay" onClick={handleToggleModal}></div>}
     </div>
