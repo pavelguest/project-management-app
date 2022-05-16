@@ -117,5 +117,5 @@ export {
   fetchRegistr,
   fetchLogin,
   fetchCheck,
-  fetchEdit
+  fetchEdit,
 };
