@@ -17,6 +17,10 @@
   z-index: 2;
 }
 
+.create-board-modal__label {
+  font-size: 1.6rem;
+}
+
 .create-board-modal__input {
   border: solid 1px black;
 }
