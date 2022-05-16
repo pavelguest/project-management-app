@@ -3,6 +3,8 @@ import { IInitialState, IBoardData } from '../../types/boardsSliceTypes';
 
 const initialState: IInitialState = {
   board: [],
+  deleteModalOpen: false,
+  boardToDeleteId: '',
 };
 
 export const boardsSlice = createSlice({
@@ -15,8 +17,20 @@ export const boardsSlice = createSlice({
     addAllBoards: (state, action: PayloadAction<IBoardData[]>) => {
       state.board = action.payload;
     },
+    setBoardToDelete: (state, action: PayloadAction<string>) => {
+      state.boardToDeleteId = action.payload;
+    },
+    deleteBoard: (state, action: PayloadAction<string>) => {
+      state.board.map((el, index) => {
+        if (el.id === action.payload) state.board.splice(index, 1);
+      });
+    },
+    toggleDeleteModalOpen: (state, action: PayloadAction<boolean>) => {
+      state.deleteModalOpen = action.payload;
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { addNewBoard, addAllBoards } = boardsSlice.actions;
+export const { addNewBoard, addAllBoards, deleteBoard, toggleDeleteModalOpen, setBoardToDelete } =
+  boardsSlice.actions;

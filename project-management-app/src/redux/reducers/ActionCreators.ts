@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { IBoardForm } from '../../types/headerTypes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';
@@ -8,7 +7,7 @@ const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
   async (data: IBoardForm, thunkAPI) => {
     try {
-      const response = await axios.post('https://app-management-final.herokuapp.com/boards', {
+      const response = await $authHost.post('https://app-management-final.herokuapp.com/boards', {
         title: data.title,
         id: data.id,
       });
@@ -21,7 +20,18 @@ const fetchBoardsPostAll = createAsyncThunk(
 
 const fetchBoardsGetAll = createAsyncThunk('boards/getAll', async (_, thunkAPI) => {
   try {
-    const response = await axios.get('https://app-management-final.herokuapp.com/boards');
+    const response = await $authHost.get('https://app-management-final.herokuapp.com/boards');
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(`${e}`);
+  }
+});
+
+const fetchBoardDelete = createAsyncThunk('board/delete', async (boardId: string, thunkAPI) => {
+  try {
+    const response = await $authHost.delete(
+      `https://app-management-final.herokuapp.com/boards/${boardId}`
+    );
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(`${e}`);
@@ -83,4 +93,11 @@ const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocke
   }
 });
 
-export { fetchBoardsPostAll, fetchBoardsGetAll, fetchRegistr, fetchLogin, fetchCheck };
+export {
+  fetchBoardsPostAll,
+  fetchBoardsGetAll,
+  fetchBoardDelete,
+  fetchRegistr,
+  fetchLogin,
+  fetchCheck,
+};

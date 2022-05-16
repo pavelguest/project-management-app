@@ -1,13 +1,12 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
-import axios from 'axios';
 import { useAppDispatch } from '../../hooks/redux';
 import { addNewBoard } from '../../redux/reducers/boardsSlice';
 import { fetchBoardsPostAll } from '../../redux/reducers/ActionCreators';
 
-axios.defaults.headers.common['Authorization'] =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
+// axios.defaults.headers.common['Authorization'] =
+//   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
 
 export const RenderModalCreateBoard = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +26,7 @@ export const RenderModalCreateBoard = () => {
 
   return (
     <form className="create-board-modal" onSubmit={handleSubmit(onSubmit)}>
-      <label>
+      <label className="create-board-modal__label">
         Create new board
         <input
           className="create-board-modal__input"
