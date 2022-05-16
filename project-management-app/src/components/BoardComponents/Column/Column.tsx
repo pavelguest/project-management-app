@@ -7,9 +7,10 @@ import './Column.css';
 interface IProps {
   title: string;
   children: ReactNode;
+  createTask: (value: string) => void;
 }
 
-export const Column = ({ children, title }: IProps) => {
+export const Column = ({ children, title, createTask }: IProps) => {
   const [, drop] = useDrop({
     accept: itemTypes.card,
     drop: () => ({
@@ -22,7 +23,7 @@ export const Column = ({ children, title }: IProps) => {
       <p>{title}</p>
       <div className="columns-wrapper" ref={drop}>
         {children}
-        <ModalCreateItem type={'task'} />
+        <ModalCreateItem type={'task'} create={createTask} />
       </div>
     </div>
   );

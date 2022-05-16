@@ -1,14 +1,13 @@
 .columns-wrapper {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 500px;
+  width: 200px;
+  height: 300px;
   padding: 10px;
-  border: 2px salmon solid;
 
   gap: 10px;
 }
 .columns__item {
-  padding: 20px;
-  box-shadow: 2px 2px 20px 2px #000a;
+  overflow-y: auto;
+  box-shadow: 1px 1px 10px 1px #000a;
 }

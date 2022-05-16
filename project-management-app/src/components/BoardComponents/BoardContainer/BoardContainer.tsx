@@ -41,6 +41,15 @@ export const BoardContainer = () => {
   const [columns, setColumns] = useState(columnItems);
   const [tasks, setTasks] = useState(items);
 
+  const createColumn = (value: string) => {
+    console.log(value);
+    const countItems = columns.length + 2;
+    setColumns([...columns, { id: countItems, name: value }]);
+  };
+  const createTask = (value: string) => {
+    console.log(value);
+  };
+
   const moveColumnHandler = (dragIndex: number, hoverIndex: number) => {
     const dragItem = columns[dragIndex];
     if (dragItem) {
@@ -89,11 +98,13 @@ export const BoardContainer = () => {
             index={index}
             name={elem.name}
           >
-            <Column title={elem.name}>{returnTasksForColumn(elem.name)}</Column>
+            <Column title={elem.name} createTask={createTask}>
+              {returnTasksForColumn(elem.name)}
+            </Column>
           </ColumnsContainer>
         ))}
       </div>
-      <ModalCreateItem type={'column'} />
+      <ModalCreateItem type={'column'} create={createColumn} />
     </div>
   );
 };

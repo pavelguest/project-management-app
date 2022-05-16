@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  overflow-x: auto;
 
   gap: 20px;
 }
@@ -9,7 +11,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 
   gap: 20px;
 }
