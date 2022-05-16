@@ -3,6 +3,7 @@ import AuthorizationBtn from '../AuthorizationBtn';
 import './Header.css';
 import { RenderButton } from '../CreateBoard';
 import { useAppSelector } from '../../hooks/redux';
+import EditBtn from '../EditBth/EditBtn';
 
 export const Header = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -28,6 +29,12 @@ export const Header = () => {
                 Board
               </NavLink>
               <RenderButton />
+              <NavLink
+                to="/edit"
+                className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
+              >
+                <EditBtn />
+              </NavLink>
             </>
           )}
         </nav>

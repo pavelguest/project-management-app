@@ -11,7 +11,7 @@
 .header__nav {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  width: 600px;
   gap: 20px;
 }
 
