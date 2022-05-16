@@ -94,7 +94,7 @@ const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocke
   }
 });
 
-export const fetchEdit = createAsyncThunk('auth/fetchEdit', async (props: IEditProps, thunkAPI) => {
+const fetchEdit = createAsyncThunk('auth/fetchEdit', async (props: IEditProps, thunkAPI) => {
   try {
     const response = await $authHost.put(
       `https://app-management-final.herokuapp.com/users/${props.id}`,
