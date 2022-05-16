@@ -3,6 +3,7 @@ import { IBoardForm } from '../../types/headerTypes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';
 import { $authHost, $host } from '.';
+import { IEditProps } from '../../types/editPropsTypes';
 
 const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
@@ -80,6 +81,22 @@ const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocke
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue('Unauthorized!');
+  }
+});
+
+export const fetchEdit = createAsyncThunk('auth/fetchEdit', async (props: IEditProps, thunkAPI) => {
+  try {
+    const response = await $authHost.put(
+      `https://app-management-final.herokuapp.com/users/${props.id}`,
+      {
+        name: props.name,
+        login: props.login,
+        password: props.password,
+      }
+    );
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue('Ошибка! Повторите попытку');
   }
 });
 
