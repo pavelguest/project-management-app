@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';
 import { $authHost, $host } from '.';
 import { IEditProps } from '../../types/editPropsTypes';
+import { ISetColumn } from '../../types/columnSliceType';
 
 const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
@@ -110,6 +111,38 @@ const fetchEdit = createAsyncThunk('auth/fetchEdit', async (props: IEditProps, t
   }
 });
 
+const fetchGetAllColumns = createAsyncThunk(
+  'columns/fetchGetAllColumns',
+  async (boardId: string, thunkAPI) => {
+    try {
+      const response = await $authHost.get(
+        `https://app-management-final.herokuapp.com/boards/${boardId}/columns`
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+const fetchCreateColumn = createAsyncThunk(
+  'columns/fetchCreateColumn',
+  async (props: ISetColumn, thunkAPI) => {
+    try {
+      const response = await $authHost.post(
+        `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns`,
+        {
+          title: props.title,
+          order: props.order,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export {
   fetchBoardsPostAll,
   fetchBoardsGetAll,
@@ -118,4 +151,6 @@ export {
   fetchLogin,
   fetchCheck,
   fetchEdit,
+  fetchGetAllColumns,
+  fetchCreateColumn,
 };

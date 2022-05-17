@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalCreateItem from '../ModalCreateItem';
 import Column from '../Column';
 import Task from '../Task';
 import ColumnsContainer from '../TasksContainer';
 import './BoardContainer.css';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { columnSlice } from '../../../redux/reducers/columnSlice';
+import { fetchCreateColumn, fetchGetAllColumns } from '../../../redux/reducers/ActionCreators';
+import { IColumns } from '../../../types/columnSliceType';
+import Preload from '../../Preload';
 
 export interface IColumnItems {
-  id: number;
-  name: string;
+  order: number;
+  title: string;
 }
 export interface ITaskSItems {
   id: number;
@@ -23,10 +28,10 @@ export const COLUMN_NAMES = {
 };
 
 export const columnItems = [
-  { id: 1, name: COLUMN_NAMES.DO_IT },
-  { id: 2, name: COLUMN_NAMES.IN_PROGRESS },
-  { id: 3, name: COLUMN_NAMES.AWAITING_REVIEW },
-  { id: 4, name: COLUMN_NAMES.DONE },
+  { order: 1, title: COLUMN_NAMES.DO_IT },
+  { order: 2, title: COLUMN_NAMES.IN_PROGRESS },
+  { order: 3, title: COLUMN_NAMES.AWAITING_REVIEW },
+  { order: 4, title: COLUMN_NAMES.DONE },
 ];
 
 const { DO_IT } = COLUMN_NAMES;
@@ -38,13 +43,30 @@ export const items = [
 ];
 
 export const BoardContainer = () => {
-  const [columns, setColumns] = useState(columnItems);
+  const { columnsArr, column, statusApi } = useAppSelector((state) => state.columnReducers);
+  const {} = columnSlice.actions;
+  const dispatch = useAppDispatch();
+  const [columns, setColumns] = useState<IColumns[]>([]);
   const [tasks, setTasks] = useState(items);
 
+  const getColumns = () => {
+    dispatch(fetchGetAllColumns('7e4d9a6c-1791-4114-a267-e8895b2bfa52'));
+    setColumns(columnsArr);
+  };
+
+  useEffect(() => {
+    getColumns();
+  }, []);
+
   const createColumn = (value: string) => {
-    console.log(value);
-    const countItems = columns.length + 2;
-    setColumns([...columns, { id: countItems, name: value }]);
+    const orderColumns = columnsArr.length ? columnsArr.length + 2 : 0;
+    dispatch(
+      fetchCreateColumn({
+        boardId: '7e4d9a6c-1791-4114-a267-e8895b2bfa52',
+        order: orderColumns,
+        title: value,
+      })
+    );
   };
   const createTask = (value: string) => {
     console.log(value);
@@ -91,18 +113,25 @@ export const BoardContainer = () => {
   return (
     <div className="board-container">
       <div className="columns-container">
-        {columns.map((elem, index) => (
-          <ColumnsContainer
-            moveColumnHandler={moveColumnHandler}
-            key={elem.id}
-            index={index}
-            name={elem.name}
-          >
-            <Column title={elem.name} createTask={createTask}>
-              {returnTasksForColumn(elem.name)}
-            </Column>
-          </ColumnsContainer>
-        ))}
+        {statusApi.isLoading ? (
+          <Preload />
+        ) : statusApi.error ? (
+          <div>{statusApi.error}</div>
+        ) : (
+          columns &&
+          columns.map((elem, index) => (
+            <ColumnsContainer
+              moveColumnHandler={moveColumnHandler}
+              key={elem.order}
+              index={index}
+              name={elem.title}
+            >
+              <Column title={elem.title} createTask={createTask}>
+                {returnTasksForColumn(elem.title)}
+              </Column>
+            </ColumnsContainer>
+          ))
+        )}
       </div>
       <ModalCreateItem type={'column'} create={createColumn} />
     </div>
