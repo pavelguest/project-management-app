@@ -1,4 +1,4 @@
-import { RenderButton } from './CreateBoardBtn';
+import { CreateBoardBtn } from './CreateBoardBtn';
 import { RenderModalCreateBoard } from './CreateBoardModal';
 
-export { RenderButton, RenderModalCreateBoard };
+export { CreateBoardBtn, RenderModalCreateBoard };

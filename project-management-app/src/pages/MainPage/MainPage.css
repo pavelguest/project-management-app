@@ -2,15 +2,9 @@
   box-sizing: border-box;
 }
 
-html {
-  /* background-color: var(--light-blue); */
-}
-
 .main-page {
   min-height: calc(100vh - 92px);
   background-color: var(--light-blue);
-  /* box-sizing: border-box; */
-  /* height: 100%; */
 }
 
 .boards-wrapper {

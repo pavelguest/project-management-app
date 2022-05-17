@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { RenderModalCreateBoard } from './CreateBoardModal';
 import './CreateBoardBtn.css';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { toggleCreateBoardModalOpen } from '../../redux/reducers/boardsSlice';
 
-export function RenderButton() {
-  const [showModal, setShowModal] = useState(false);
+export function CreateBoardBtn() {
+  const dispatch = useAppDispatch();
+  const { createBoardModalOpen } = useAppSelector((state) => state.boardReducers);
+  console.log(createBoardModalOpen);
+  // const [showModal, setShowModal] = useState(false);
 
   const handleToggleModal = () => {
-    showModal ? setShowModal(false) : setShowModal(true);
+    dispatch(toggleCreateBoardModalOpen(createBoardModalOpen ? false : true));
+    // showModal ? setShowModal(false) : setShowModal(true);
   };
 
   return (
@@ -14,8 +20,9 @@ export function RenderButton() {
       <button className="create__btn" onClick={handleToggleModal}>
         Create
       </button>
-      {showModal && <RenderModalCreateBoard />}
-      {showModal && <div className="overlay" onClick={handleToggleModal}></div>}
+      <RenderModalCreateBoard open={createBoardModalOpen} />
+      {/* {showModal && <RenderModalCreateBoard />}
+      {showModal && <div className="overlay" onClick={handleToggleModal}></div>} */}
     </div>
   );
 }
