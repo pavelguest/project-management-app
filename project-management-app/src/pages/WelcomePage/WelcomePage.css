@@ -1,4 +1,13 @@
 .welcome {
     min-height: calc(100vh - 85px);
     background-color: var(--blue);
+    
+}
+
+.welcome__wrap {
+    display: flex;
+    max-width: 900px;
+    justify-content: space-between;
+    margin-left: 20%;
+    padding-top: 10%;
 }
