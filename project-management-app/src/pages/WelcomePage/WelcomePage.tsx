@@ -7,7 +7,7 @@ export const WelcomePage = () => {
   return (
     <div className="welcome">
       <div className="welcome__wrap">
-        <Card sx={{ maxWidth: 250 }}>
+        <Card className="welcome__1" sx={{ maxWidth: 250 }}>
           <CardActionArea>
             <CardMedia component="img" height="240" image="./pavel_edited.jpg" alt="green iguana" />
             <CardContent>
@@ -23,7 +23,7 @@ export const WelcomePage = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 250 }}>
+        <Card className="welcome__2" sx={{ maxWidth: 250 }}>
           <CardActionArea>
             <CardMedia component="img" height="240" image="./alena_edite.jpg" alt="green iguana" />
             <CardContent>
@@ -40,7 +40,7 @@ export const WelcomePage = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 250 }}>
+        <Card className="welcome__3" sx={{ maxWidth: 250 }}>
           <CardActionArea>
             <CardMedia
               component="img"
