@@ -9,6 +9,7 @@ import { columnSlice } from '../../../redux/reducers/columnSlice';
 import { fetchCreateColumn, fetchGetAllColumns } from '../../../redux/reducers/ActionCreators';
 import { IColumns } from '../../../types/columnSliceType';
 import Preload from '../../Preload';
+import { taskSlice } from '../../../redux/reducers/taskSlice';
 
 export interface IColumnItems {
   order: number;
@@ -43,16 +44,19 @@ export const items = [
 ];
 
 export const BoardContainer = () => {
-  const { columnsArr, column, statusApi } = useAppSelector((state) => state.columnReducers);
-  const {} = columnSlice.actions;
+  const { columnsArr, statusApi } = useAppSelector((state) => state.columnReducers);
+  const { tasksArr, statusApiTask } = useAppSelector((state) => state.taskReducers);
+  const { addColumns } = columnSlice.actions;
+  const { addTasks } = taskSlice.actions;
   const dispatch = useAppDispatch();
-  const [columns, setColumns] = useState<IColumns[]>([]);
+  // const [columns, setColumns] = useState<IColumns[]>([]);
   const [tasks, setTasks] = useState(items);
 
   const getColumns = () => {
     dispatch(fetchGetAllColumns('7e4d9a6c-1791-4114-a267-e8895b2bfa52'));
-    setColumns(columnsArr);
+    // setColumns(columnsArr);
   };
+  const getTasks = () => {};
 
   useEffect(() => {
     getColumns();
@@ -73,14 +77,12 @@ export const BoardContainer = () => {
   };
 
   const moveColumnHandler = (dragIndex: number, hoverIndex: number) => {
-    const dragItem = columns[dragIndex];
+    const dragItem = columnsArr[dragIndex];
     if (dragItem) {
-      setColumns((prevState) => {
-        const coppiedStateArray = [...prevState];
-        const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
-        coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
-        return coppiedStateArray;
-      });
+      const coppiedStateArray = [...columnsArr];
+      const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
+      coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+      dispatch(addColumns(coppiedStateArray));
     }
   };
 
@@ -113,13 +115,12 @@ export const BoardContainer = () => {
   return (
     <div className="board-container">
       <div className="columns-container">
-        {statusApi.isLoading ? (
-          <Preload />
-        ) : statusApi.error ? (
+        {statusApi.isLoading && <Preload />}
+        {statusApi.error ? (
           <div>{statusApi.error}</div>
         ) : (
-          columns &&
-          columns.map((elem, index) => (
+          columnsArr &&
+          columnsArr.map((elem, index) => (
             <ColumnsContainer
               moveColumnHandler={moveColumnHandler}
               key={elem.order}

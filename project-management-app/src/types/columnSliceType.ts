@@ -9,6 +9,10 @@ export interface ISetColumn {
   title: string;
   order: number;
 }
+export interface IDeleteColumn {
+  boardId: string;
+  columnId: string;
+}
 
 export interface IInitialState {
   columnsArr: IColumns[];

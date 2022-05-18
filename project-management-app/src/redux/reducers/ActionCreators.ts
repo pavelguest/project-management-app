@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import jwt_decode from 'jwt-decode';
 import { $authHost, $host } from '.';
 import { IEditProps } from '../../types/editPropsTypes';
-import { ISetColumn } from '../../types/columnSliceType';
+import { IDeleteColumn, ISetColumn } from '../../types/columnSliceType';
+import { ICreateTask, IDeleteTask, IGetTasks } from '../../types/tasksSliceType';
 
 const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
@@ -142,6 +143,66 @@ const fetchCreateColumn = createAsyncThunk(
     }
   }
 );
+const fetchDeleteColumn = createAsyncThunk(
+  'columns/fetchCreateColumn',
+  async (props: IDeleteColumn, thunkAPI) => {
+    try {
+      const response = await $authHost.post(
+        `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns/${props.columnId}`
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+const fetchGetAllTasks = createAsyncThunk(
+  'tasks/fetchGetAllTasks',
+  async (props: IGetTasks, thunkAPI) => {
+    try {
+      const response = await $authHost.get(
+        `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns/${props.columnId}/tasks`
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+const fetchCreateTask = createAsyncThunk(
+  'columns/fetchCreateColumn',
+  async (props: ICreateTask, thunkAPI) => {
+    try {
+      const response = await $authHost.post(
+        `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns/${props.columnId}/tasks`,
+        {
+          title: props.title,
+          order: props.order,
+          description: props.description,
+          userId: props.userId,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+const fetchDeleteTask = createAsyncThunk(
+  'columns/fetchCreateColumn',
+  async (props: IDeleteTask, thunkAPI) => {
+    try {
+      const response = await $authHost.post(
+        `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns/${props.columnId}/tasks/${props.taskId}`
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 
 export {
   fetchBoardsPostAll,
@@ -153,4 +214,8 @@ export {
   fetchEdit,
   fetchGetAllColumns,
   fetchCreateColumn,
+  fetchDeleteColumn,
+  fetchGetAllTasks,
+  fetchCreateTask,
+  fetchDeleteTask,
 };

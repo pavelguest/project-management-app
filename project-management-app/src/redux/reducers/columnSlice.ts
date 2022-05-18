@@ -37,7 +37,7 @@ export const columnSlice = createSlice({
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
       console.log(`set`, action.payload);
-      state.column = action.payload;
+      state.columnsArr = [...state.columnsArr, action.payload];
     },
     [fetchCreateColumn.pending.type]: (state) => {
       state.statusApi.isLoading = true;
@@ -47,7 +47,11 @@ export const columnSlice = createSlice({
       state.statusApi.error = action.payload;
     },
   },
-  reducers: {},
+  reducers: {
+    addColumns: (state, action: PayloadAction<IColumns[]>) => {
+      state.columnsArr = action.payload;
+    },
+  },
 });
 
 export default columnSlice.reducer;
