@@ -179,9 +179,6 @@ const Edit = () => {
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <p>New Password - {newPass}</p>
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <p>Log in again!</p>
-              </Typography>
             </Box>
           </Modal>
           <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
