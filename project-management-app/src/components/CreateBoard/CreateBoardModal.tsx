@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IBoardForm } from '../../types/headerTypes';
 import './CreateBoardModal.css';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { addNewBoard } from '../../redux/reducers/boardsSlice';
 import { fetchBoardsPostAll } from '../../redux/reducers/ActionCreators';
 import { toggleCreateBoardModalOpen } from '../../redux/reducers/boardsSlice';
@@ -12,93 +12,101 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react';
+import { makeStyles } from '@material-ui/core';
 
-// axios.defaults.headers.common['Authorization'] =
-//   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
 interface IProps {
   open: boolean;
 }
 
+const useStyles = makeStyles({
+  dialog: {
+    position: 'absolute',
+    top: 50,
+    left: 370,
+  },
+});
+
 export const RenderModalCreateBoard = (props: IProps) => {
   const dispatch = useAppDispatch();
-  const { createBoardModalOpen } = useAppSelector((state) => state.boardReducers);
+  const [boardName, setBoardName] = useState('');
+  const { handleSubmit } = useForm();
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors /*, isValid*/ },
-  // } = useForm();
-  // const onSubmit: SubmitHandler<IBoardForm> = (data) => {
-  //   // console.log(data.title);
-  //   dispatch(fetchBoardsPostAll(data)).then((result) => {
-  //     dispatch(addNewBoard(result.payload));
-  //   });
-  // };
-  // const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    // setOpen(true);
+  const onSubmit: SubmitHandler<IBoardForm> = () => {
+    if (boardName === '') return;
+    dispatch(toggleCreateBoardModalOpen(false));
+    dispatch(fetchBoardsPostAll({ title: boardName })).then((result) => {
+      dispatch(addNewBoard(result.payload));
+    });
   };
 
-  const handleClose = (props: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log(props);
-    // if (props === 'create') {
-    //   // dispatch(fetchBoardsPostAll(data)).then((result) => {
-    //   //   dispatch(addNewBoard(result.payload));
-    //   // });
-    // }
-    dispatch(toggleCreateBoardModalOpen(false));
+  const classes = useStyles();
 
-    // setOpen(false);
+  const handleClose = () => {
+    dispatch(toggleCreateBoardModalOpen(false));
+  };
+
+  const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setBoardName(e.target.value);
   };
 
   return (
-    <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
-      <Dialog open={props.open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+    <div className="create-board-modal">
+      <Dialog
+        open={props.open}
+        onClose={handleClose}
+        classes={{
+          paper: classes.dialog,
+        }}
+      >
+        <DialogTitle>Create a board</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+            A board is an aggregation of cards, arranged in lists. Use it for project managment,
+            tracking or organizing of whatever you want.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
+          <form /* className="create-board-modal"*/ onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Board name"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={boardName}
+              onChange={(event) => handleChangeValue(event)}
+              required={true}
+              error={boardName === ''}
+              helperText={boardName === '' ? 'Empty field!' : ' '}
+            />
+          </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={(event) => handleClose(event)}>Cancel</Button>
-          <Button onClick={(event) => handleClose(event)}>Subscribe</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit(onSubmit)}>Create</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-
-  // return (
-  //   <form className="create-board-modal" onSubmit={handleSubmit(onSubmit)}>
-  //     <label className="create-board-modal__label">
-  //       Create new board
-  //       <input
-  //         className="create-board-modal__input"
-  //         type="text"
-  //         {...register('title', {
-  //           required: 'Field has to be fulfilled',
-  //         })}
-  //       />
-  //       {errors.title && <p className="errors-message">{errors.title.message || 'error!'}</p>}
-  //     </label>
-  //     <button className="create-board-modal__btn">Create</button>
-  //   </form>
-  // );
 };
+
+// return (
+//   <form className="create-board-modal" onSubmit={handleSubmit(onSubmit)}>
+//     <label className="create-board-modal__label">
+//       Create new board
+//       <input
+//         className="create-board-modal__input"
+//         type="text"
+//         {...register('title', {
+//           required: 'Field has to be fulfilled',
+//         })}
+//       />
+//       {errors.title && <p className="errors-message">{errors.title.message || 'error!'}</p>}
+//     </label>
+//     <button className="create-board-modal__btn">Create</button>
+//   </form>
+// );
 
 // axios
 //   .post('https://app-management-final.herokuapp.com/boards', {
@@ -110,3 +118,6 @@ export const RenderModalCreateBoard = (props: IProps) => {
 //   .catch(function (error) {
 //     console.log(error);
 //   });
+
+// axios.defaults.headers.common['Authorization'] =
+//   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
