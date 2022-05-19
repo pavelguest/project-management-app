@@ -19,7 +19,15 @@
   width: 200px;
   height: 96px;
   padding: 10px;
-  border: solid 1px black;
+  /* border: solid 1px black; */
+  background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
+  box-shadow: rgb(0 0 0 / 67%) 1px 1px 10px 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.board:hover {
+  transform: scale(1.1) rotate(-0.5deg);
 }
 
 .create-board-modal__delete {
@@ -55,8 +63,4 @@
   opacity: 0;
   background: none;
   transition: opacity 1s 1s;
-}
-
-.board svg.active {
-  opacity: 1;
 } */
