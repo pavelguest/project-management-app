@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import './HeaderMenu.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const HeaderMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+    console.log(location);
+  });
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,11 +53,33 @@ export const HeaderMenu = () => {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+        // selectedMenuItemStyle={ {backgroundColor: '#c00', color: '#FFFFFF'} }
+        // value={this.state.selectedItem}
       >
-        <MenuItem onClick={() => handleClose('welcome')}>Welcome</MenuItem>
-        <MenuItem onClick={() => handleClose('main')}>Main</MenuItem>
-        <MenuItem onClick={() => handleClose('board')}>Board</MenuItem>
-        <MenuItem onClick={() => handleClose('edit-profile')}>Edit profile</MenuItem>
+        <MenuItem
+          onClick={() => handleClose('welcome')}
+          selected={location.pathname === '/' ? true : false}
+        >
+          Welcome
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleClose('main')}
+          selected={location.pathname === '/main' ? true : false}
+        >
+          Main
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleClose('board')}
+          selected={location.pathname === '/board' ? true : false}
+        >
+          Board
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleClose('edit-profile')}
+          selected={location.pathname === '/edit' ? true : false}
+        >
+          Edit profile
+        </MenuItem>
       </Menu>
     </div>
   );
