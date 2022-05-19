@@ -17,7 +17,9 @@
 
 .header__nav-wrapper {
   display: flex;
-  gap: 20px;
+  /* gap: 20px; */
+  justify-content: space-between;
+  width: 100%;
 }
 
 .nav__link {
@@ -36,4 +38,8 @@
 
 .active {
   background-color: var(--peach);
+}
+
+@media (max-width: 945px) {
+
 }

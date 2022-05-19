@@ -3,7 +3,7 @@
 }
 
 .main-page {
-  min-height: calc(100vh - 92px);
+  min-height: calc(100vh - 79px);
   background-color: var(--light-blue);
 }
 

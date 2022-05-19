@@ -19,7 +19,7 @@ const AuthorizationBtn = () => {
   };
 
   return (
-    <div className="autoriz-wrap">
+    <div className="authorization-wrapper">
       {auth.isAuth && (
         <Button
           variant="contained"

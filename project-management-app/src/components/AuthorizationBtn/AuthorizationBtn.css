@@ -1,7 +1,8 @@
-.autoriz-wrap {
-  width: 380px;
+.authorization-wrapper {
+  /* width: 380px; */
   display: flex;
   flex-direction: row;
   gap: 20px;
-  margin-left: 900px;
+  /* justify-content: space-between; */
+  /* margin-left: 900px; */
 }
