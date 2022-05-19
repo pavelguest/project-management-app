@@ -71,7 +71,7 @@ const Auth = () => {
     if (!registrationMatches) {
       dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
         .then(unwrapResult)
-        .then((originalPromiseResult) => {})
+        .then(() => {})
         .catch(() => setIsOpen(true));
       {
         auth.isAuth && navigate('/main');
