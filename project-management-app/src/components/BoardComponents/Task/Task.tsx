@@ -11,22 +11,23 @@ interface ITask {
 interface IPropsTask {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setTasks: any;
-  name: string;
+  title: string;
   index: number;
-  moveTaskHandler: (dragIndex: number, hoverIndex: number) => void;
+  columnId: string;
+  moveTaskHandler: (dragIndex: number, hoverIndex: number, currentColumnId: string) => void;
 }
 
-export const Task = ({ setTasks, name, index, moveTaskHandler }: IPropsTask) => {
-  const changeTaskColumn = (currentTask: ITask, columnName: string) => {
-    setTasks((prevState: ITaskSItems[]) => {
-      return prevState.map((elem) => {
-        return {
-          ...elem,
-          column: elem.name === currentTask.name ? columnName : elem.column,
-        };
-      });
-    });
-  };
+export const Task = ({ setTasks, title, index, moveTaskHandler, columnId }: IPropsTask) => {
+  // const changeTaskColumn = (currentTask: ITask, columnName: string) => {
+  //   setTasks((prevState: ITaskSItems[]) => {
+  //     return prevState.map((elem) => {
+  //       return {
+  //         ...elem,
+  //         column: elem.name === currentTask.name ? columnName : elem.column,
+  //       };
+  //     });
+  //   });
+  // };
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -55,35 +56,35 @@ export const Task = ({ setTasks, name, index, moveTaskHandler }: IPropsTask) => 
       }
       console.log(dragIndex, hoverIndex);
 
-      moveTaskHandler(dragIndex, hoverIndex);
+      moveTaskHandler(dragIndex, hoverIndex, columnId);
       item.index = hoverIndex;
     },
   });
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.card,
-    item: { index, name },
+    item: { index, name: title },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult() as ITask;
-      if (dropResult) {
-        const { name } = dropResult;
-        const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
-        switch (name) {
-          case IN_PROGRESS:
-            changeTaskColumn(item, IN_PROGRESS);
-            break;
-          case AWAITING_REVIEW:
-            changeTaskColumn(item, AWAITING_REVIEW);
-            break;
-          case DONE:
-            changeTaskColumn(item, DONE);
-            break;
-          case DO_IT:
-            changeTaskColumn(item, DO_IT);
-            break;
-          default:
-            break;
-        }
-      }
+      // if (dropResult) {
+      //   const { name } = dropResult;
+      //   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
+      //   switch (name) {
+      //     case IN_PROGRESS:
+      //       changeTaskColumn(item, IN_PROGRESS);
+      //       break;
+      //     case AWAITING_REVIEW:
+      //       changeTaskColumn(item, AWAITING_REVIEW);
+      //       break;
+      //     case DONE:
+      //       changeTaskColumn(item, DONE);
+      //       break;
+      //     case DO_IT:
+      //       changeTaskColumn(item, DO_IT);
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      // }
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -93,7 +94,7 @@ export const Task = ({ setTasks, name, index, moveTaskHandler }: IPropsTask) => 
   drag(drop(ref));
   return (
     <div className="column" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
-      {name}
+      {title}
     </div>
   );
 };

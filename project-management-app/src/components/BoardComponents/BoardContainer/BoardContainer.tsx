@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalCreateItem from '../ModalCreateItem';
 import Column from '../Column';
 import Task from '../Task';
 import ColumnsContainer from '../TasksContainer';
 import './BoardContainer.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { columnSlice } from '../../../redux/reducers/columnSlice';
-import { fetchCreateColumn, fetchGetAllColumns } from '../../../redux/reducers/ActionCreators';
-import { IColumns } from '../../../types/columnSliceType';
+import { fetchCreateColumn, fetchCreateTask } from '../../../redux/reducers/ActionCreators';
 import Preload from '../../Preload';
-import { taskSlice } from '../../../redux/reducers/taskSlice';
+import { addColumns, addTasks } from '../../../redux/reducers/boardsSlice';
+import { IColumnsArr } from '../../../types/boardsSliceTypes';
 
 export interface IColumnItems {
   order: number;
@@ -44,36 +43,36 @@ export const items = [
 ];
 
 export const BoardContainer = () => {
-  const { columnsArr, statusApi } = useAppSelector((state) => state.columnReducers);
-  const { tasksArr, statusApiTask } = useAppSelector((state) => state.taskReducers);
-  const { addColumns } = columnSlice.actions;
-  const { addTasks } = taskSlice.actions;
+  const { auth } = useAppSelector((state) => state.authReducers);
+  const { currentBoard, statusApi } = useAppSelector((state) => state.boardReducers);
+  const userId = auth.id;
+  const columnsArr = currentBoard.columns;
   const dispatch = useAppDispatch();
-  // const [columns, setColumns] = useState<IColumns[]>([]);
   const [tasks, setTasks] = useState(items);
-
-  const getColumns = () => {
-    dispatch(fetchGetAllColumns('7e4d9a6c-1791-4114-a267-e8895b2bfa52'));
-    // setColumns(columnsArr);
-  };
-  const getTasks = () => {};
-
-  useEffect(() => {
-    getColumns();
-  }, []);
 
   const createColumn = (value: string) => {
     const orderColumns = columnsArr.length ? columnsArr.length + 2 : 0;
     dispatch(
       fetchCreateColumn({
-        boardId: '7e4d9a6c-1791-4114-a267-e8895b2bfa52',
+        boardId: currentBoard.id,
         order: orderColumns,
         title: value,
       })
     );
   };
-  const createTask = (value: string) => {
-    console.log(value);
+  const createTask = (value: string, currentColumnId: string) => {
+    const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
+    const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
+    dispatch(
+      fetchCreateTask({
+        columnId: currentColumnId,
+        boardId: currentBoard.id,
+        userId: userId,
+        title: value,
+        order: orderTask,
+        description: 'qqq',
+      })
+    );
   };
 
   const moveColumnHandler = (dragIndex: number, hoverIndex: number) => {
@@ -86,30 +85,15 @@ export const BoardContainer = () => {
     }
   };
 
-  const moveTaskHandler = (dragIndex: number, hoverIndex: number) => {
-    const dragItem = tasks[dragIndex];
+  const moveTaskHandler = (dragIndex: number, hoverIndex: number, currentColumnId: string) => {
+    const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
+    const dragItem = currentColumn.tasks[dragIndex];
     if (dragItem) {
-      setTasks((prevState) => {
-        const coppiedStateArray = [...prevState];
-        const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
-        coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
-        return coppiedStateArray;
-      });
+      const coppiedStateArray = [...currentColumn.tasks];
+      const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
+      coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+      dispatch(addTasks(coppiedStateArray));
     }
-  };
-
-  const returnTasksForColumn = (columnName: string) => {
-    return tasks
-      .filter((task) => task.column === columnName)
-      .map((task, index) => (
-        <Task
-          key={task.id}
-          name={task.name}
-          setTasks={setTasks}
-          index={index}
-          moveTaskHandler={moveTaskHandler}
-        />
-      ));
   };
 
   return (
@@ -127,8 +111,17 @@ export const BoardContainer = () => {
               index={index}
               name={elem.title}
             >
-              <Column title={elem.title} createTask={createTask}>
-                {returnTasksForColumn(elem.title)}
+              <Column title={elem.title} id={elem.id} createTask={createTask}>
+                {elem.tasks.map((task, index) => (
+                  <Task
+                    key={task.id}
+                    title={task.title}
+                    setTasks={setTasks}
+                    index={index}
+                    columnId={elem.id}
+                    moveTaskHandler={moveTaskHandler}
+                  />
+                ))}
               </Column>
             </ColumnsContainer>
           ))

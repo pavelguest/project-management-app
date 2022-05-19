@@ -21,7 +21,7 @@ const initialState: IInitialState = {
 };
 
 export const taskSlice = createSlice({
-  name: 'columns',
+  name: 'tasks',
   initialState,
   extraReducers: {
     [fetchGetAllTasks.fulfilled.type]: (state, action: PayloadAction<ITask[]>) => {

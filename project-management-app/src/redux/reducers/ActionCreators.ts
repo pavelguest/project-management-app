@@ -127,7 +127,7 @@ const fetchGetAllColumns = createAsyncThunk(
 );
 
 const fetchCreateColumn = createAsyncThunk(
-  'columns/fetchCreateColumn',
+  'boards/fetchCreateColumn',
   async (props: ISetColumn, thunkAPI) => {
     try {
       const response = await $authHost.post(
@@ -144,7 +144,7 @@ const fetchCreateColumn = createAsyncThunk(
   }
 );
 const fetchDeleteColumn = createAsyncThunk(
-  'columns/fetchCreateColumn',
+  'columns/fetchDeleteColumn',
   async (props: IDeleteColumn, thunkAPI) => {
     try {
       const response = await $authHost.post(
@@ -172,7 +172,7 @@ const fetchGetAllTasks = createAsyncThunk(
 );
 
 const fetchCreateTask = createAsyncThunk(
-  'columns/fetchCreateColumn',
+  'boards/fetchCreateTask',
   async (props: ICreateTask, thunkAPI) => {
     try {
       const response = await $authHost.post(
@@ -191,11 +191,25 @@ const fetchCreateTask = createAsyncThunk(
   }
 );
 const fetchDeleteTask = createAsyncThunk(
-  'columns/fetchCreateColumn',
+  'tasks/fetchCreateTask',
   async (props: IDeleteTask, thunkAPI) => {
     try {
       const response = await $authHost.post(
         `https://app-management-final.herokuapp.com/boards/${props.boardId}/columns/${props.columnId}/tasks/${props.taskId}`
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+const fetchGetBoardId = createAsyncThunk(
+  'boards/fetchGetBoardId',
+  async (boardId: string, thunkAPI) => {
+    try {
+      const response = await $authHost.get(
+        `https://app-management-final.herokuapp.com/boards/${boardId}`
       );
       return response.data;
     } catch (e) {
@@ -218,4 +232,5 @@ export {
   fetchGetAllTasks,
   fetchCreateTask,
   fetchDeleteTask,
+  fetchGetBoardId,
 };
