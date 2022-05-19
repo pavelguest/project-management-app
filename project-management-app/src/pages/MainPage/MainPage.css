@@ -3,12 +3,15 @@
 }
 
 .main-page {
+  min-height: calc(100vh - 92px);
+  background-color: var(--light-blue);
+}
+
+.boards-wrapper {
   display: flex;
   gap: 20px;
-  padding: 10px;
+  padding: 20px;
   flex-wrap: wrap;
-  min-height: calc(100vh - 85px);
-  background-color: var(--light-blue);
 }
 
 .board {
