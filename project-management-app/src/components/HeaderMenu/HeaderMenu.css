@@ -1,0 +1,16 @@
+.more-menu {
+  display: none;
+  transform: 0.3s;
+  border-radius: 4px;
+}
+
+.more-menu:hover {
+  background-color: var(--light-blue) ;
+}
+
+@media (max-width: 945px) {
+  
+  .more-menu {
+    display: block;
+  }
+}

@@ -3,7 +3,7 @@
 }
 
 .main-page {
-  min-height: calc(100vh - 79px);
+  min-height: calc(100vh - 80px);
   background-color: var(--light-blue);
 }
 
@@ -12,6 +12,7 @@
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .board {

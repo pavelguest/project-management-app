@@ -5,6 +5,7 @@
   padding: 20px;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 80px;
   background-color: var(--darck-blue);
 }
 
@@ -17,8 +18,7 @@
 
 .header__nav-wrapper {
   display: flex;
-  /* gap: 20px; */
-  justify-content: space-between;
+  gap: 20px;
   width: 100%;
 }
 
@@ -41,5 +41,8 @@
 }
 
 @media (max-width: 945px) {
-
+  
+  .header__nav {
+    display: none;
+  }
 }
