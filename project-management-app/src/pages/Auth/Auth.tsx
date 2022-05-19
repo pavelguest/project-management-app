@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchLogin, fetchRegistr } from '../../redux/reducers/ActionCreators';
 import { Alert, Snackbar } from '@mui/material';
 import { FormInputsTypes } from '../../types/formInputsTypes';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,13 +69,14 @@ const Auth = () => {
       }
     }
     if (!registrationMatches) {
-      dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }));
+      dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
+        .then(unwrapResult)
+        .then((originalPromiseResult) => {})
+        .catch(() => setIsOpen(true));
       {
         auth.isAuth && navigate('/main');
-        !!auth.error && setIsOpen(true);
       }
     }
-
     reset();
   };
 
@@ -157,9 +159,22 @@ const Auth = () => {
             Login
           </Button>
         </CardActions>
-        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {auth.errorLogin}
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={isOpen}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert
+            style={{ backgroundColor: 'var(--peach)' }}
+            onClose={handleClose}
+            severity="error"
+            sx={{ width: '100%' }}
+          >
+            User was not founded!
           </Alert>
         </Snackbar>
       </Card>

@@ -9,7 +9,7 @@ export const WelcomePage = () => {
       <div className="welcome__wrap">
         <Card className="welcome__1" sx={{ maxWidth: 250 }}>
           <CardActionArea>
-            <CardMedia component="img" height="240" image="./pavel_edited.jpg" alt="green iguana" />
+            <CardMedia component="img" height="240" image="./pavel2.jpg" alt="green iguana" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Pavel
@@ -42,12 +42,7 @@ export const WelcomePage = () => {
         </Card>
         <Card className="welcome__3" sx={{ maxWidth: 250 }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="250"
-              image="./sergei_edited.jpg"
-              alt="green iguana"
-            />
+            <CardMedia component="img" height="250" image="./sergei.jpg" alt="green iguana" />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 Sergei
