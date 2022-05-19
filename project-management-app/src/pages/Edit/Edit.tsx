@@ -1,8 +1,195 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Edit.css';
+import { useForm } from 'react-hook-form';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import Button from '@material-ui/core/Button';
+import { Alert, Box, Modal, Snackbar, Typography } from '@mui/material';
+import { fetchEdit } from '../../redux/reducers/ActionCreators';
+import { IEditProps } from '../../types/editPropsTypes';
+import { useNavigate } from 'react-router-dom';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: 400,
+      margin: `${theme.spacing(0)} auto`,
+    },
+    loginBtn: {
+      marginTop: theme.spacing(2),
+      flexGrow: 1,
+      background: 'var(--peach)',
+    },
+    header: {
+      textAlign: 'center',
+      background: '#212121',
+      color: '#fff',
+    },
+    card: {
+      marginTop: theme.spacing(10),
+      width: 400,
+    },
+  })
+);
+
+const style = {
+  position: 'absolute',
+  top: '70%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  border: '2px solid var(--darck-blue)',
+  backgroundColor: 'var(--blue)',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Edit = () => {
-  return <div className="edit">Change profile</div>;
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const { auth } = useAppSelector((state) => state.authReducers);
+  const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenСonfirmation, setIsOpenСonfirmation] = useState(false);
+  const [newPass, setNewPass] = useState('');
+  const [newLog, setNewLog] = useState('');
+
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm<IEditProps>({
+    mode: 'all',
+  });
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setIsOpenСonfirmation(false);
+    navigate('/main');
+  };
+
+  const submit = (data: IEditProps) => {
+    dispatch(
+      fetchEdit({ name: data.name, login: data.login, password: data.password, id: auth.id })
+    );
+    setNewPass(data.password);
+    setNewLog(data.login);
+    !auth.error && setIsOpenСonfirmation(true);
+    !!auth.error && setIsOpen(true);
+    reset();
+  };
+
+  return (
+    <div className="edit">
+      <form onSubmit={handleSubmit(submit)} className={classes.container} autoComplete="off">
+        <Card className={classes.card}>
+          <CardHeader className={classes.header} title="Login App" />
+          <CardContent>
+            <div>
+              <TextField
+                fullWidth
+                id="name"
+                type="text"
+                label="Name"
+                placeholder="Name"
+                margin="normal"
+                {...register('name', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 5,
+                    message: 'Длинна не менее 5 символов',
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>
+                {errors?.name && <p>{errors?.name?.message || 'Error!'}</p>}
+              </div>
+
+              <TextField
+                fullWidth
+                id="login"
+                type="text"
+                label="New Login"
+                placeholder="New Login"
+                margin="normal"
+                {...register('login', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 5,
+                    message: 'Длинна не менее 5 символов',
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>
+                {errors?.login && <p>{errors?.login?.message || 'Error!'}</p>}
+              </div>
+
+              <TextField
+                fullWidth
+                id="password"
+                type="password"
+                label="New Password"
+                placeholder="New Password"
+                margin="normal"
+                {...register('password', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 3,
+                    message: 'Длинна не менее 3 символов',
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>
+                {errors?.password && <p>{errors?.password?.message || 'Error!'}</p>}
+              </div>
+            </div>
+          </CardContent>
+          <CardActions>
+            <Button
+              type="submit"
+              disabled={!isValid}
+              variant="contained"
+              size="large"
+              className={classes.loginBtn}
+            >
+              Change
+            </Button>
+          </CardActions>
+          <Modal
+            open={isOpenСonfirmation}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Changes applied!
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <p>New Login - {newLog}</p>
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <p>New Password - {newPass}</p>
+              </Typography>
+            </Box>
+          </Modal>
+          <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              {auth.errorLogin}
+            </Alert>
+          </Snackbar>
+        </Card>
+      </form>
+    </div>
+  );
 };
 
 export default Edit;

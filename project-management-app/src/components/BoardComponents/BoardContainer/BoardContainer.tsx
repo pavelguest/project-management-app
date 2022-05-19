@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ModalCreateItem from '../ModalCreateItem';
 import Column from '../Column';
 import Task from '../Task';
 import ColumnsContainer from '../TasksContainer';
@@ -92,6 +93,7 @@ export const BoardContainer = () => {
           </ColumnsContainer>
         ))}
       </div>
+      <ModalCreateItem type={'column'} />
     </div>
   );
 };
