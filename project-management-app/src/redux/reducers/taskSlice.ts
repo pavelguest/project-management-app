@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import React from 'react';
 import { IInitialState } from '../../types/tasksSliceType';
 
 const initialState: IInitialState = {
