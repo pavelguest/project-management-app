@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './MainPage.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchBoardsGetAll } from '../../redux/reducers/ActionCreators';
+import { fetchBoardsGetAll, fetchGetBoardId } from '../../redux/reducers/ActionCreators';
 import {
   addAllBoards,
   toggleDeleteModalOpen,
@@ -9,8 +9,10 @@ import {
 } from '../../redux/reducers/boardsSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialogModal from '../../components/AlertDialogModal';
+import { useNavigate } from 'react-router-dom';
 
 export const MainPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { board, deleteModalOpen } = useAppSelector((state) => state.boardReducers);
   useEffect(() => {
@@ -47,6 +49,10 @@ export const MainPage = () => {
     }
     dispatch(toggleDeleteModalOpen(true));
   };
+  const moveToBoard = (id: string) => {
+    dispatch(fetchGetBoardId(id));
+    navigate('../board');
+  };
 
   return (
     <div className="main-page">
@@ -59,6 +65,7 @@ export const MainPage = () => {
               className="board"
               onMouseEnter={(event) => handleMouseOverBoard(event)}
               onMouseLeave={(event) => handleMouseLeaveBoard(event)}
+              onClick={() => moveToBoard(el.id)}
             >
               <DeleteIcon
                 className="create-board-modal__delete"
