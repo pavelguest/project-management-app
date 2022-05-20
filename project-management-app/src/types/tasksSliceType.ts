@@ -15,7 +15,7 @@ export interface ICreateTask {
   description: string;
   userId: string;
 }
-export interface ITask {
+export interface ITaskObj {
   id: string;
   boardId: string;
   columnId: string;
@@ -25,8 +25,8 @@ export interface ITask {
   userId: string;
 }
 export interface IInitialState {
-  tasksArr: ITask[];
-  task: ITask;
+  tasksArr: ITaskObj[];
+  task: ITaskObj;
   statusApiTask: {
     isLoading: boolean;
     error: string;

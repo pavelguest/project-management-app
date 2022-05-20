@@ -4,9 +4,10 @@ import {
   IBoardData,
   ICurrentBoard,
   IColumnsArr,
+  ITasksArrAndColumnId,
+  IMovedTasks,
 } from '../../types/boardsSliceTypes';
-import { IColumns } from '../../types/columnSliceType';
-import { ITask } from '../../types/tasksSliceType';
+import { ITaskObj } from '../../types/tasksSliceType';
 import { fetchCreateColumn, fetchCreateTask, fetchGetBoardId } from './ActionCreators';
 
 const initialState: IInitialState = {
@@ -51,11 +52,20 @@ export const boardsSlice = createSlice({
     addColumns: (state, action: PayloadAction<IColumnsArr[]>) => {
       state.currentBoard.columns = action.payload;
     },
-    addTasks: (state, action: PayloadAction<ITask[]>) => {
-      const { columnId } = action.payload[0];
+    addTasks: (state, action: PayloadAction<ITasksArrAndColumnId>) => {
       state.currentBoard.columns.forEach((elem) => {
-        if (elem.id === columnId) {
-          elem.tasks = action.payload;
+        if (elem.id === action.payload.columnId) {
+          elem.tasks = action.payload.tasksArr;
+        }
+      });
+    },
+    addMovedTasks: (state, action: PayloadAction<IMovedTasks>) => {
+      state.currentBoard.columns.forEach((elem) => {
+        if (elem.id === action.payload.columnIdFrom) {
+          elem.tasks = action.payload.columnTasksArrFrom;
+        }
+        if (elem.id === action.payload.columnIdTo) {
+          elem.tasks = action.payload.columnTasksArrTo;
         }
       });
     },
@@ -88,7 +98,7 @@ export const boardsSlice = createSlice({
       state.statusApi.isLoading = false;
       state.statusApi.error = action.payload;
     },
-    [fetchCreateTask.fulfilled.type]: (state, action: PayloadAction<ITask>) => {
+    [fetchCreateTask.fulfilled.type]: (state, action: PayloadAction<ITaskObj>) => {
       const { columnId } = action.payload;
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
@@ -119,4 +129,5 @@ export const {
   addNewColumn,
   addColumns,
   addTasks,
+  addMovedTasks,
 } = boardsSlice.actions;

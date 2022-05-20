@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import React from 'react';
-import { IInitialState, ITask } from '../../types/tasksSliceType';
+import { IInitialState, ITaskObj } from '../../types/tasksSliceType';
 import { fetchCreateTask, fetchGetAllTasks } from './ActionCreators';
 
 const initialState: IInitialState = {
@@ -23,39 +23,8 @@ const initialState: IInitialState = {
 export const taskSlice = createSlice({
   name: 'tasks',
   initialState,
-  extraReducers: {
-    [fetchGetAllTasks.fulfilled.type]: (state, action: PayloadAction<ITask[]>) => {
-      state.statusApiTask.isLoading = false;
-      state.statusApiTask.error = '';
-      console.log(`get`, action.payload);
-      state.tasksArr = action.payload;
-    },
-    [fetchGetAllTasks.pending.type]: (state) => {
-      state.statusApiTask.isLoading = true;
-    },
-    [fetchGetAllTasks.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.statusApiTask.isLoading = false;
-      state.statusApiTask.error = action.payload;
-    },
-    [fetchCreateTask.fulfilled.type]: (state, action: PayloadAction<ITask>) => {
-      state.statusApiTask.isLoading = false;
-      state.statusApiTask.error = '';
-      console.log(`set`, action.payload);
-      state.tasksArr = [...state.tasksArr, action.payload];
-    },
-    [fetchCreateTask.pending.type]: (state) => {
-      state.statusApiTask.isLoading = true;
-    },
-    [fetchCreateTask.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.statusApiTask.isLoading = false;
-      state.statusApiTask.error = action.payload;
-    },
-  },
-  reducers: {
-    addTasks: (state, action: PayloadAction<ITask[]>) => {
-      state.tasksArr = action.payload;
-    },
-  },
+  extraReducers: {},
+  reducers: {},
 });
 
 export default taskSlice.reducer;

@@ -12,10 +12,13 @@ interface IProps {
 }
 
 export const Column = ({ children, title, id, createTask }: IProps) => {
-  const [, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: itemTypes.card,
     drop: () => ({
-      name: title,
+      currentDropColumnId: id,
+    }),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
     }),
   });
 
@@ -26,10 +29,14 @@ export const Column = ({ children, title, id, createTask }: IProps) => {
   return (
     <div className={'columns__item'}>
       <p>{title}</p>
-      <div className="columns-wrapper" ref={drop}>
+      <div
+        className="columns-wrapper"
+        ref={drop}
+        style={{ backgroundColor: isOver ? 'coral' : 'white' }}
+      >
         {children}
-        <ModalCreateItem type={'task'} create={setTask} />
       </div>
+      <ModalCreateItem type={'task'} create={setTask} />
     </div>
   );
 };

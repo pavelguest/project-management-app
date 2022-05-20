@@ -1,4 +1,4 @@
-import { ITask } from './tasksSliceType';
+import { ITaskObj } from './tasksSliceType';
 
 export interface IInitialState {
   board: IBoardData[];
@@ -25,5 +25,16 @@ export interface IColumnsArr {
   id: string;
   title: string;
   order: number;
-  tasks: ITask[];
+  tasks: ITaskObj[];
+}
+
+export interface ITasksArrAndColumnId {
+  columnId: string;
+  tasksArr: ITaskObj[];
+}
+export interface IMovedTasks {
+  columnIdFrom: string;
+  columnIdTo: string;
+  columnTasksArrFrom: ITaskObj[];
+  columnTasksArrTo: ITaskObj[];
 }

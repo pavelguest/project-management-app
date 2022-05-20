@@ -1,33 +1,35 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop, XYCoord } from 'react-dnd';
+import { useAppSelector } from '../../../hooks/redux';
 import { itemTypes } from '../../../types/BoardTypes';
-import { COLUMN_NAMES, ITaskSItems } from '../BoardContainer/BoardContainer';
+import { ITaskObj } from '../../../types/tasksSliceType';
 import './Task.css';
 
 interface ITask {
   index: number;
-  name: string;
+  currentDropColumnId: string;
 }
 interface IPropsTask {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setTasks: any;
-  title: string;
   index: number;
   columnId: string;
+  taskObj: ITaskObj;
   moveTaskHandler: (dragIndex: number, hoverIndex: number, currentColumnId: string) => void;
+  moveTaskToColumn: (
+    currentTaskIndex: number,
+    dropTaskIndex: number,
+    dropColumnId: string,
+    currentColumnId: string
+  ) => void;
 }
 
-export const Task = ({ setTasks, title, index, moveTaskHandler, columnId }: IPropsTask) => {
-  // const changeTaskColumn = (currentTask: ITask, columnName: string) => {
-  //   setTasks((prevState: ITaskSItems[]) => {
-  //     return prevState.map((elem) => {
-  //       return {
-  //         ...elem,
-  //         column: elem.name === currentTask.name ? columnName : elem.column,
-  //       };
-  //     });
-  //   });
-  // };
+export const Task = ({
+  index,
+  moveTaskHandler,
+  columnId,
+  taskObj,
+  moveTaskToColumn,
+}: IPropsTask) => {
+  const { currentBoard } = useAppSelector((state) => state.boardReducers);
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -54,7 +56,7 @@ export const Task = ({ setTasks, title, index, moveTaskHandler, columnId }: IPro
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
-      console.log(dragIndex, hoverIndex);
+      console.log(`index`, dragIndex, hoverIndex);
 
       moveTaskHandler(dragIndex, hoverIndex, columnId);
       item.index = hoverIndex;
@@ -62,29 +64,18 @@ export const Task = ({ setTasks, title, index, moveTaskHandler, columnId }: IPro
   });
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.card,
-    item: { index, name: title },
+    item: { ...taskObj, index },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult() as ITask;
-      // if (dropResult) {
-      //   const { name } = dropResult;
-      //   const { DO_IT, IN_PROGRESS, AWAITING_REVIEW, DONE } = COLUMN_NAMES;
-      //   switch (name) {
-      //     case IN_PROGRESS:
-      //       changeTaskColumn(item, IN_PROGRESS);
-      //       break;
-      //     case AWAITING_REVIEW:
-      //       changeTaskColumn(item, AWAITING_REVIEW);
-      //       break;
-      //     case DONE:
-      //       changeTaskColumn(item, DONE);
-      //       break;
-      //     case DO_IT:
-      //       changeTaskColumn(item, DO_IT);
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      // }
+      if (dropResult) {
+        const { currentDropColumnId } = dropResult;
+        console.log(`drop column`, currentDropColumnId);
+        currentBoard.columns.forEach((elem) => {
+          if (elem.id === currentDropColumnId) {
+            moveTaskToColumn(item.index, index, currentDropColumnId, columnId);
+          }
+        });
+      }
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -94,7 +85,7 @@ export const Task = ({ setTasks, title, index, moveTaskHandler, columnId }: IPro
   drag(drop(ref));
   return (
     <div className="column" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
-      {title}
+      {taskObj.title}
     </div>
   );
 };
