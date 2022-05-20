@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import AuthorizationBtn from '../AuthorizationBtn';
 import './Header.css';
-import { RenderButton } from '../CreateBoard';
+import { CreateBoardBtn } from '../CreateBoard';
 import { useAppSelector } from '../../hooks/redux';
 import EditBtn from '../EditBth/EditBtn';
 
@@ -28,7 +28,7 @@ export const Header = () => {
               >
                 Board
               </NavLink>
-              <RenderButton />
+              <CreateBoardBtn />
               <NavLink
                 to="/edit"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}

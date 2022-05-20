@@ -18,6 +18,7 @@ const initialState: IInitialState = {
     columns: [],
   },
   deleteModalOpen: false,
+  createBoardModalOpen: false,
   boardToDeleteId: '',
   statusApi: {
     isLoading: false,
@@ -45,6 +46,9 @@ export const boardsSlice = createSlice({
     },
     toggleDeleteModalOpen: (state, action: PayloadAction<boolean>) => {
       state.deleteModalOpen = action.payload;
+    },
+    toggleCreateBoardModalOpen: (state, action: PayloadAction<boolean>) => {
+      state.createBoardModalOpen = action.payload;
     },
     addNewColumn: (state, action: PayloadAction<IColumnsArr>) => {
       state.currentBoard.columns = [...state.currentBoard.columns, action.payload];
@@ -130,4 +134,5 @@ export const {
   addColumns,
   addTasks,
   addMovedTasks,
+  toggleCreateBoardModalOpen,
 } = boardsSlice.actions;

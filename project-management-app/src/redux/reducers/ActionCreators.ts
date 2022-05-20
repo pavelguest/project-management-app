@@ -76,7 +76,6 @@ const fetchLogin = createAsyncThunk(
         password: props.password,
       });
       localStorage.setItem('token', response.data.token);
-      console.log(response);
       return jwt_decode(response.data.token);
     } catch (e) {
       return thunkAPI.rejectWithValue('User was not founded!');

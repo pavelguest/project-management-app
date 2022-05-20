@@ -4,6 +4,7 @@ export interface IInitialState {
   board: IBoardData[];
   currentBoard: ICurrentBoard;
   deleteModalOpen: boolean;
+  createBoardModalOpen: boolean;
   boardToDeleteId: string;
   statusApi: {
     isLoading: boolean;

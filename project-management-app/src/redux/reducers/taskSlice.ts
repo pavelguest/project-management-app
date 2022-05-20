@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import React from 'react';
-import { IInitialState, ITaskObj } from '../../types/tasksSliceType';
-import { fetchCreateTask, fetchGetAllTasks } from './ActionCreators';
+import { IInitialState } from '../../types/tasksSliceType';
 
 const initialState: IInitialState = {
   tasksArr: [],

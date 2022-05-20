@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 export const MainPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { board, currentBoard, deleteModalOpen } = useAppSelector((state) => state.boardReducers);
+  const { board, deleteModalOpen } = useAppSelector((state) => state.boardReducers);
   useEffect(() => {
     dispatch(fetchBoardsGetAll()).then((result) => {
       dispatch(addAllBoards(result.payload));
@@ -56,26 +56,29 @@ export const MainPage = () => {
 
   return (
     <div className="main-page">
-      {board.map((el) => {
-        return (
-          <div
-            key={el.id}
-            id={el.id}
-            className="board"
-            onMouseEnter={(event) => handleMouseOverBoard(event)}
-            onMouseLeave={(event) => handleMouseLeaveBoard(event)}
-            onClick={() => moveToBoard(el.id)}
-          >
-            <DeleteIcon
-              className="create-board-modal__delete"
-              fontSize="small"
-              color="action"
-              onClick={(event) => handleDeleteBoardModal(event)}
-            />
-            <p>{el.title}</p>
-          </div>
-        );
-      })}
+      <div className="boards-wrapper">
+        {board.map((el) => {
+          return (
+            <div
+              key={el.id}
+              id={el.id}
+              className="board"
+              onMouseEnter={(event) => handleMouseOverBoard(event)}
+              onMouseLeave={(event) => handleMouseLeaveBoard(event)}
+              onClick={() => moveToBoard(el.id)}
+            >
+              <DeleteIcon
+                className="create-board-modal__delete"
+                fontSize="small"
+                color="action"
+                onClick={(event) => handleDeleteBoardModal(event)}
+              />
+              <p>{el.title}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <AlertDialogModal open={deleteModalOpen} />
     </div>
   );
