@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,9 +10,6 @@ export const HeaderMenu = () => {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => {
-    console.log(location);
-  });
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };

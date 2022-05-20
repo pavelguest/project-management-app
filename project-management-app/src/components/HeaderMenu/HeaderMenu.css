@@ -2,13 +2,14 @@
   display: none;
   transform: 0.3s;
   border-radius: 4px;
+  color: white;
 }
 
 .more-menu:hover {
   background-color: var(--light-blue) ;
 }
 
-@media (max-width: 945px) {
+@media (max-width: 1025px) {
   
   .more-menu {
     display: block;

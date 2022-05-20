@@ -23,7 +23,6 @@ export const AlertDialogModal = (props: IProps) => {
     dispatch(toggleDeleteModalOpen(false));
     if (props === 'confirm') {
       dispatch(fetchBoardDelete(boardToDeleteId)).then((result) => {
-        console.log(result.meta.arg);
         dispatch(deleteBoard(result.meta.arg));
       });
     }

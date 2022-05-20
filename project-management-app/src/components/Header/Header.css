@@ -12,7 +12,7 @@
 .header__nav {
   display: flex;
   flex-direction: row;
-  width: 600px;
+  /* width: 600px; */
   gap: 20px;
 }
 
@@ -40,7 +40,7 @@
   background-color: var(--peach);
 }
 
-@media (max-width: 945px) {
+@media (max-width: 1025px) {
   
   .header__nav {
     display: none;
