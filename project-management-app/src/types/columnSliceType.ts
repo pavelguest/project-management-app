@@ -7,7 +7,7 @@ export interface IColumns {
 export interface ISetColumn {
   boardId: string;
   title: string;
-  order: number;
+  // order: number;
 }
 export interface IDeleteColumn {
   boardId: string;

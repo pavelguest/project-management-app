@@ -17,8 +17,8 @@ interface IPropsTask {
   moveTaskToColumn: (
     currentTaskIndex: number,
     dropTaskIndex: number,
-    dropColumnId: string,
-    currentColumnId: string
+    currentColumnId: string,
+    dropColumnId: string
   ) => void;
 }
 
@@ -56,7 +56,6 @@ export const Task = ({
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
-      console.log(`index`, dragIndex, hoverIndex);
 
       moveTaskHandler(dragIndex, hoverIndex, columnId);
       item.index = hoverIndex;
@@ -72,7 +71,7 @@ export const Task = ({
         console.log(`drop column`, currentDropColumnId);
         currentBoard.columns.forEach((elem) => {
           if (elem.id === currentDropColumnId && columnId !== currentDropColumnId) {
-            moveTaskToColumn(item.index, index, currentDropColumnId, columnId);
+            moveTaskToColumn(index, item.index, columnId, currentDropColumnId);
           }
         });
       }

@@ -28,25 +28,25 @@ export const BoardContainer = () => {
   const dispatch = useAppDispatch();
 
   const createColumn = (value: string) => {
-    const orderColumns = columnsArr.length ? columnsArr.length + 2 : 0;
+    // const orderColumns = columnsArr.length ? columnsArr.length + 2 : 0;
     dispatch(
       fetchCreateColumn({
         boardId: currentBoard.id,
-        order: orderColumns,
+        // order: orderColumns,
         title: value,
       })
     );
   };
   const createTask = (value: string, currentColumnId: string) => {
-    const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
-    const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
+    // const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
+    // const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
     dispatch(
       fetchCreateTask({
         columnId: currentColumnId,
         boardId: currentBoard.id,
         userId: userId,
         title: value,
-        order: orderTask,
+        // order: orderTask,
         description: 'qqq',
       })
     );
@@ -77,8 +77,8 @@ export const BoardContainer = () => {
   const moveTaskToColumn = (
     taskIndexFrom: number,
     taskIndexTo: number,
-    columnIdTo: string,
-    columnIdFrom: string
+    columnIdFrom: string,
+    columnIdTo: string
   ) => {
     console.log(`taskIndexFrom`, taskIndexFrom);
     console.log(`taskIndexTo`, taskIndexTo);
@@ -88,14 +88,14 @@ export const BoardContainer = () => {
     const currentColumn = columnsArr.find((elem) => elem.id === columnIdFrom) as IColumnsArr;
     const dropColumn = columnsArr.find((elem) => elem.id === columnIdTo) as IColumnsArr;
 
-    console.log(`step one`, dropColumn);
+    // console.log(`step one`, dropColumn);
 
     const dragTask = currentColumn.tasks[taskIndexFrom];
     if (dragTask) {
       const columnTasksFrom = [...currentColumn.tasks];
       const columnTasksTo = [...dropColumn.tasks];
 
-      console.log(`step two`, columnTasksTo);
+      // console.log(`step two`, columnTasksTo);
 
       if (columnTasksTo.length === 0) {
         columnTasksTo.push(dragTask);
@@ -103,14 +103,13 @@ export const BoardContainer = () => {
         columnTasksTo.splice(taskIndexTo, 0, dragTask);
       }
 
-      // console.log(`prev`, prevItem);
-      console.log(`step tree`, columnTasksTo);
+      // console.log(`step tree`, columnTasksTo);
 
-      console.log(`to`, columnTasksTo);
+      // console.log(`to`, columnTasksTo);
       // columnTasksTo.splice(currentTaskIndex, 0, prevItem[0]);
 
       columnTasksFrom.splice(taskIndexFrom, 1);
-      console.log(`from`, columnTasksFrom);
+      // console.log(`from`, columnTasksFrom);
 
       dispatch(
         addMovedTasks({
