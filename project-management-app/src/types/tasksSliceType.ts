@@ -11,7 +11,7 @@ export interface ICreateTask {
   boardId: string;
   columnId: string;
   title: string;
-  order: number;
+  // order: number;
   description: string;
   userId: string;
 }
