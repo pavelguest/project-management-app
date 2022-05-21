@@ -49,7 +49,13 @@ export const MainPage = () => {
     }
     dispatch(toggleDeleteModalOpen(true));
   };
-  const moveToBoard = (id: string) => {
+  const moveToCurrentBoard = (
+    id: string,
+    event: React.MouseEvent<HTMLElement, MouseEvent> | React.MouseEvent<SVGSVGElement, MouseEvent>
+  ) => {
+    if ((event.target as SVGSVGElement).closest('svg')) {
+      return;
+    }
     dispatch(fetchGetBoardId(id));
     navigate('../board');
   };
@@ -65,7 +71,7 @@ export const MainPage = () => {
               className="board"
               onMouseEnter={(event) => handleMouseOverBoard(event)}
               onMouseLeave={(event) => handleMouseLeaveBoard(event)}
-              onClick={() => moveToBoard(el.id)}
+              onClick={(event) => moveToCurrentBoard(el.id, event)}
             >
               <DeleteIcon
                 className="create-board-modal__delete"
