@@ -38,7 +38,7 @@ export const BoardContainer = () => {
     );
   };
   const createTask = (value: string, currentColumnId: string) => {
-    const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
+    // const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
     // const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
     dispatch(
       fetchCreateTask({
