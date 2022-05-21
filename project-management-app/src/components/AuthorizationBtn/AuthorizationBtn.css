@@ -6,3 +6,22 @@
   /* justify-content: space-between; */
   /* margin-left: 900px; */
 }
+
+/* .sign-out-btn {
+  display: inline-flex;
+} */
+
+.account-box-icon {
+  display: none;
+}
+
+@media (max-width: 1025px) {
+  
+  .authorization-wrapper {
+    display: none;
+  }
+
+  .account-box-icon {
+    display: inline-block;
+  }
+}

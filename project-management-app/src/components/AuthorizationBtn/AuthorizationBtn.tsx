@@ -4,6 +4,7 @@ import { matchPath, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import './AuthorizationBtn.css';
 import { updateIsAuth } from '../../redux/reducers/authSlice';
+import HeaderMenu from '../HeaderMenu';
 
 const AuthorizationBtn = () => {
   const navigate = useNavigate();
@@ -19,49 +20,58 @@ const AuthorizationBtn = () => {
   };
 
   return (
-    <div className="authorization-wrapper">
-      {auth.isAuth && (
-        <Button
-          variant="contained"
-          style={{
-            whiteSpace: 'nowrap',
-            boxShadow: '1px 1px 10px 1px #000a',
-            backgroundColor: 'var(--blue)',
-          }}
-          onClick={logOut}
-        >
-          Sign Out
-        </Button>
-      )}
-      {!auth.isAuth && !mainMatches && (
-        <>
-          <NavLink
-            to="/registration"
-            className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
+    <div>
+      <div className="authorization-wrapper">
+        {auth.isAuth && (
+          <div className="sign-out-btn">
+            <Button
+              variant="contained"
+              style={{
+                whiteSpace: 'nowrap',
+                boxShadow: '1px 1px 10px 1px #000a',
+                backgroundColor: 'var(--blue)',
+              }}
+              onClick={logOut}
+            >
+              Sign Out
+            </Button>
+          </div>
+        )}
+        {!auth.isAuth && !mainMatches && (
+          <>
+            <NavLink
+              to="/registration"
+              className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
+            >
+              Sign Up
+            </NavLink>
+            <NavLink
+              to="/login"
+              className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
+            >
+              Sign In
+            </NavLink>
+          </>
+        )}
+        {auth.isAuth && !mainMatches && (
+          <Button
+            variant="contained"
+            style={{
+              whiteSpace: 'nowrap',
+              boxShadow: '1px 1px 10px 1px #000a',
+              backgroundColor: 'var(--blue)',
+            }}
+            onClick={() => navigate('/main')}
           >
-            Sign Up
-          </NavLink>
-          <NavLink
-            to="/login"
-            className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
-          >
-            Sign In
-          </NavLink>
-        </>
-      )}
-      {auth.isAuth && !mainMatches && (
-        <Button
-          variant="contained"
-          style={{
-            whiteSpace: 'nowrap',
-            boxShadow: '1px 1px 10px 1px #000a',
-            backgroundColor: 'var(--blue)',
-          }}
-          onClick={() => navigate('/main')}
-        >
-          Go to main page
-        </Button>
-      )}
+            Go to main page
+          </Button>
+        )}
+      </div>
+      <div className="account-box-icon">
+        {auth.isAuth && mainMatches && <HeaderMenu type="auth-done-main" />}
+        {auth.isAuth && !mainMatches && <HeaderMenu type="auth-done-not-main" />}
+        {!auth.isAuth && !mainMatches && <HeaderMenu type="auth-not-done" />}
+      </div>
     </div>
   );
 };

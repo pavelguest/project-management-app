@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <header className="app-header">
       <div className="header__nav-wrapper">
-        <HeaderMenu />
+        <HeaderMenu type={'nav-menu'} />
         <nav className="header__nav">
           <NavLink to="/" className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}>
             Welcome
