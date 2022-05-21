@@ -8,9 +8,12 @@
   gap: 10px;
 }
 .columns__item {
+  padding: 15px;
   box-shadow: 1px 1px 10px 1px #000a;
 }
 .columns-wrapper {
+  margin-bottom: 5px;
+  padding: 10px;
   overflow-y: scroll;
 }
 .columns-wrapper::-webkit-scrollbar {
