@@ -4,6 +4,7 @@ import './CreateBoardBtn.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleCreateBoardModalOpen } from '../../redux/reducers/boardsSlice';
 import { useLocation } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 export function CreateBoardBtn() {
   const dispatch = useAppDispatch();
@@ -17,9 +18,20 @@ export function CreateBoardBtn() {
   return (
     <div className="create-board-wrapper">
       {location.pathname === '/main' && (
-        <button className="create__btn" onClick={handleToggleModal}>
+        <Button
+          variant="contained"
+          style={{
+            whiteSpace: 'nowrap',
+            boxShadow: '1px 1px 10px 1px #000a',
+            backgroundColor: 'var(--blue)',
+          }}
+          onClick={handleToggleModal}
+        >
           Create
-        </button>
+        </Button>
+        // <button className="create__btn" onClick={handleToggleModal}>
+        //   Create
+        // </button>
       )}
       <RenderModalCreateBoard open={createBoardModalOpen} />
     </div>

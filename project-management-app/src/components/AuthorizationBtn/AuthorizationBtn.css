@@ -7,10 +7,6 @@
   /* margin-left: 900px; */
 }
 
-/* .sign-out-btn {
-  display: inline-flex;
-} */
-
 .account-box-icon {
   display: none;
 }
@@ -25,3 +21,7 @@
     display: inline-block;
   }
 }
+
+/* .sign-out-btn {
+  display: inline-flex;
+} */
