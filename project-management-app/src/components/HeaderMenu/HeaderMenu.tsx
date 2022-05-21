@@ -113,18 +113,21 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           <MenuItem
             onClick={() => handleClose('main')}
             selected={location.pathname === '/main' ? true : false}
+            disabled={!auth.isAuth ? true : false}
           >
             Main
           </MenuItem>
           <MenuItem
             onClick={() => handleClose('board')}
             selected={location.pathname === '/board' ? true : false}
+            disabled={!auth.isAuth ? true : false}
           >
             Board
           </MenuItem>
           <MenuItem
             onClick={() => handleClose('edit-profile')}
             selected={location.pathname === '/edit' ? true : false}
+            disabled={!auth.isAuth ? true : false}
           >
             Edit profile
           </MenuItem>
