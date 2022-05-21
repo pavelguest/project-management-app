@@ -66,9 +66,7 @@ export const AuthorizationBtn = () => {
         )}
       </div>
       <div className="account-box-icon">
-        {auth.isAuth && mainMatches && <HeaderMenu type="auth-done-main" />}
-        {auth.isAuth && !mainMatches && <HeaderMenu type="auth-done-not-main" />}
-        {!auth.isAuth && !mainMatches && <HeaderMenu type="auth-not-done" />}
+        <HeaderMenu type="auth-menu" />
       </div>
     </div>
   );

@@ -3,10 +3,10 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import './HeaderMenu.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { matchPath, useNavigate, useLocation } from 'react-router-dom';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { updateIsAuth } from '../../redux/reducers/authSlice';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 interface IHeaderMenu {
   type: string;
@@ -20,6 +20,8 @@ export const HeaderMenu = (props: IHeaderMenu) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const { auth } = useAppSelector((state) => state.authReducers);
+  const mainMatches = matchPath({ path: '/main', end: true }, location.pathname);
 
   const logOut = () => {
     localStorage.removeItem('token');
@@ -85,9 +87,7 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           More
         </Button>
       )}
-      {(props.type === 'auth-done-main' ||
-        props.type === 'auth-done-not-main' ||
-        props.type === 'auth-not-done') && (
+      {props.type === 'auth-menu' && (
         <AccountBoxIcon
           color="primary"
           fontSize="large"
@@ -130,9 +130,7 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           </MenuItem>
         </Menu>
       )}
-      {(props.type === 'auth-done-main' ||
-        props.type === 'auth-done-not-main' ||
-        props.type === 'auth-not-done') && (
+      {props.type === 'auth-menu' && (
         <Menu
           id="basic-menu-auth"
           anchorEl={anchorElAuth}
@@ -144,25 +142,25 @@ export const HeaderMenu = (props: IHeaderMenu) => {
         >
           <MenuItem
             onClick={() => handleCloseAuth('sign-up')}
-            disabled={props.type !== 'auth-not-done' ? true : false}
+            disabled={auth.isAuth ? true : false}
           >
             Sign Up
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('sign-in')}
-            disabled={props.type !== 'auth-not-done' ? true : false}
+            disabled={auth.isAuth ? true : false}
           >
             Sign In
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('sign-out')}
-            disabled={props.type === 'auth-not-done' ? true : false}
+            disabled={!auth.isAuth ? true : false}
           >
             Sign Out
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('go-to-main')}
-            disabled={props.type === 'auth-done-not-main' ? false : true}
+            disabled={mainMatches ? true : false}
           >
             Main page
           </MenuItem>
@@ -177,3 +175,6 @@ export const HeaderMenu = (props: IHeaderMenu) => {
 //     color: 'white',
 //   },
 // }}
+// (props.type === 'auth-done-main' ||
+//         props.type === 'auth-done-not-main' ||
+//         props.type === 'auth-not-done')
