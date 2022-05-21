@@ -34,7 +34,7 @@ export const Task = ({
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: itemTypes.card,
-    hover(item: { index: number; name: string }, monitor) {
+    hover(item: { index: number; title: string }, monitor) {
       if (!ref.current) {
         return;
       }
@@ -71,7 +71,7 @@ export const Task = ({
         const { currentDropColumnId } = dropResult;
         console.log(`drop column`, currentDropColumnId);
         currentBoard.columns.forEach((elem) => {
-          if (elem.id === currentDropColumnId) {
+          if (elem.id === currentDropColumnId && columnId !== currentDropColumnId) {
             moveTaskToColumn(item.index, index, currentDropColumnId, columnId);
           }
         });

@@ -75,29 +75,47 @@ export const BoardContainer = () => {
   };
 
   const moveTaskToColumn = (
-    currentTaskIndex: number,
-    dropTaskIndex: number,
-    dropColumnId: string,
-    currentColumnId: string
+    taskIndexFrom: number,
+    taskIndexTo: number,
+    columnIdTo: string,
+    columnIdFrom: string
   ) => {
-    const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
-    const dropColumn = columnsArr.find((elem) => elem.id === dropColumnId) as IColumnsArr;
-    const dragItem = currentColumn.tasks[currentTaskIndex];
-    if (dragItem) {
+    console.log(`taskIndexFrom`, taskIndexFrom);
+    console.log(`taskIndexTo`, taskIndexTo);
+    console.log(`columnIdFrom`, columnIdFrom);
+    console.log(`columnIdTo`, columnIdTo);
+
+    const currentColumn = columnsArr.find((elem) => elem.id === columnIdFrom) as IColumnsArr;
+    const dropColumn = columnsArr.find((elem) => elem.id === columnIdTo) as IColumnsArr;
+
+    console.log(`step one`, dropColumn);
+
+    const dragTask = currentColumn.tasks[taskIndexFrom];
+    if (dragTask) {
       const columnTasksFrom = [...currentColumn.tasks];
       const columnTasksTo = [...dropColumn.tasks];
 
-      const prevItem = columnTasksTo.splice(dropTaskIndex, 1, dragItem);
-      columnTasksTo.splice(currentTaskIndex, 0, prevItem[0]);
-      console.log(`to`, columnTasksTo);
+      console.log(`step two`, columnTasksTo);
 
-      columnTasksFrom.splice(currentTaskIndex, 1);
+      if (columnTasksTo.length === 0) {
+        columnTasksTo.push(dragTask);
+      } else {
+        columnTasksTo.splice(taskIndexTo, 0, dragTask);
+      }
+
+      // console.log(`prev`, prevItem);
+      console.log(`step tree`, columnTasksTo);
+
+      console.log(`to`, columnTasksTo);
+      // columnTasksTo.splice(currentTaskIndex, 0, prevItem[0]);
+
+      columnTasksFrom.splice(taskIndexFrom, 1);
       console.log(`from`, columnTasksFrom);
 
       dispatch(
         addMovedTasks({
-          columnIdFrom: currentColumnId,
-          columnIdTo: dropColumnId,
+          columnIdFrom: columnIdFrom,
+          columnIdTo: columnIdTo,
           columnTasksArrFrom: columnTasksFrom,
           columnTasksArrTo: columnTasksTo,
         })
