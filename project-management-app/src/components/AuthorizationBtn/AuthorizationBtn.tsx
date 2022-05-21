@@ -41,13 +41,13 @@ export const AuthorizationBtn = () => {
               to="/registration"
               className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
             >
-              Sign Up
+              Sign&nbsp;Up
             </NavLink>
             <NavLink
               to="/login"
               className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
             >
-              Sign In
+              Sign&nbsp;In
             </NavLink>
           </>
         )}
