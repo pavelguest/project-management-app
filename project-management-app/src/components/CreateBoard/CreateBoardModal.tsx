@@ -13,19 +13,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
 
 interface IProps {
   open: boolean;
 }
 
-const useStyles = makeStyles({
-  dialog: {
-    position: 'absolute',
-    top: 50,
-    left: 370,
-  },
-});
+// const useStyles = makeStyles({
+//   dialog: {
+//     position: 'absolute',
+//     top: -150,
+//     left: 0,
+//   },
+// });
 
 export const RenderModalCreateBoard = (props: IProps) => {
   const dispatch = useAppDispatch();
@@ -40,7 +39,7 @@ export const RenderModalCreateBoard = (props: IProps) => {
     });
   };
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const handleClose = () => {
     dispatch(toggleCreateBoardModalOpen(false));
@@ -55,9 +54,9 @@ export const RenderModalCreateBoard = (props: IProps) => {
       <Dialog
         open={props.open}
         onClose={handleClose}
-        classes={{
-          paper: classes.dialog,
-        }}
+        // classes={{
+        //   paper: classes.dialog,
+        // }}
       >
         <DialogTitle>Create a board</DialogTitle>
         <DialogContent>

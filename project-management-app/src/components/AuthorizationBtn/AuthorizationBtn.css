@@ -1,7 +1,27 @@
-.autoriz-wrap {
-  width: 380px;
+.authorization-wrapper {
+  /* width: 380px; */
   display: flex;
   flex-direction: row;
   gap: 20px;
-  margin-left: 900px;
+  /* justify-content: space-between; */
+  /* margin-left: 900px; */
 }
+
+.account-box-icon {
+  display: none;
+}
+
+@media (max-width: 1025px) {
+  
+  .authorization-wrapper {
+    display: none;
+  }
+
+  .account-box-icon {
+    display: inline-block;
+  }
+}
+
+/* .sign-out-btn {
+  display: inline-flex;
+} */

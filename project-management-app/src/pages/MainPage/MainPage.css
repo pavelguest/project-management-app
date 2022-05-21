@@ -3,7 +3,7 @@
 }
 
 .main-page {
-  min-height: calc(100vh - 92px);
+  min-height: calc(100vh - 80px);
   background-color: var(--light-blue);
 }
 
@@ -12,6 +12,7 @@
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .board {
@@ -39,7 +40,7 @@
 .board svg {
   opacity: 0;
   background: none;
-  transition-delay: 0.5s;
+  /* transition-delay: 0.5s; */
   transition-duration: 0.5s;
   transition-property: opacity, transform;
 }
