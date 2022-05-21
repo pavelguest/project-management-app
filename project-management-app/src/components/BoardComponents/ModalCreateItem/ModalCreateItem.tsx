@@ -31,8 +31,18 @@ const validationSchema = yup.object({
     .min(3, 'Title must be 3 or more characters')
     .max(20, 'Title must be 20 or less characters'),
 });
-export const ModalCreateItem = ({ type }: { type: string }) => {
+export const ModalCreateItem = ({
+  type,
+  create,
+}: {
+  type: string;
+  create: (value: string) => void;
+}) => {
   const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const initialValues: IInitialValues = {
     name: '',
@@ -41,13 +51,10 @@ export const ModalCreateItem = ({ type }: { type: string }) => {
     initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      create(values.name);
+      handleClose();
     },
   });
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>

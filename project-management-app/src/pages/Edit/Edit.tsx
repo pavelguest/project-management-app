@@ -46,7 +46,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   border: '2px solid var(--darck-blue)',
-  backgroundColor: 'var(--blue)',
+  backgroundColor: 'var(--light-blue)',
   boxShadow: 24,
   p: 4,
 };
@@ -74,6 +74,7 @@ const Edit = () => {
     setIsOpen(false);
     setIsOpenСonfirmation(false);
     navigate('/main');
+    console.log(auth.name);
   };
 
   const submit = (data: IEditProps) => {
@@ -173,17 +174,17 @@ const Edit = () => {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Changes applied!
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <p>New Login - {newLog}</p>
+              <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
+                New Login - {newLog}
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <p>New Password - {newPass}</p>
+              <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
+                New Password - {newPass}
               </Typography>
             </Box>
           </Modal>
           <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-              {auth.errorLogin}
+              User was not founded!
             </Alert>
           </Snackbar>
         </Card>

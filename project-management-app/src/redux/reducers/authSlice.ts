@@ -9,10 +9,10 @@ const initialState: IInitialState = {
     password: '',
     userId: '',
     isAuth: false,
-    error: '',
+    error: '', // ошибка при регистрации и проверке токена
     isLoading: true,
     id: '',
-    errorLogin: '',
+    errorLogin: '', // ошибка при логине и изменении пароля/логина - для вывода в снэк бар
   },
 };
 
