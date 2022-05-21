@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import './HeaderMenu.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import { updateIsAuth } from '../../redux/reducers/authSlice';
+import { useAppDispatch } from '../../hooks/redux';
 
 interface IHeaderMenu {
   type: string;
@@ -17,6 +19,14 @@ export const HeaderMenu = (props: IHeaderMenu) => {
   const openAuth = Boolean(anchorElAuth);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  const logOut = () => {
+    localStorage.removeItem('token');
+    dispatch(updateIsAuth(false));
+    navigate('/');
+  };
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,9 +52,22 @@ export const HeaderMenu = (props: IHeaderMenu) => {
   };
 
   const handleCloseAuth = (props: string) => {
+    switch (props) {
+      case 'sign-up':
+        navigate('/registration');
+        break;
+      case 'sign-in':
+        navigate('/login');
+        break;
+      case 'go-to-main':
+        navigate('/main');
+        break;
+      case 'sign-out':
+        logOut();
+        break;
+    }
     setAnchorElAuth(null);
   };
-  console.log(props.type);
 
   return (
     <div className="more-menu">
@@ -120,25 +143,25 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           }}
         >
           <MenuItem
-            onClick={() => handleClose('sign-up')}
+            onClick={() => handleCloseAuth('sign-up')}
             disabled={props.type !== 'auth-not-done' ? true : false}
           >
             Sign Up
           </MenuItem>
           <MenuItem
-            onClick={() => handleClose('sign-in')}
+            onClick={() => handleCloseAuth('sign-in')}
             disabled={props.type !== 'auth-not-done' ? true : false}
           >
             Sign In
           </MenuItem>
           <MenuItem
-            onClick={() => handleClose('sign-out')}
+            onClick={() => handleCloseAuth('sign-out')}
             disabled={props.type === 'auth-not-done' ? true : false}
           >
             Sign Out
           </MenuItem>
           <MenuItem
-            onClick={() => handleClose('go-to-main')}
+            onClick={() => handleCloseAuth('go-to-main')}
             disabled={props.type === 'auth-done-not-main' ? false : true}
           >
             Main page

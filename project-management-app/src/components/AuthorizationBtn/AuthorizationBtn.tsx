@@ -6,7 +6,7 @@ import './AuthorizationBtn.css';
 import { updateIsAuth } from '../../redux/reducers/authSlice';
 import HeaderMenu from '../HeaderMenu';
 
-const AuthorizationBtn = () => {
+export const AuthorizationBtn = () => {
   const navigate = useNavigate();
   const { auth } = useAppSelector((state) => state.authReducers);
   const dispatch = useAppDispatch();
@@ -23,19 +23,17 @@ const AuthorizationBtn = () => {
     <div>
       <div className="authorization-wrapper">
         {auth.isAuth && (
-          <div className="sign-out-btn">
-            <Button
-              variant="contained"
-              style={{
-                whiteSpace: 'nowrap',
-                boxShadow: '1px 1px 10px 1px #000a',
-                backgroundColor: 'var(--blue)',
-              }}
-              onClick={logOut}
-            >
-              Sign Out
-            </Button>
-          </div>
+          <Button
+            variant="contained"
+            style={{
+              whiteSpace: 'nowrap',
+              boxShadow: '1px 1px 10px 1px #000a',
+              backgroundColor: 'var(--blue)',
+            }}
+            onClick={logOut}
+          >
+            Sign Out
+          </Button>
         )}
         {!auth.isAuth && !mainMatches && (
           <>
