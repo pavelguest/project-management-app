@@ -60,7 +60,7 @@ const Edit = () => {
   const [isOpenСonfirmation, setIsOpenСonfirmation] = useState(false);
   const [newPass, setNewPass] = useState('');
   const [newLog, setNewLog] = useState('');
-
+  console.log(auth.name);
   const {
     register,
     formState: { errors, isValid },
@@ -74,7 +74,7 @@ const Edit = () => {
     setIsOpen(false);
     setIsOpenСonfirmation(false);
     navigate('/main');
-    console.log(auth.name);
+    console.log('handleClose', auth.name);
   };
 
   const submit = (data: IEditProps) => {
@@ -102,6 +102,7 @@ const Edit = () => {
                 label="Name"
                 placeholder="Name"
                 margin="normal"
+                defaultValue={auth.name}
                 {...register('name', {
                   required: 'Поле обязательно к заполнению',
                   minLength: {
