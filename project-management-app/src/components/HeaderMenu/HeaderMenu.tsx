@@ -163,7 +163,7 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('go-to-main')}
-            disabled={mainMatches ? true : false}
+            disabled={mainMatches || !auth.isAuth ? true : false}
           >
             Main page
           </MenuItem>

@@ -17,8 +17,12 @@
 
 .board {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 200px;
-  height: 96px;
+  word-break: break-all;
+  min-height: 96px;
   padding: 10px;
   /* border: solid 1px black; */
   background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
@@ -37,10 +41,15 @@
   cursor: pointer;
 }
 
+.board h3 {
+  color: var(--darck-blue);
+  border-bottom: 1px solid var(--darck-blue);
+  width: fit-content;
+}
+
 .board svg {
   opacity: 0;
   background: none;
-  /* transition-delay: 0.5s; */
   transition-duration: 0.5s;
   transition-property: opacity, transform;
 }
@@ -65,3 +74,6 @@
   background: none;
   transition: opacity 1s 1s;
 } */
+
+/* overflow-wrap: break-word; */
+/* transition-delay: 0.5s; */

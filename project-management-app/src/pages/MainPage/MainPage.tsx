@@ -79,7 +79,8 @@ export const MainPage = () => {
                 color="action"
                 onClick={(event) => handleDeleteBoardModal(event)}
               />
-              <p>{el.title}</p>
+              <h3>{el.title}</h3>
+              <p>{el.description}</p>
             </div>
           );
         })}
