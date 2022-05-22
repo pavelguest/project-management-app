@@ -29,7 +29,12 @@ interface IProps {
 export const RenderModalCreateBoard = (props: IProps) => {
   const dispatch = useAppDispatch();
   const [boardName, setBoardName] = useState('');
-  const { handleSubmit } = useForm();
+  const [boardDescription, setBoardDescription] = useState('');
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+  } = useForm();
 
   const onSubmit: SubmitHandler<IBoardForm> = () => {
     if (boardName === '') return;
@@ -45,8 +50,14 @@ export const RenderModalCreateBoard = (props: IProps) => {
     dispatch(toggleCreateBoardModalOpen(false));
   };
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleChangeNameValue = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setBoardName(e.target.value);
+  };
+
+  const handleChangeDescriptionValue = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setBoardDescription(e.target.value);
   };
 
   return (
@@ -74,11 +85,29 @@ export const RenderModalCreateBoard = (props: IProps) => {
               fullWidth
               variant="standard"
               value={boardName}
-              onChange={(event) => handleChangeValue(event)}
-              required={true}
-              error={boardName === ''}
-              helperText={boardName === '' ? 'Empty field!' : ' '}
+              placeholder="Name"
+              {...register('name', {
+                required: 'Have to be filled.',
+              })}
+              onChange={(event) => handleChangeNameValue(event)}
             />
+            <div style={{ color: 'red' }}>{errors?.name && <p>{errors?.name?.message}</p>}</div>
+            <TextField
+              margin="dense"
+              id="description"
+              label="Board description"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={boardDescription}
+              {...register('description', {
+                required: 'Have to be filled.',
+              })}
+              onChange={(event) => handleChangeDescriptionValue(event)}
+            />
+            <div style={{ color: 'red' }}>
+              {errors?.description && <p>{errors?.description?.message}</p>}
+            </div>
           </form>
         </DialogContent>
         <DialogActions>
@@ -120,3 +149,12 @@ export const RenderModalCreateBoard = (props: IProps) => {
 
 // axios.defaults.headers.common['Authorization'] =
 //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYjNkNGEyNy1iMDg3LTRkM2QtOTM0OC0zZjg2ZmFhZmI2ZmEiLCJsb2dpbiI6InVzZXIxIiwiaWF0IjoxNjUyMTExMjY4fQ.EsmO7vXW5kUlyJjfy93YXYpB41p8z_AkQlqal1RGK6o';
+
+// required={true}
+// error={boardName === ''}
+// helperText={boardName === '' ? 'Empty field!' : ' '}
+
+// minLength: {
+//   value: 1,
+//   message: 'Длинна не менее 5 символов',
+// },
