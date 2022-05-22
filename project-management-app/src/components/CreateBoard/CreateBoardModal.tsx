@@ -33,7 +33,7 @@ export const RenderModalCreateBoard = (props: IProps) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm();
 
   const onSubmit: SubmitHandler<IBoardForm> = () => {
