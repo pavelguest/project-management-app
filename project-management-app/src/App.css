@@ -6,7 +6,8 @@
     --peach: #F2A29B;
   }
 
-.MuiButtonBase-root {
+/* .MuiButtonBase-root */
+#basic-menu li {
   display: flex  !important;
   min-height: 48px !important;
   padding-top: 6px !important;
