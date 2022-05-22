@@ -1,26 +1,8 @@
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Stack,
-  Typography,
-  Paper,
-  Box,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import './WelcomePage.css';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 export const WelcomePage = () => {
   return (
