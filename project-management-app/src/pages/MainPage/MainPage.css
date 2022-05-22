@@ -22,7 +22,6 @@
   align-items: center;
   width: 200px;
   word-break: break-all;
-  /* overflow-wrap: break-word; */
   min-height: 96px;
   padding: 10px;
   /* border: solid 1px black; */
@@ -51,7 +50,6 @@
 .board svg {
   opacity: 0;
   background: none;
-  /* transition-delay: 0.5s; */
   transition-duration: 0.5s;
   transition-property: opacity, transform;
 }
@@ -76,3 +74,6 @@
   background: none;
   transition: opacity 1s 1s;
 } */
+
+/* overflow-wrap: break-word; */
+/* transition-delay: 0.5s; */
