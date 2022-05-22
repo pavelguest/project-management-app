@@ -40,3 +40,29 @@ export interface IMovedTasks {
   columnTasksArrFrom: ITaskObj[];
   columnTasksArrTo: ITaskObj[];
 }
+
+export interface IPutTask {
+  props: {
+    boardId: string;
+    columnId: string;
+    taskId: string;
+  };
+  putTask: {
+    title: string;
+    order: number;
+    description: string;
+    userId: string;
+    boardId: string;
+    columnId: string;
+  };
+}
+export interface IPutColumn {
+  props: {
+    boardId: string;
+    columnId: string;
+  };
+  putColumn: {
+    title: string;
+    order: number;
+  };
+}
