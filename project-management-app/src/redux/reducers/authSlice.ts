@@ -58,6 +58,7 @@ export const authSlice = createSlice({
       state.auth.isLoading = false;
       state.auth.error = '';
       state.auth.id = action.payload.id;
+      state.auth.name = action.payload.name;
       state.auth.login = action.payload.login;
       state.auth.isAuth = !!action.payload.login;
     },
@@ -72,6 +73,7 @@ export const authSlice = createSlice({
       state.auth.isLoading = false;
       state.auth.errorLogin = '';
       state.auth.id = action.payload.id;
+      state.auth.name = action.payload.name;
       state.auth.login = action.payload.login;
     },
     [fetchEdit.pending.type]: (state) => {
