@@ -5,6 +5,7 @@ import { $authHost, $host } from '.';
 import { IEditProps } from '../../types/editPropsTypes';
 import { IDeleteColumn, ISetColumn } from '../../types/columnSliceType';
 import { ICreateTask, IDeleteTask, IGetTasks } from '../../types/tasksSliceType';
+import { IPutColumn, IPutTask } from '../../types/boardsSliceTypes';
 
 const fetchBoardsPostAll = createAsyncThunk(
   'boards/postAll',
@@ -201,6 +202,39 @@ const fetchGetBoardId = createAsyncThunk(
   }
 );
 
+const fetchPutTaskId = async (task: IPutTask) => {
+  try {
+    const response = await $authHost.put(
+      `boards/${task.props.boardId}/columns/${task.props.columnId}/tasks/${task.props.taskId}`,
+      {
+        title: task.putTask.title,
+        order: task.putTask.order,
+        description: task.putTask.description,
+        userId: task.putTask.userId,
+        boardId: task.putTask.boardId,
+        columnId: task.putTask.columnId,
+      }
+    );
+    return response;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+const fetchPutColumnId = async (column: IPutColumn) => {
+  try {
+    const response = await $authHost.put(
+      `boards/${column.props.boardId}/columns/${column.props.columnId}`,
+      {
+        title: column.putColumn.title,
+        order: column.putColumn.order,
+      }
+    );
+    return response;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+
 export {
   fetchBoardsPostAll,
   fetchBoardsGetAll,
@@ -216,4 +250,6 @@ export {
   fetchCreateTask,
   fetchDeleteTask,
   fetchGetBoardId,
+  fetchPutTaskId,
+  fetchPutColumnId,
 };
