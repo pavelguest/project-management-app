@@ -7,7 +7,8 @@
   }
 
 /* .MuiButtonBase-root */
-#basic-menu li {
+#basic-menu li,
+#basic-menu-auth li {
   display: flex  !important;
   min-height: 48px !important;
   padding-top: 6px !important;
