@@ -39,9 +39,11 @@ export const RenderModalCreateBoard = (props: IProps) => {
   const onSubmit: SubmitHandler<IBoardForm> = () => {
     if (boardName === '') return;
     dispatch(toggleCreateBoardModalOpen(false));
-    dispatch(fetchBoardsPostAll({ title: boardName, description: '312321' })).then((result) => {
-      dispatch(addNewBoard(result.payload));
-    });
+    dispatch(fetchBoardsPostAll({ title: boardName, description: boardDescription })).then(
+      (result) => {
+        dispatch(addNewBoard(result.payload));
+      }
+    );
   };
 
   // const classes = useStyles();

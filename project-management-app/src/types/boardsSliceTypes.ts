@@ -15,6 +15,7 @@ export interface IInitialState {
 export interface IBoardData {
   title: string;
   id: string;
+  description: string;
 }
 
 export interface ICurrentBoard {
