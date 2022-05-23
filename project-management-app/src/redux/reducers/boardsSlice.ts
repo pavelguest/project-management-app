@@ -6,6 +6,7 @@ import {
   IColumnsArr,
   ITasksArrAndColumnId,
   IMovedTasks,
+  IDeleteTask,
 } from '../../types/boardsSliceTypes';
 import { ITaskObj } from '../../types/tasksSliceType';
 import { fetchCreateColumn, fetchCreateTask, fetchGetBoardId } from './ActionCreators';
@@ -73,6 +74,21 @@ export const boardsSlice = createSlice({
         }
       });
     },
+    delColumn: (state, action: PayloadAction<string>) => {
+      const indexDeleteColumn = state.currentBoard.columns.findIndex(
+        (elem) => elem.id === action.payload
+      );
+      state.currentBoard.columns.splice(indexDeleteColumn, 1);
+    },
+    delTask: (state, action: PayloadAction<IDeleteTask>) => {
+      const indexColumn = state.currentBoard.columns.findIndex(
+        (elem) => elem.id === action.payload.columnId
+      );
+      const indexTask = state.currentBoard.columns[indexColumn].tasks.findIndex(
+        (elem) => elem.id === action.payload.taskId
+      );
+      state.currentBoard.columns[indexColumn].tasks.splice(indexTask, 1);
+    },
   },
   extraReducers: {
     [fetchGetBoardId.fulfilled.type]: (state, action: PayloadAction<ICurrentBoard>) => {
@@ -132,6 +148,8 @@ export const {
   setBoardToDelete,
   addNewColumn,
   addColumns,
+  delColumn,
+  delTask,
   addTasks,
   addMovedTasks,
   toggleCreateBoardModalOpen,

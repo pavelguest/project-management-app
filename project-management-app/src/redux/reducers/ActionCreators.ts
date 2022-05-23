@@ -131,17 +131,6 @@ const fetchCreateColumn = createAsyncThunk(
     }
   }
 );
-const fetchDeleteColumn = createAsyncThunk(
-  'columns/fetchDeleteColumn',
-  async (props: IDeleteColumn, thunkAPI) => {
-    try {
-      const response = await $authHost.post(`boards/${props.boardId}/columns/${props.columnId}`);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
-    }
-  }
-);
 
 const fetchGetAllTasks = createAsyncThunk(
   'tasks/fetchGetAllTasks',
@@ -176,19 +165,6 @@ const fetchCreateTask = createAsyncThunk(
     }
   }
 );
-const fetchDeleteTask = createAsyncThunk(
-  'tasks/fetchCreateTask',
-  async (props: IDeleteTask, thunkAPI) => {
-    try {
-      const response = await $authHost.post(
-        `boards/${props.boardId}/columns/${props.columnId}/tasks/${props.taskId}`
-      );
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
-    }
-  }
-);
 
 const fetchGetBoardId = createAsyncThunk(
   'boards/fetchGetBoardId',
@@ -202,6 +178,29 @@ const fetchGetBoardId = createAsyncThunk(
   }
 );
 
+const fetchDeleteColumnId = createAsyncThunk(
+  'boards/fetchDeleteColumnId',
+  async (props: IDeleteColumn, thunkAPI) => {
+    try {
+      await $authHost.delete(`boards/${props.boardId}/columns/${props.columnId}`);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+const fetchDeleteTaskId = createAsyncThunk(
+  'boards/fetchDeleteTaskId',
+  async (props: IDeleteTask, thunkAPI) => {
+    try {
+      await $authHost.delete(
+        `boards/${props.boardId}/columns/${props.columnId}/tasks/${props.taskId}`
+      );
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 const fetchPutTaskId = async (task: IPutTask) => {
   try {
     const response = await $authHost.put(
@@ -245,11 +244,11 @@ export {
   fetchEdit,
   fetchGetAllColumns,
   fetchCreateColumn,
-  fetchDeleteColumn,
   fetchGetAllTasks,
   fetchCreateTask,
-  fetchDeleteTask,
   fetchGetBoardId,
+  fetchDeleteColumnId,
+  fetchDeleteTaskId,
   fetchPutTaskId,
   fetchPutColumnId,
 };
