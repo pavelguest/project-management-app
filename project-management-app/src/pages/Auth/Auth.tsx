@@ -14,6 +14,7 @@ import { Alert, Snackbar } from '@mui/material';
 import { FormInputsTypes } from '../../types/formInputsTypes';
 import { unwrapResult } from '@reduxjs/toolkit';
 import Preload from '../../components/Preload';
+// import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +49,8 @@ const Auth = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  // const [cookies, setCookie] = useCookies(['name', 'login', 'password', 'token']);
+  // const [cookies, removeCookie] = useCookies(['name', 'login', 'password', 'token']);
 
   const {
     register,
@@ -65,6 +68,17 @@ const Auth = () => {
   const submit = (data: FormInputsTypes) => {
     if (registrationMatches) {
       dispatch(fetchRegistr({ name: data.name, login: data.login, password: data.password }));
+      dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
+        .then(unwrapResult)
+        .then(() => {})
+        .catch(() => setIsOpen(true));
+      // setCookie('login', auth.login, { path: '/', maxAge: 5000 });
+      // setCookie('password', auth.password, { path: '/', maxAge: 5000 });
+      // setCookie('token', auth.token, { path: '/', maxAge: 5000 });
+      {
+        auth.isAuth && navigate('/main');
+        console.log('registr');
+      }
     }
     if (!registrationMatches) {
       dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
