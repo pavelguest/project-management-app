@@ -13,6 +13,7 @@ import { fetchLogin, fetchRegistr } from '../../redux/reducers/ActionCreators';
 import { Alert, Snackbar } from '@mui/material';
 import { FormInputsTypes } from '../../types/formInputsTypes';
 import { unwrapResult } from '@reduxjs/toolkit';
+import Preload from '../../components/Preload';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,9 +65,6 @@ const Auth = () => {
   const submit = (data: FormInputsTypes) => {
     if (registrationMatches) {
       dispatch(fetchRegistr({ name: data.name, login: data.login, password: data.password }));
-      {
-        auth.isAuth && navigate('/main');
-      }
     }
     if (!registrationMatches) {
       dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
@@ -82,102 +80,106 @@ const Auth = () => {
 
   return (
     <form onSubmit={handleSubmit(submit)} className={classes.container} autoComplete="off">
-      <Card className={classes.card}>
-        <CardHeader className={classes.header} title="Login App" />
-        <CardContent>
-          <div>
-            {registrationMatches && (
-              <>
-                <TextField
-                  fullWidth
-                  id="name"
-                  type="text"
-                  label="Name"
-                  placeholder="Name"
-                  margin="normal"
-                  {...register('name', {
-                    required: 'Поле обязательно к заполнению',
-                    minLength: {
-                      value: 5,
-                      message: 'Длинна не менее 5 символов',
-                    },
-                  })}
-                />
-                <div style={{ color: 'red' }}>
-                  {errors?.name && <p>{errors?.name?.message || 'Error!'}</p>}
-                </div>
-              </>
-            )}
+      {auth.isLoading ? (
+        <Preload />
+      ) : (
+        <Card className={classes.card}>
+          <CardHeader className={classes.header} title="Login App" />
+          <CardContent>
+            <div>
+              {registrationMatches && (
+                <>
+                  <TextField
+                    fullWidth
+                    id="name"
+                    type="text"
+                    label="Name"
+                    placeholder="Name"
+                    margin="normal"
+                    {...register('name', {
+                      required: 'Поле обязательно к заполнению',
+                      minLength: {
+                        value: 5,
+                        message: 'Длинна не менее 5 символов',
+                      },
+                    })}
+                  />
+                  <div style={{ color: 'red' }}>
+                    {errors?.name && <p>{errors?.name?.message || 'Error!'}</p>}
+                  </div>
+                </>
+              )}
 
-            <TextField
-              fullWidth
-              id="login"
-              type="text"
-              label="Login"
-              placeholder="Login"
-              margin="normal"
-              {...register('login', {
-                required: 'Поле обязательно к заполнению',
-                minLength: {
-                  value: 5,
-                  message: 'Длинна не менее 5 символов',
-                },
-              })}
-            />
-            <div style={{ color: 'red' }}>
-              {errors?.login && <p>{errors?.login?.message || 'Error!'}</p>}
-            </div>
+              <TextField
+                fullWidth
+                id="login"
+                type="text"
+                label="Login"
+                placeholder="Login"
+                margin="normal"
+                {...register('login', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 5,
+                    message: 'Длинна не менее 5 символов',
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>
+                {errors?.login && <p>{errors?.login?.message || 'Error!'}</p>}
+              </div>
 
-            <TextField
-              fullWidth
-              id="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-              margin="normal"
-              {...register('password', {
-                required: 'Поле обязательно к заполнению',
-                minLength: {
-                  value: 3,
-                  message: 'Длинна не менее 3 символов',
-                },
-              })}
-            />
-            <div style={{ color: 'red' }}>
-              {errors?.password && <p>{errors?.password?.message || 'Error!'}</p>}
+              <TextField
+                fullWidth
+                id="password"
+                type="password"
+                label="Password"
+                placeholder="Password"
+                margin="normal"
+                {...register('password', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 3,
+                    message: 'Длинна не менее 3 символов',
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>
+                {errors?.password && <p>{errors?.password?.message || 'Error!'}</p>}
+              </div>
             </div>
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button
-            type="submit"
-            disabled={!isValid}
-            variant="contained"
-            size="large"
-            className={classes.loginBtn}
-          >
-            Login
-          </Button>
-        </CardActions>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          open={isOpen}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <Alert
-            style={{ backgroundColor: 'var(--peach)' }}
+          </CardContent>
+          <CardActions>
+            <Button
+              type="submit"
+              disabled={!isValid}
+              variant="contained"
+              size="large"
+              className={classes.loginBtn}
+            >
+              Login
+            </Button>
+          </CardActions>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            open={isOpen}
+            autoHideDuration={6000}
             onClose={handleClose}
-            severity="error"
-            sx={{ width: '100%' }}
           >
-            User was not founded!
-          </Alert>
-        </Snackbar>
-      </Card>
+            <Alert
+              style={{ backgroundColor: 'var(--peach)' }}
+              onClose={handleClose}
+              severity="error"
+              sx={{ width: '100%' }}
+            >
+              User was not founded!
+            </Alert>
+          </Snackbar>
+        </Card>
+      )}
     </form>
   );
 };
