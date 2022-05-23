@@ -8,6 +8,7 @@ export interface IAuth {
   isLoading: boolean;
   id: string; // то, что приходит в response при проверке токена при запросе на /useers/id
   errorLogin: string;
+  token: string;
 }
 
 export interface IInitialState {

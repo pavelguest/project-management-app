@@ -13,6 +13,7 @@ const initialState: IInitialState = {
     isLoading: true,
     id: '',
     errorLogin: '', // ошибка при логине и изменении пароля/логина - для вывода в снэк бар
+    token: '',
   },
 };
 
@@ -31,7 +32,7 @@ export const authSlice = createSlice({
       state.auth.name = action.payload.name;
       state.auth.login = action.payload.login;
       state.auth.password = action.payload.password;
-      state.auth.isAuth = !!action.payload.name; //переводим в булево значение имя, если не пустая строка то будет тру
+      // state.auth.isAuth = !!action.payload.name; //переводим в булево значение имя, если не пустая строка то будет тру
     },
     [fetchRegistr.pending.type]: (state) => {
       state.auth.isLoading = true;
@@ -46,6 +47,7 @@ export const authSlice = createSlice({
       state.auth.userId = action.payload.userId;
       state.auth.login = action.payload.login;
       state.auth.isAuth = !!action.payload.login;
+      state.auth.token = action.payload.token;
     },
     [fetchLogin.pending.type]: (state) => {
       state.auth.isLoading = true;
