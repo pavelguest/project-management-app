@@ -8,22 +8,20 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   fetchCreateColumn,
   fetchCreateTask,
+  fetchDeleteColumnId,
+  fetchDeleteTaskId,
   fetchPutColumnId,
   fetchPutTaskId,
 } from '../../../redux/reducers/ActionCreators';
 import Preload from '../../Preload';
-import { addColumns, addMovedTasks, addTasks } from '../../../redux/reducers/boardsSlice';
+import {
+  addColumns,
+  addMovedTasks,
+  addTasks,
+  delColumn,
+  delTask,
+} from '../../../redux/reducers/boardsSlice';
 import { IColumnsArr } from '../../../types/boardsSliceTypes';
-
-export interface IColumnItems {
-  order: number;
-  title: string;
-}
-export interface ITaskSItems {
-  id: number;
-  name: string;
-  column: string;
-}
 
 export const BoardContainer = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -151,10 +149,19 @@ export const BoardContainer = () => {
           description: dragTask.description,
           boardId: currentBoard.id,
           columnId: columnIdTo,
-          order: taskIndexTo,
+          order: columnTasksTo.length === 0 ? 1 : !taskIndexTo ? taskIndexTo + 1 : taskIndexTo,
         },
       });
     }
+  };
+  const deleteColumn = (columnId: string) => {
+    dispatch(fetchDeleteColumnId({ boardId: currentBoard.id, columnId }));
+    dispatch(delColumn(columnId));
+  };
+
+  const deleteTask = (taskId: string, columnId: string) => {
+    dispatch(fetchDeleteTaskId({ boardId: currentBoard.id, columnId, taskId }));
+    dispatch(delTask({ taskId, columnId }));
   };
 
   return (
@@ -172,7 +179,12 @@ export const BoardContainer = () => {
               index={index}
               name={elem.title}
             >
-              <Column title={elem.title} id={elem.id} createTask={createTask}>
+              <Column
+                title={elem.title}
+                id={elem.id}
+                createTask={createTask}
+                deleteColumn={deleteColumn}
+              >
                 {elem.tasks.map((task, index) => (
                   <Task
                     key={task.id}
@@ -181,6 +193,7 @@ export const BoardContainer = () => {
                     columnId={elem.id}
                     moveTaskHandler={moveTaskHandler}
                     moveTaskToColumn={moveTaskToColumn}
+                    deleteTask={deleteTask}
                   />
                 ))}
               </Column>

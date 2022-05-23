@@ -66,3 +66,7 @@ export interface IPutColumn {
     order: number;
   };
 }
+export interface IDeleteTask {
+  columnId: string;
+  taskId: string;
+}

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useDrop } from 'react-dnd';
 import { itemTypes } from '../../../types/BoardTypes';
+import AlertDialogDelete from '../../AlertDialogDelete';
 import ModalCreateItem from '../ModalCreateItem';
 import './Column.css';
 
@@ -9,9 +10,10 @@ interface IProps {
   id: string;
   children: ReactNode;
   createTask: (value: string, currentColumnId: string) => void;
+  deleteColumn: (columnId: string) => void;
 }
 
-export const Column = ({ children, title, id, createTask }: IProps) => {
+export const Column = ({ children, title, id, createTask, deleteColumn }: IProps) => {
   const [{ isOver }, drop] = useDrop({
     accept: itemTypes.card,
     drop: () => ({
@@ -25,10 +27,16 @@ export const Column = ({ children, title, id, createTask }: IProps) => {
   const setTask = (value: string) => {
     createTask(value, id);
   };
+  const deleteItem = () => {
+    deleteColumn(id);
+  };
 
   return (
     <div className={'columns__item'}>
-      <p>{title}</p>
+      <div className={'column__controls'}>
+        <p>{title}</p>
+        <AlertDialogDelete deleteItem={deleteItem} />
+      </div>
       <div
         className="columns-wrapper"
         ref={drop}
