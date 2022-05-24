@@ -18,6 +18,7 @@ import {
   addColumns,
   addMovedTasks,
   addTasks,
+  changeColumnTitle,
   delColumn,
   delTask,
 } from '../../../redux/reducers/boardsSlice';
@@ -164,6 +165,10 @@ export const BoardContainer = () => {
     dispatch(delTask({ taskId, columnId }));
   };
 
+  const changeTitleColumn = (columnId: string, title: string) => {
+    dispatch(changeColumnTitle({ columnId, title }));
+  };
+
   return (
     <div className="board-container">
       <div className="columns-container">
@@ -181,9 +186,12 @@ export const BoardContainer = () => {
             >
               <Column
                 title={elem.title}
-                id={elem.id}
+                columnId={elem.id}
+                boardId={currentBoard.id}
+                order={elem.order}
                 createTask={createTask}
                 deleteColumn={deleteColumn}
+                changeTitle={changeTitleColumn}
               >
                 {elem.tasks.map((task, index) => (
                   <Task

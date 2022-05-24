@@ -6,6 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -37,13 +38,10 @@ export const AlertDialogDelete = (props: IDelete) => {
   };
 
   return (
-    <div>
-      <DeleteIcon
-        className="ico__delete"
-        fontSize="small"
-        color="action"
-        onClick={handleClickOpen}
-      />
+    <>
+      <IconButton onClick={handleClickOpen} size={'small'}>
+        <DeleteIcon />
+      </IconButton>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -57,6 +55,6 @@ export const AlertDialogDelete = (props: IDelete) => {
           <Button onClick={handleDelete}>Agree</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };

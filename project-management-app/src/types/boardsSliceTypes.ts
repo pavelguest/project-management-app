@@ -70,3 +70,7 @@ export interface IDeleteTask {
   columnId: string;
   taskId: string;
 }
+export interface IChangeColumnTitle {
+  columnId: string;
+  title: string;
+}
