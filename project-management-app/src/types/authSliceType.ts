@@ -9,8 +9,15 @@ export interface IAuth {
   id: string; // то, что приходит в response при проверке токена при запросе на /useers/id
   errorLogin: string;
   token: string;
+  allUsers: IAllUsers[];
 }
 
 export interface IInitialState {
   auth: IAuth;
+}
+
+export interface IAllUsers {
+  id: string;
+  name: string;
+  login: string;
 }
