@@ -82,6 +82,16 @@ const fetchLogin = createAsyncThunk(
   }
 );
 
+const fetchAllUsers = createAsyncThunk('auth/fetchAllUsers', async (_, thunkAPI) => {
+  try {
+    const response = await $authHost.get(`users`);
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue('User was not founded!');
+  }
+});
+
 // Получаем юзера по id, если без ошибки - значит токен валидный
 const fetchCheck = createAsyncThunk('auth/fetchCheck', async (props: ICheckTocken, thunkAPI) => {
   try {
@@ -251,4 +261,5 @@ export {
   fetchDeleteTaskId,
   fetchPutTaskId,
   fetchPutColumnId,
+  fetchAllUsers,
 };

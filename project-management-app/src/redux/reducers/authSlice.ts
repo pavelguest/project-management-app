@@ -1,6 +1,7 @@
+import { IAllUsers } from './../../types/authSliceType';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAuth, IInitialState } from '../../types/authSliceType';
-import { fetchRegistr, fetchLogin, fetchCheck, fetchEdit } from './ActionCreators';
+import { fetchRegistr, fetchLogin, fetchCheck, fetchEdit, fetchAllUsers } from './ActionCreators';
 
 const initialState: IInitialState = {
   auth: {
@@ -9,11 +10,12 @@ const initialState: IInitialState = {
     password: '',
     userId: '',
     isAuth: false,
-    error: '', // ошибка при регистрации и проверке токена
+    error: '', // ошибка при регистрации и проверке токена и получении всех юзеров
     isLoading: true,
     id: '',
     errorLogin: '', // ошибка при логине и изменении пароля/логина - для вывода в снэк бар
     token: '',
+    allUsers: [],
   },
 };
 
@@ -84,6 +86,17 @@ export const authSlice = createSlice({
     [fetchEdit.rejected.type]: (state, action: PayloadAction<string>) => {
       state.auth.isLoading = false;
       state.auth.errorLogin = action.payload;
+    },
+    [fetchAllUsers.fulfilled.type]: (state, action: PayloadAction<IAllUsers>) => {
+      state.auth.isLoading = false;
+      state.auth.allUsers = [action.payload];
+    },
+    [fetchAllUsers.pending.type]: (state) => {
+      state.auth.isLoading = true;
+    },
+    [fetchAllUsers.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.auth.isLoading = false;
+      state.auth.error = action.payload;
     },
   },
 });
