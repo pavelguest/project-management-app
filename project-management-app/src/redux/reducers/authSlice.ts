@@ -87,9 +87,9 @@ export const authSlice = createSlice({
       state.auth.isLoading = false;
       state.auth.errorLogin = action.payload;
     },
-    [fetchAllUsers.fulfilled.type]: (state, action: PayloadAction<IAllUsers>) => {
+    [fetchAllUsers.fulfilled.type]: (state, action: PayloadAction<IAllUsers[]>) => {
       state.auth.isLoading = false;
-      state.auth.allUsers = [action.payload];
+      state.auth.allUsers = action.payload;
     },
     [fetchAllUsers.pending.type]: (state) => {
       state.auth.isLoading = true;
