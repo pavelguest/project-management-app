@@ -21,7 +21,7 @@ interface IInitialValues {
   name: string;
 }
 
-const validationSchema = yup.object({
+export const validationSchema = yup.object({
   name: yup
     .string()
     .required('Title is required')

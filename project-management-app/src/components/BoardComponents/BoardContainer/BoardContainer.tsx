@@ -5,20 +5,24 @@ import Task from '../Task';
 import ColumnsContainer from '../TasksContainer';
 import './BoardContainer.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { fetchCreateColumn, fetchCreateTask } from '../../../redux/reducers/ActionCreators';
+import {
+  fetchCreateColumn,
+  fetchCreateTask,
+  fetchDeleteColumnId,
+  fetchDeleteTaskId,
+  fetchPutColumnId,
+  fetchPutTaskId,
+} from '../../../redux/reducers/ActionCreators';
 import Preload from '../../Preload';
-import { addColumns, addMovedTasks, addTasks } from '../../../redux/reducers/boardsSlice';
+import {
+  addColumns,
+  addMovedTasks,
+  addTasks,
+  changeColumnTitle,
+  delColumn,
+  delTask,
+} from '../../../redux/reducers/boardsSlice';
 import { IColumnsArr } from '../../../types/boardsSliceTypes';
-
-export interface IColumnItems {
-  order: number;
-  title: string;
-}
-export interface ITaskSItems {
-  id: number;
-  name: string;
-  column: string;
-}
 
 export const BoardContainer = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -59,6 +63,17 @@ export const BoardContainer = () => {
       const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
       coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
       dispatch(addColumns(coppiedStateArray));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const promiseAll: any[] = [];
+      coppiedStateArray.forEach((elem, index) => {
+        promiseAll.push(
+          fetchPutColumnId({
+            props: { boardId: currentBoard.id, columnId: elem.id },
+            putColumn: { title: elem.title, order: index + 1 },
+          })
+        );
+      });
+      Promise.all(promiseAll).then((res) => console.log(res));
     }
   };
 
@@ -71,6 +86,24 @@ export const BoardContainer = () => {
       const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
       coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
       dispatch(addTasks({ columnId: currentColumn.id, tasksArr: coppiedStateArray }));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const promiseAll: any[] = [];
+      coppiedStateArray.forEach((elem, index) => {
+        promiseAll.push(
+          fetchPutTaskId({
+            props: { boardId: currentBoard.id, columnId: currentColumnId, taskId: elem.id },
+            putTask: {
+              title: elem.title,
+              userId: elem.userId,
+              description: elem.description,
+              boardId: currentBoard.id,
+              columnId: currentColumnId,
+              order: index + 1,
+            },
+          })
+        );
+      });
+      Promise.all(promiseAll).then((res) => console.log(res));
     }
   };
 
@@ -88,14 +121,10 @@ export const BoardContainer = () => {
     const currentColumn = columnsArr.find((elem) => elem.id === columnIdFrom) as IColumnsArr;
     const dropColumn = columnsArr.find((elem) => elem.id === columnIdTo) as IColumnsArr;
 
-    // console.log(`step one`, dropColumn);
-
     const dragTask = currentColumn.tasks[taskIndexFrom];
     if (dragTask) {
       const columnTasksFrom = [...currentColumn.tasks];
       const columnTasksTo = [...dropColumn.tasks];
-
-      // console.log(`step two`, columnTasksTo);
 
       if (columnTasksTo.length === 0) {
         columnTasksTo.push(dragTask);
@@ -103,13 +132,7 @@ export const BoardContainer = () => {
         columnTasksTo.splice(taskIndexTo, 0, dragTask);
       }
 
-      // console.log(`step tree`, columnTasksTo);
-
-      // console.log(`to`, columnTasksTo);
-      // columnTasksTo.splice(currentTaskIndex, 0, prevItem[0]);
-
       columnTasksFrom.splice(taskIndexFrom, 1);
-      // console.log(`from`, columnTasksFrom);
 
       dispatch(
         addMovedTasks({
@@ -119,7 +142,31 @@ export const BoardContainer = () => {
           columnTasksArrTo: columnTasksTo,
         })
       );
+      fetchPutTaskId({
+        props: { boardId: currentBoard.id, columnId: columnIdFrom, taskId: dragTask.id },
+        putTask: {
+          title: dragTask.title,
+          userId: dragTask.userId,
+          description: dragTask.description,
+          boardId: currentBoard.id,
+          columnId: columnIdTo,
+          order: columnTasksTo.length === 0 ? 1 : !taskIndexTo ? taskIndexTo + 1 : taskIndexTo,
+        },
+      });
     }
+  };
+  const deleteColumn = (columnId: string) => {
+    dispatch(fetchDeleteColumnId({ boardId: currentBoard.id, columnId }));
+    dispatch(delColumn(columnId));
+  };
+
+  const deleteTask = (taskId: string, columnId: string) => {
+    dispatch(fetchDeleteTaskId({ boardId: currentBoard.id, columnId, taskId }));
+    dispatch(delTask({ taskId, columnId }));
+  };
+
+  const changeTitleColumn = (columnId: string, title: string) => {
+    dispatch(changeColumnTitle({ columnId, title }));
   };
 
   return (
@@ -137,7 +184,15 @@ export const BoardContainer = () => {
               index={index}
               name={elem.title}
             >
-              <Column title={elem.title} id={elem.id} createTask={createTask}>
+              <Column
+                title={elem.title}
+                columnId={elem.id}
+                boardId={currentBoard.id}
+                order={elem.order}
+                createTask={createTask}
+                deleteColumn={deleteColumn}
+                changeTitle={changeTitleColumn}
+              >
                 {elem.tasks.map((task, index) => (
                   <Task
                     key={task.id}
@@ -146,6 +201,7 @@ export const BoardContainer = () => {
                     columnId={elem.id}
                     moveTaskHandler={moveTaskHandler}
                     moveTaskToColumn={moveTaskToColumn}
+                    deleteTask={deleteTask}
                   />
                 ))}
               </Column>
