@@ -109,7 +109,6 @@ const fetchEdit = createAsyncThunk('auth/fetchEdit', async (props: IEditProps, t
       login: props.login,
       password: props.password,
     });
-    console.log(response.data);
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue('Ошибка! Повторите попытку');

@@ -61,7 +61,7 @@ const Edit = () => {
   const [isOpenСonfirmation, setIsOpenСonfirmation] = useState(false);
   const [newPass, setNewPass] = useState('');
   const [newLog, setNewLog] = useState('');
-  console.log(auth.name);
+
   const {
     register,
     formState: { errors, isValid },
@@ -75,7 +75,6 @@ const Edit = () => {
     setIsOpen(false);
     setIsOpenСonfirmation(false);
     navigate('/main');
-    console.log('handleClose', auth.name);
   };
 
   const submit = (data: IEditProps) => {
