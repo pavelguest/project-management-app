@@ -13,7 +13,7 @@ interface IProps {
   columnId: string;
   boardId: string;
   children: ReactNode;
-  createTask: (value: string, currentColumnId: string) => void;
+  createTask: (value: string, description: string, currentColumnId: string) => void;
   deleteColumn: (columnId: string) => void;
   changeTitle: (columnId: string, title: string) => void;
 }
@@ -39,8 +39,8 @@ export const Column = ({
     }),
   });
 
-  const setTask = (value: string) => {
-    createTask(value, columnId);
+  const setTask = (value: string, description?: string) => {
+    createTask(value, description as string, columnId);
   };
   const deleteItem = () => {
     deleteColumn(columnId);

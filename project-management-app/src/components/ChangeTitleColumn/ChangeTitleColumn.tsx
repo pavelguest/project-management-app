@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { validationSchema } from '../BoardComponents/ModalCreateItem/ModalCreateItem';
+import { validationSchemaForColumn } from '../BoardComponents/ModalCreateItem/ModalCreateItem';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, TextField } from '@mui/material';
@@ -21,7 +21,7 @@ export const ChangeTitleColumn = (props: IPropsChangeTitle) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchema,
+    validationSchema: validationSchemaForColumn,
     onSubmit: (values) => {
       props.changeTitleColumn(values.name);
       props.closeContainer();

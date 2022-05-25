@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import './MainPage.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchBoardsGetAll, fetchGetBoardId } from '../../redux/reducers/ActionCreators';
+import {
+  // fetchAllUsers,
+  fetchBoardsGetAll,
+  fetchGetBoardId,
+} from '../../redux/reducers/ActionCreators';
 import {
   addAllBoards,
   toggleDeleteModalOpen,
@@ -56,6 +60,7 @@ export const MainPage = () => {
     if ((event.target as SVGSVGElement).closest('svg')) {
       return;
     }
+    // dispatch(fetchAllUsers());
     dispatch(fetchGetBoardId(id));
     navigate('../board');
   };
