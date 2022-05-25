@@ -5,6 +5,7 @@ import { CreateBoardBtn } from '../CreateBoard';
 import { useAppSelector } from '../../hooks/redux';
 import EditBtn from '../EditBth/EditBtn';
 import HeaderMenu from '../HeaderMenu';
+import LocalizationSelect from '../LocalizationSelect';
 
 export const Header = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -43,6 +44,7 @@ export const Header = () => {
         <CreateBoardBtn />
       </div>
       <AuthorizationBtn />
+      <LocalizationSelect />
     </header>
   );
 };
