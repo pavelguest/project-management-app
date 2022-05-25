@@ -3,6 +3,7 @@ import { useDrag, useDrop, XYCoord } from 'react-dnd';
 import { useAppSelector } from '../../../hooks/redux';
 import { itemTypes } from '../../../types/BoardTypes';
 import { ITaskObj } from '../../../types/tasksSliceType';
+import AlertDialogDelete from '../../AlertDialogDelete';
 import './Task.css';
 
 interface ITask {
@@ -20,14 +21,16 @@ interface IPropsTask {
     currentColumnId: string,
     dropColumnId: string
   ) => void;
+  deleteTask: (taskId: string, columnId: string) => void;
 }
 
 export const Task = ({
   index,
-  moveTaskHandler,
   columnId,
   taskObj,
+  moveTaskHandler,
   moveTaskToColumn,
+  deleteTask,
 }: IPropsTask) => {
   const { currentBoard } = useAppSelector((state) => state.boardReducers);
 
@@ -81,10 +84,13 @@ export const Task = ({
     }),
   });
 
+  const deleteItem = () => deleteTask(taskObj.id, columnId);
+
   drag(drop(ref));
   return (
-    <div className="column" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
+    <div className="task" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
       {taskObj.title}
+      <AlertDialogDelete deleteItem={deleteItem} />
     </div>
   );
 };

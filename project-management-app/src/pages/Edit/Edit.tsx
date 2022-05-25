@@ -13,6 +13,7 @@ import { Alert, Box, Modal, Snackbar, Typography } from '@mui/material';
 import { fetchEdit } from '../../redux/reducers/ActionCreators';
 import { IEditProps } from '../../types/editPropsTypes';
 import { useNavigate } from 'react-router-dom';
+import Preload from '../../components/Preload';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,7 +61,7 @@ const Edit = () => {
   const [isOpenСonfirmation, setIsOpenСonfirmation] = useState(false);
   const [newPass, setNewPass] = useState('');
   const [newLog, setNewLog] = useState('');
-  console.log(auth.name);
+
   const {
     register,
     formState: { errors, isValid },
@@ -74,7 +75,6 @@ const Edit = () => {
     setIsOpen(false);
     setIsOpenСonfirmation(false);
     navigate('/main');
-    console.log('handleClose', auth.name);
   };
 
   const submit = (data: IEditProps) => {
@@ -91,104 +91,108 @@ const Edit = () => {
   return (
     <div className="edit">
       <form onSubmit={handleSubmit(submit)} className={classes.container} autoComplete="off">
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Login App" />
-          <CardContent>
-            <div>
-              <TextField
-                fullWidth
-                id="name"
-                type="text"
-                label="Name"
-                placeholder="Name"
-                margin="normal"
-                defaultValue={auth.name}
-                {...register('name', {
-                  required: 'Поле обязательно к заполнению',
-                  minLength: {
-                    value: 5,
-                    message: 'Длинна не менее 5 символов',
-                  },
-                })}
-              />
-              <div style={{ color: 'red' }}>
-                {errors?.name && <p>{errors?.name?.message || 'Error!'}</p>}
-              </div>
+        {auth.isLoading ? (
+          <Preload />
+        ) : (
+          <Card className={classes.card}>
+            <CardHeader className={classes.header} title="Login App" />
+            <CardContent>
+              <div>
+                <TextField
+                  fullWidth
+                  id="name"
+                  type="text"
+                  label="Name"
+                  placeholder="Name"
+                  margin="normal"
+                  defaultValue={auth.name}
+                  {...register('name', {
+                    required: 'Поле обязательно к заполнению',
+                    minLength: {
+                      value: 5,
+                      message: 'Длинна не менее 5 символов',
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>
+                  {errors?.name && <p>{errors?.name?.message || 'Error!'}</p>}
+                </div>
 
-              <TextField
-                fullWidth
-                id="login"
-                type="text"
-                label="New Login"
-                placeholder="New Login"
-                margin="normal"
-                {...register('login', {
-                  required: 'Поле обязательно к заполнению',
-                  minLength: {
-                    value: 5,
-                    message: 'Длинна не менее 5 символов',
-                  },
-                })}
-              />
-              <div style={{ color: 'red' }}>
-                {errors?.login && <p>{errors?.login?.message || 'Error!'}</p>}
-              </div>
+                <TextField
+                  fullWidth
+                  id="login"
+                  type="text"
+                  label="New Login"
+                  placeholder="New Login"
+                  margin="normal"
+                  {...register('login', {
+                    required: 'Поле обязательно к заполнению',
+                    minLength: {
+                      value: 5,
+                      message: 'Длинна не менее 5 символов',
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>
+                  {errors?.login && <p>{errors?.login?.message || 'Error!'}</p>}
+                </div>
 
-              <TextField
-                fullWidth
-                id="password"
-                type="password"
-                label="New Password"
-                placeholder="New Password"
-                margin="normal"
-                {...register('password', {
-                  required: 'Поле обязательно к заполнению',
-                  minLength: {
-                    value: 3,
-                    message: 'Длинна не менее 3 символов',
-                  },
-                })}
-              />
-              <div style={{ color: 'red' }}>
-                {errors?.password && <p>{errors?.password?.message || 'Error!'}</p>}
+                <TextField
+                  fullWidth
+                  id="password"
+                  type="password"
+                  label="New Password"
+                  placeholder="New Password"
+                  margin="normal"
+                  {...register('password', {
+                    required: 'Поле обязательно к заполнению',
+                    minLength: {
+                      value: 3,
+                      message: 'Длинна не менее 3 символов',
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>
+                  {errors?.password && <p>{errors?.password?.message || 'Error!'}</p>}
+                </div>
               </div>
-            </div>
-          </CardContent>
-          <CardActions>
-            <Button
-              type="submit"
-              disabled={!isValid}
-              variant="contained"
-              size="large"
-              className={classes.loginBtn}
+            </CardContent>
+            <CardActions>
+              <Button
+                type="submit"
+                disabled={!isValid}
+                variant="contained"
+                size="large"
+                className={classes.loginBtn}
+              >
+                Change
+              </Button>
+            </CardActions>
+            <Modal
+              open={isOpenСonfirmation}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              Change
-            </Button>
-          </CardActions>
-          <Modal
-            open={isOpenСonfirmation}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Changes applied!
-              </Typography>
-              <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
-                New Login - {newLog}
-              </Typography>
-              <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
-                New Password - {newPass}
-              </Typography>
-            </Box>
-          </Modal>
-          <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-              User was not founded!
-            </Alert>
-          </Snackbar>
-        </Card>
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Changes applied!
+                </Typography>
+                <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
+                  New Login - {newLog}
+                </Typography>
+                <Typography component={'p'} id="modal-modal-description" sx={{ mt: 2 }}>
+                  New Password - {newPass}
+                </Typography>
+              </Box>
+            </Modal>
+            <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                User was not founded!
+              </Alert>
+            </Snackbar>
+          </Card>
+        )}
       </form>
     </div>
   );

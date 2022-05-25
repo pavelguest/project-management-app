@@ -1,20 +1,17 @@
 import React from 'react';
-import InputLabel from '@mui/material/InputLabel';
+// import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import './LocalizationSelect.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setLocale } from '../../redux/reducers/localizatonSlice';
-// import { setLocale }
 
 export const LocalizationSelect = () => {
-  const [language, setLanguage] = React.useState('en');
   const dispatch = useAppDispatch();
   const { locale } = useAppSelector((state) => state.localizationReducers);
 
   const handleChange = (event: SelectChangeEvent) => {
-    // setLanguage(event.target.value);
     dispatch(setLocale(event.target.value));
     console.log(locale);
   };
