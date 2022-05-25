@@ -3,11 +3,14 @@ import React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import './WelcomePage.css';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import { FormattedMessage } from 'react-intl';
 
 export const WelcomePage = () => {
   return (
     <div className="welcome">
-      <h2 className="welcome__title">The project was made by:</h2>
+      <h2 className="welcome__title">
+        <FormattedMessage id="project_creators" />
+      </h2>
       <div className="welcome__box">
         <div className="welcome__centr">
           <div className="welcome__wrap">
@@ -21,10 +24,10 @@ export const WelcomePage = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Pavel
+                    <FormattedMessage id="first_member_name" />
                   </Typography>
                   <Typography className="welcome__subtitle" variant="body2" color="text.secondary">
-                    Team-lead, Drag-and-drop, Board page, create column
+                    <FormattedMessage id="first_member_contribution" />
                   </Typography>
                   <a href="https://github.com/pavelguest">
                     <GitHubIcon />

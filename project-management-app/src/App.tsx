@@ -11,7 +11,6 @@ const App = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   let userInfo: ICheckTocken;
   let id: string;
   const decoded = localStorage.getItem('token');
