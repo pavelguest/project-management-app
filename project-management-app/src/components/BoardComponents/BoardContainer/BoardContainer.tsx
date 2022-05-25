@@ -41,7 +41,7 @@ export const BoardContainer = () => {
       })
     );
   };
-  const createTask = (value: string, currentColumnId: string) => {
+  const createTask = (value: string, description: string, currentColumnId: string) => {
     // const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
     // const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
     dispatch(
@@ -51,7 +51,7 @@ export const BoardContainer = () => {
         userId: userId,
         title: value,
         // order: orderTask,
-        description: 'qqq',
+        description,
       })
     );
   };

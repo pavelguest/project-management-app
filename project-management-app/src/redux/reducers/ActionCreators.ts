@@ -85,7 +85,6 @@ const fetchLogin = createAsyncThunk(
 const fetchAllUsers = createAsyncThunk('auth/fetchAllUsers', async (_, thunkAPI) => {
   try {
     const response = await $authHost.get(`users`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue('User was not founded!');
