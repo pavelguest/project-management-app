@@ -4,6 +4,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { itemTypes } from '../../../types/BoardTypes';
 import { ITaskObj } from '../../../types/tasksSliceType';
 import AlertDialogDelete from '../../AlertDialogDelete';
+import TaskModal from '../../TaskModal';
 import './Task.css';
 
 interface ITask {
@@ -22,6 +23,7 @@ interface IPropsTask {
     dropColumnId: string
   ) => void;
   deleteTask: (taskId: string, columnId: string) => void;
+  editTask: (value: string, type: string, columnId: string) => void;
 }
 
 export const Task = ({
@@ -31,8 +33,12 @@ export const Task = ({
   moveTaskHandler,
   moveTaskToColumn,
   deleteTask,
+  editTask,
 }: IPropsTask) => {
   const { currentBoard } = useAppSelector((state) => state.boardReducers);
+  const [openTask, setOpenTask] = React.useState(false);
+  const handleOpenTask = () => setOpenTask(true);
+  const handleCloseTask = () => setOpenTask(false);
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -86,11 +92,28 @@ export const Task = ({
 
   const deleteItem = () => deleteTask(taskObj.id, columnId);
 
+  const editInputTaskHandle = (value: string, type: string) => {
+    console.log(value, type);
+  };
+
   drag(drop(ref));
   return (
-    <div className="task" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
-      {taskObj.title}
-      <AlertDialogDelete deleteItem={deleteItem} />
-    </div>
+    <>
+      <div
+        className="task"
+        ref={ref}
+        style={{ backgroundColor: isDragging ? 'red' : 'white' }}
+        onClick={handleOpenTask}
+      >
+        {taskObj.title}
+        <AlertDialogDelete deleteItem={deleteItem} />
+      </div>
+      <TaskModal
+        isOpen={openTask}
+        closeTask={handleCloseTask}
+        task={taskObj}
+        editInput={editInputTaskHandle}
+      />
+    </>
   );
 };

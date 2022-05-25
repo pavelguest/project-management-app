@@ -32,25 +32,20 @@ export const BoardContainer = () => {
   const dispatch = useAppDispatch();
 
   const createColumn = (value: string) => {
-    // const orderColumns = columnsArr.length ? columnsArr.length + 2 : 0;
     dispatch(
       fetchCreateColumn({
         boardId: currentBoard.id,
-        // order: orderColumns,
         title: value,
       })
     );
   };
   const createTask = (value: string, description: string, currentColumnId: string) => {
-    // const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
-    // const orderTask = currentColumn.tasks.length ? currentColumn.tasks.length + 2 : 0;
     dispatch(
       fetchCreateTask({
         columnId: currentColumnId,
         boardId: currentBoard.id,
         userId: userId,
         title: value,
-        // order: orderTask,
         description,
       })
     );
@@ -169,6 +164,8 @@ export const BoardContainer = () => {
     dispatch(changeColumnTitle({ columnId, title }));
   };
 
+  const editTask = (value: string, type: string, columnId: string) => {};
+
   return (
     <div className="board-container">
       <div className="columns-container">
@@ -202,6 +199,7 @@ export const BoardContainer = () => {
                     moveTaskHandler={moveTaskHandler}
                     moveTaskToColumn={moveTaskToColumn}
                     deleteTask={deleteTask}
+                    editTask={editTask}
                   />
                 ))}
               </Column>
