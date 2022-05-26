@@ -77,7 +77,6 @@ const Auth = () => {
       // setCookie('token', auth.token, { path: '/', maxAge: 5000 });
       {
         auth.isAuth && navigate('/main');
-        console.log('registr');
       }
     }
     if (!registrationMatches) {
