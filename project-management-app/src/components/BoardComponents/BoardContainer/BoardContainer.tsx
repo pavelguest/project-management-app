@@ -19,6 +19,7 @@ import {
   addMovedTasks,
   addTasks,
   changeColumnTitle,
+  changeTask,
   delColumn,
   delTask,
 } from '../../../redux/reducers/boardsSlice';
@@ -164,7 +165,9 @@ export const BoardContainer = () => {
     dispatch(changeColumnTitle({ columnId, title }));
   };
 
-  const editTask = (value: string, type: string, columnId: string) => {};
+  const editTask = (value: string, type: string, columnId: string, taskId: string) => {
+    dispatch(changeTask({ columnId, taskId, value, type }));
+  };
 
   return (
     <div className="board-container">
