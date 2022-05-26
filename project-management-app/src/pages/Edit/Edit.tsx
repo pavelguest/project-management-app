@@ -20,8 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       display: 'flex',
       flexWrap: 'wrap',
-      width: 400,
       margin: `${theme.spacing(0)} auto`,
+      [theme.breakpoints.down('sm')]: {
+        width: 300,
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 400,
+      },
     },
     loginBtn: {
       marginTop: theme.spacing(2),
@@ -35,7 +40,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       marginTop: theme.spacing(10),
-      width: 400,
+      [theme.breakpoints.down('sm')]: {
+        width: 300,
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 400,
+      },
     },
   })
 );

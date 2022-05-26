@@ -2,3 +2,10 @@
   min-height: calc(100vh - 80px);
   background-color: var(--beige);
 }
+
+
+@media (max-width: 413px){
+  .makeStyles-container-13 {
+    width: 300px !important;
+  }
+}

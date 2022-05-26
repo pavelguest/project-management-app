@@ -7,6 +7,20 @@
 .welcome__title {
     color: var(--beige);
     padding-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.welcome__title2 {
+    color: var(--beige);
+    padding-top: 15px;
+    margin-bottom: 15px;
+
+    opacity:0; 
+    transition: 1s; 
+    animation: show 1s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.6s; 
 }
 .welcome__centr {
     display: flex;
@@ -27,8 +41,9 @@
 }
 
 .welcome__foto {
-    height: 240px;
-    width: 250px;
+    width: 140px !important;
+    margin: 0 auto;
+    margin-top: 3px;
 }
 
 .welcome__1 {
@@ -36,24 +51,27 @@
     transition: 1s; 
     animation: show 1s 1;
     animation-fill-mode: forwards;
-    animation-delay: 0.5s;
+    animation-delay: 1.1s;
     width: 250px;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
 }
 .welcome__2 {
     opacity:0; 
     transition: 1s;
     animation: show 1s 1; 
     animation-fill-mode: forwards;
-    animation-delay: 1s; 
+    animation-delay: 1.55s; 
     width: 250px;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
 }
 .welcome__3 {
     opacity:0; 
     transition: 1s; 
     animation: show 1s 1;
     animation-fill-mode: forwards;
-    animation-delay: 1.5s; 
+    animation-delay: 2s; 
     width: 250px;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
 }
 
 .welcome__subtitle{
@@ -79,12 +97,8 @@
     word-wrap: break-word;
     max-width: 900px;
     font-size: 19px !important;
-    background-color: var(--light-blue);
-    opacity:0; 
-    transition: 1s; 
-    animation: show 1s 1;
-    animation-fill-mode: forwards;
-    animation-delay: 1.8s; 
+    /* background-color: var(--light-blue); */
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
     text-align: left;
     padding-left: 1%;
 }
@@ -109,10 +123,6 @@
         margin-bottom: 20px;
     }
 
-    .welcome__foto {
-        width: 150px;
-        height: 240px;
-    }
     .welcome__subtitle{
         font-size: 22px !important;
         height: 190px;
@@ -145,10 +155,6 @@
         margin-bottom: 20px;
     }
 
-    .welcome__foto {
-        width: 450px;
-        height: 370px;
-    }
     .welcome__subtitle{
         font-size: 22px !important;
         height: 115px;
@@ -184,10 +190,6 @@
         margin-bottom: 20px;
     }
 
-    .welcome__foto {
-        width: 250px;
-        height: 370px;
-    }
     .welcome__subtitle{
         font-size: 22px !important;
         height: 115px;

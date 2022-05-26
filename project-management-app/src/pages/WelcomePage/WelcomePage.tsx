@@ -8,18 +8,35 @@ import { FormattedMessage } from 'react-intl';
 export const WelcomePage = () => {
   return (
     <div className="welcome">
-      <h2 className="welcome__title">
+      <h2 className="welcome__title">О проекте</h2>
+      <Box className="welcome__box2" sx={{ width: '100%' }}>
+        <Typography className="welcome__item" variant="body2" color="text.secondary">
+          <DoneOutlineIcon /> This is a web-based, Kanban-style, list-making application.
+          <br />
+          <DoneOutlineIcon /> This application helps teams move work forward.
+          <br />
+          <DoneOutlineIcon /> Start with a board, lists, and cards.
+          <br />
+          <DoneOutlineIcon />
+          Customize and expand with more features as your teamwork grows.
+          <br />
+          <DoneOutlineIcon />
+          Manage projects, organize tasks, and build team spirit—all in one place.
+        </Typography>
+      </Box>
+
+      <h2 className="welcome__title2">
         <FormattedMessage id="project_creators" />
       </h2>
       <div className="welcome__box">
         <div className="welcome__centr">
           <div className="welcome__wrap">
-            <Card className="welcome__1" style={{ backgroundColor: 'var(--light-blue)' }}>
+            <Card className="welcome__1">
               <CardActionArea>
                 <CardMedia
                   className="welcome__foto"
                   component="img"
-                  image="./pavel2.jpg"
+                  image="./Pavel2-round.png"
                   alt="green iguana"
                 />
                 <CardContent>
@@ -35,12 +52,12 @@ export const WelcomePage = () => {
                 </CardContent>
               </CardActionArea>
             </Card>
-            <Card style={{ backgroundColor: 'var(--light-blue)' }} className="welcome__2">
+            <Card className="welcome__2">
               <CardActionArea>
                 <CardMedia
                   className="welcome__foto"
                   component="img"
-                  image="./alena_edite.jpg"
+                  image="./alena_edite-round.png"
                   alt="green iguana"
                 />
                 <CardContent>
@@ -57,12 +74,12 @@ export const WelcomePage = () => {
                 </CardContent>
               </CardActionArea>
             </Card>
-            <Card style={{ backgroundColor: 'var(--light-blue)' }} className="welcome__3">
+            <Card className="welcome__3">
               <CardActionArea>
                 <CardMedia
                   className="welcome__foto"
                   component="img"
-                  image="./sergei.jpg"
+                  image="./sergei-round.png"
                   alt="green iguana"
                 />
                 <CardContent>
@@ -81,22 +98,6 @@ export const WelcomePage = () => {
           </div>
         </div>
       </div>
-
-      <Box className="welcome__box2" sx={{ width: '100%' }}>
-        <Typography className="welcome__item" variant="body2" color="text.secondary">
-          <DoneOutlineIcon /> This is a web-based, Kanban-style, list-making application.
-          <br />
-          <DoneOutlineIcon /> This application helps teams move work forward.
-          <br />
-          <DoneOutlineIcon /> Start with a board, lists, and cards.
-          <br />
-          <DoneOutlineIcon />
-          Customize and expand with more features as your teamwork grows.
-          <br />
-          <DoneOutlineIcon />
-          Manage projects, organize tasks, and build team spirit—all in one place.
-        </Typography>
-      </Box>
     </div>
   );
 };
