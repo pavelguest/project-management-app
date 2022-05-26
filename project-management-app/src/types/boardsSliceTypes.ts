@@ -74,3 +74,9 @@ export interface IChangeColumnTitle {
   columnId: string;
   title: string;
 }
+export interface IChangeTask {
+  columnId: string;
+  taskId: string;
+  value: string;
+  type: string;
+}

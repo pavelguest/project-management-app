@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop, XYCoord } from 'react-dnd';
 import { useAppSelector } from '../../../hooks/redux';
+import { fetchPutTaskId } from '../../../redux/reducers/ActionCreators';
 import { itemTypes } from '../../../types/BoardTypes';
 import { ITaskObj } from '../../../types/tasksSliceType';
 import AlertDialogDelete from '../../AlertDialogDelete';
+import TaskModal from '../../TaskModal';
 import './Task.css';
 
 interface ITask {
@@ -22,6 +24,7 @@ interface IPropsTask {
     dropColumnId: string
   ) => void;
   deleteTask: (taskId: string, columnId: string) => void;
+  editTask: (value: string, type: string, columnId: string, taskId: string) => void;
 }
 
 export const Task = ({
@@ -31,8 +34,13 @@ export const Task = ({
   moveTaskHandler,
   moveTaskToColumn,
   deleteTask,
+  editTask,
 }: IPropsTask) => {
   const { currentBoard } = useAppSelector((state) => state.boardReducers);
+  const { auth } = useAppSelector((state) => state.authReducers);
+  const [openTask, setOpenTask] = React.useState(false);
+  const handleOpenTask = () => setOpenTask(true);
+  const handleCloseTask = () => setOpenTask(false);
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -86,11 +94,43 @@ export const Task = ({
 
   const deleteItem = () => deleteTask(taskObj.id, columnId);
 
+  const editInputTaskHandle = (value: string, type: string) => {
+    editTask(value, type, columnId, taskObj.id);
+    fetchPutTaskId({
+      props: {
+        boardId: currentBoard.id,
+        columnId,
+        taskId: taskObj.id,
+      },
+      putTask: {
+        title: type === 'title' ? value : taskObj.title,
+        order: taskObj.order,
+        description: type !== 'title' ? value : taskObj.description,
+        userId: auth.id,
+        boardId: currentBoard.id,
+        columnId,
+      },
+    });
+  };
+
   drag(drop(ref));
   return (
-    <div className="task" ref={ref} style={{ backgroundColor: isDragging ? 'red' : 'white' }}>
-      {taskObj.title}
-      <AlertDialogDelete deleteItem={deleteItem} />
-    </div>
+    <>
+      <div
+        className="task"
+        ref={ref}
+        style={{ backgroundColor: isDragging ? 'red' : 'white' }}
+        onClick={handleOpenTask}
+      >
+        {taskObj.title}
+        <AlertDialogDelete deleteItem={deleteItem} />
+      </div>
+      <TaskModal
+        isOpen={openTask}
+        closeTask={handleCloseTask}
+        task={taskObj}
+        editInput={editInputTaskHandle}
+      />
+    </>
   );
 };

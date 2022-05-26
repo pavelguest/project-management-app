@@ -8,6 +8,7 @@ import {
   IMovedTasks,
   IDeleteTask,
   IChangeColumnTitle,
+  IChangeTask,
 } from '../../types/boardsSliceTypes';
 import { ITaskObj } from '../../types/tasksSliceType';
 import { fetchCreateColumn, fetchCreateTask, fetchGetBoardId } from './ActionCreators';
@@ -80,6 +81,19 @@ export const boardsSlice = createSlice({
         (elem) => elem.id === action.payload.columnId
       );
       state.currentBoard.columns[indexColumnChange].title = action.payload.title;
+    },
+    changeTask: (state, action: PayloadAction<IChangeTask>) => {
+      const indexColumn = state.currentBoard.columns.findIndex(
+        (elem) => elem.id === action.payload.columnId
+      );
+      const indexTask = state.currentBoard.columns[indexColumn].tasks.findIndex(
+        (elem) => elem.id === action.payload.taskId
+      );
+      if (action.payload.type === 'title') {
+        state.currentBoard.columns[indexColumn].tasks[indexTask].title = action.payload.value;
+      } else {
+        state.currentBoard.columns[indexColumn].tasks[indexTask].description = action.payload.value;
+      }
     },
     delColumn: (state, action: PayloadAction<string>) => {
       const indexDeleteColumn = state.currentBoard.columns.findIndex(
@@ -156,6 +170,7 @@ export const {
   addNewColumn,
   addColumns,
   changeColumnTitle,
+  changeTask,
   delColumn,
   delTask,
   addTasks,
