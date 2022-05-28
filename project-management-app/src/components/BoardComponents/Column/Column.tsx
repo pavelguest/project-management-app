@@ -67,29 +67,31 @@ export const Column = ({
   };
 
   return (
-    <div className={'columns__item'}>
-      <div className={'column__controls'}>
-        <div className={'column-title__container'}>
-          {isEditTitle ? (
-            <ChangeTitleColumn
-              title={title}
-              closeContainer={handleCloseTitleChange}
-              changeTitleColumn={changeTitleColumn}
-            />
-          ) : (
-            <h3 onClick={handleOpenTitleChange}>{title}</h3>
-          )}
+    <>
+      <div className={'columns__item'}>
+        <div className={'column__controls'}>
+          <div className={'column-title__container'}>
+            {isEditTitle ? (
+              <ChangeTitleColumn
+                title={title}
+                closeContainer={handleCloseTitleChange}
+                changeTitleColumn={changeTitleColumn}
+              />
+            ) : (
+              <h3 onClick={handleOpenTitleChange}>{title}</h3>
+            )}
+          </div>
+          <AlertDialogDelete deleteItem={deleteItem} />
         </div>
-        <AlertDialogDelete deleteItem={deleteItem} />
+        <div
+          className="columns-wrapper"
+          ref={drop}
+          style={{ backgroundColor: isOver ? 'coral' : 'white' }}
+        >
+          {children}
+        </div>
+        <ModalCreateItem type={'task'} create={setTask} />
       </div>
-      <div
-        className="columns-wrapper"
-        ref={drop}
-        style={{ backgroundColor: isOver ? 'coral' : 'white' }}
-      >
-        {children}
-      </div>
-      <ModalCreateItem type={'task'} create={setTask} />
-    </div>
+    </>
   );
 };

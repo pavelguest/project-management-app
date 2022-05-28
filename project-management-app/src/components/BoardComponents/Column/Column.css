@@ -1,17 +1,20 @@
+.columns__item {
+  padding: 15px;
+  overflow: hidden;
+  box-shadow: 1px 1px 10px 1px #000a;
+}
 .columns-wrapper {
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 300px;
+  height: 100%;
+  min-height: 82px;
+  max-height: calc(100vh - 325px);
   margin-bottom: 5px;
   padding: 10px;
   overflow-y: scroll;
 
   gap: 10px;
-}
-.columns__item {
-  padding: 15px;
-  box-shadow: 1px 1px 10px 1px #000a;
 }
 
 .columns-wrapper::-webkit-scrollbar {
