@@ -29,7 +29,6 @@ export const LocalizationSelect = () => {
           autoWidth
           style={{
             color: 'white',
-            // backgroundColor: '#1976d2',
           }}
           // label="Age"
         >

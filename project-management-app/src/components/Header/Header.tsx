@@ -43,8 +43,8 @@ export const Header = () => {
         </nav>
         <CreateBoardBtn />
       </div>
-      <AuthorizationBtn />
       <LocalizationSelect />
+      <AuthorizationBtn />
     </header>
   );
 };
