@@ -5,11 +5,15 @@ import { TouchBackend } from 'react-dnd-touch-backend';
 import BoardContainer from '../../components/BoardComponents/BoardContainer';
 import './BoardPage.css';
 
-const isMobile = window.innerWidth < 600;
-
 export const BoardPage = () => (
   <div className="board-page">
-    <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
+    <DndProvider
+      backend={
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+          ? TouchBackend
+          : HTML5Backend
+      }
+    >
       <BoardContainer />
     </DndProvider>
   </div>

@@ -58,48 +58,38 @@ export const BoardContainer = () => {
       const coppiedStateArray = [...columnsArr];
       const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
       coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+
       dispatch(addColumns(coppiedStateArray));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const promiseAll: any[] = [];
-      coppiedStateArray.forEach((elem, index) => {
-        promiseAll.push(
-          fetchPutColumnId({
-            props: { boardId: currentBoard.id, columnId: elem.id },
-            putColumn: { title: elem.title, order: index + 1 },
-          })
-        );
+
+      fetchPutColumnId({
+        props: { boardId: currentBoard.id, columnId: dragItem.id },
+        putColumn: { title: dragItem.title, order: hoverIndex + 1 },
       });
-      Promise.all(promiseAll).then((res) => console.log(res));
     }
   };
 
   const moveTaskHandler = (dragIndex: number, hoverIndex: number, currentColumnId: string) => {
     const currentColumn = columnsArr.find((elem) => elem.id === currentColumnId) as IColumnsArr;
-    console.log(`column`, currentColumn);
+
     const dragItem = currentColumn.tasks[dragIndex];
     if (dragItem) {
       const coppiedStateArray = [...currentColumn.tasks];
       const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
       coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+
       dispatch(addTasks({ columnId: currentColumn.id, tasksArr: coppiedStateArray }));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const promiseAll: any[] = [];
-      coppiedStateArray.forEach((elem, index) => {
-        promiseAll.push(
-          fetchPutTaskId({
-            props: { boardId: currentBoard.id, columnId: currentColumnId, taskId: elem.id },
-            putTask: {
-              title: elem.title,
-              userId: elem.userId,
-              description: elem.description,
-              boardId: currentBoard.id,
-              columnId: currentColumnId,
-              order: index + 1,
-            },
-          })
-        );
+
+      fetchPutTaskId({
+        props: { boardId: currentBoard.id, columnId: currentColumnId, taskId: dragItem.id },
+        putTask: {
+          title: dragItem.title,
+          userId: dragItem.userId,
+          description: dragItem.description,
+          boardId: currentBoard.id,
+          columnId: currentColumnId,
+          order: hoverIndex + 1,
+        },
       });
-      Promise.all(promiseAll).then((res) => console.log(res));
     }
   };
 
@@ -109,15 +99,11 @@ export const BoardContainer = () => {
     columnIdFrom: string,
     columnIdTo: string
   ) => {
-    console.log(`taskIndexFrom`, taskIndexFrom);
-    console.log(`taskIndexTo`, taskIndexTo);
-    console.log(`columnIdFrom`, columnIdFrom);
-    console.log(`columnIdTo`, columnIdTo);
-
     const currentColumn = columnsArr.find((elem) => elem.id === columnIdFrom) as IColumnsArr;
     const dropColumn = columnsArr.find((elem) => elem.id === columnIdTo) as IColumnsArr;
 
     const dragTask = currentColumn.tasks[taskIndexFrom];
+
     if (dragTask) {
       const columnTasksFrom = [...currentColumn.tasks];
       const columnTasksTo = [...dropColumn.tasks];
@@ -138,6 +124,9 @@ export const BoardContainer = () => {
           columnTasksArrTo: columnTasksTo,
         })
       );
+
+      const orderTask = columnTasksTo.findIndex((elem) => elem.id === dragTask.id);
+
       fetchPutTaskId({
         props: { boardId: currentBoard.id, columnId: columnIdFrom, taskId: dragTask.id },
         putTask: {
@@ -146,7 +135,7 @@ export const BoardContainer = () => {
           description: dragTask.description,
           boardId: currentBoard.id,
           columnId: columnIdTo,
-          order: columnTasksTo.length === 0 ? 1 : !taskIndexTo ? taskIndexTo + 1 : taskIndexTo,
+          order: orderTask + 1,
         },
       });
     }
@@ -171,6 +160,7 @@ export const BoardContainer = () => {
 
   return (
     <div className="board-container">
+      <ModalCreateItem type={'column'} create={createColumn} />
       <div className="columns-container">
         {statusApi.isLoading && <Preload />}
         {statusApi.error ? (
@@ -210,7 +200,6 @@ export const BoardContainer = () => {
           ))
         )}
       </div>
-      <ModalCreateItem type={'column'} create={createColumn} />
     </div>
   );
 };

@@ -39,7 +39,13 @@ export const AlertDialogDelete = (props: IDelete) => {
 
   return (
     <>
-      <IconButton onClick={handleClickOpen} size={'small'}>
+      <IconButton
+        onClick={(event) => {
+          event.stopPropagation();
+          handleClickOpen();
+        }}
+        size={'small'}
+      >
         <DeleteIcon />
       </IconButton>
       <Dialog
