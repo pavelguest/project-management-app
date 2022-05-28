@@ -39,7 +39,11 @@ export const Task = ({
   const { currentBoard } = useAppSelector((state) => state.boardReducers);
   const { auth } = useAppSelector((state) => state.authReducers);
   const [openTask, setOpenTask] = React.useState(false);
-  const handleOpenTask = () => setOpenTask(true);
+  const handleOpenTask = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if ((event.target as HTMLElement).className === 'task') {
+      setOpenTask(true);
+    }
+  };
   const handleCloseTask = () => setOpenTask(false);
 
   const ref = useRef(null);
@@ -79,7 +83,6 @@ export const Task = ({
       const dropResult = monitor.getDropResult() as ITask;
       if (dropResult) {
         const { currentDropColumnId } = dropResult;
-        console.log(`drop column`, currentDropColumnId);
         currentBoard.columns.forEach((elem) => {
           if (elem.id === currentDropColumnId && columnId !== currentDropColumnId) {
             moveTaskToColumn(index, item.index, columnId, currentDropColumnId);
@@ -120,7 +123,7 @@ export const Task = ({
         className="task"
         ref={ref}
         style={{ backgroundColor: isDragging ? 'red' : 'white' }}
-        onClick={handleOpenTask}
+        onClick={(event) => handleOpenTask(event)}
       >
         {taskObj.title}
         <AlertDialogDelete deleteItem={deleteItem} />

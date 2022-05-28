@@ -115,8 +115,11 @@ export const boardsSlice = createSlice({
     [fetchGetBoardId.fulfilled.type]: (state, action: PayloadAction<ICurrentBoard>) => {
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`get`, action.payload);
-      state.currentBoard = action.payload;
+      const sortColumnsArr = action.payload.columns.sort((a, b) => a.order - b.order);
+      sortColumnsArr.map((elem) => elem.tasks.sort((a, b) => a.order - b.order));
+      const copyArr = action.payload;
+      copyArr.columns = [...sortColumnsArr];
+      state.currentBoard = copyArr;
     },
     [fetchGetBoardId.pending.type]: (state) => {
       state.statusApi.isLoading = true;
@@ -129,7 +132,6 @@ export const boardsSlice = createSlice({
       const { id, title, order } = action.payload;
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`set`, action.payload);
       state.currentBoard.columns.push({ id: id, title: title, order: order, tasks: [] });
     },
     [fetchCreateColumn.pending.type]: (state) => {
@@ -143,7 +145,6 @@ export const boardsSlice = createSlice({
       const { columnId } = action.payload;
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`set`, action.payload);
       state.currentBoard.columns.forEach((elem) => {
         if (elem.id === columnId) {
           elem.tasks.push(action.payload);

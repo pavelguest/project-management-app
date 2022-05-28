@@ -60,7 +60,6 @@ export const MainPage = () => {
     if ((event.target as SVGSVGElement).closest('svg')) {
       return;
     }
-    // dispatch(fetchAllUsers());
     dispatch(fetchGetBoardId(id));
     navigate('../board');
   };
