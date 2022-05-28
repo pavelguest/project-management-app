@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleCreateBoardModalOpen } from '../../redux/reducers/boardsSlice';
 import { useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 
 export function CreateBoardBtn() {
   const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ export function CreateBoardBtn() {
           }}
           onClick={handleToggleModal}
         >
-          Create
+          <FormattedMessage id="create_btn" />
         </Button>
         // <button className="create__btn" onClick={handleToggleModal}>
         //   Create

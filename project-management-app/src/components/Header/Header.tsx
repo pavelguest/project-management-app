@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks/redux';
 import EditBtn from '../EditBth/EditBtn';
 import HeaderMenu from '../HeaderMenu';
 import LocalizationSelect from '../LocalizationSelect';
+import { FormattedMessage } from 'react-intl';
 
 export const Header = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -16,7 +17,7 @@ export const Header = () => {
         <HeaderMenu type={'nav-menu'} />
         <nav className="header__nav">
           <NavLink to="/" className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}>
-            Welcome
+            <FormattedMessage id="welcome_route" />
           </NavLink>
           {auth.isAuth && (
             <>

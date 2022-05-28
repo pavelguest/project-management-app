@@ -56,9 +56,23 @@
     width: 250px;
 }
 
+.welcome__card-wrapper {
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between !important;
+}
+
+.welcome__card-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .welcome__subtitle{
     font-size: 19px !important;
-    height: 108px;
+    height: auto;
 }
 
 .welcome__box {
@@ -76,6 +90,7 @@
 .welcome__item {
     box-shadow: rgb(0 0 0 / 67%) 1px 1px 10px 1px;
     border-radius: 4px;
+    padding: 10px;
     word-wrap: break-word;
     max-width: 900px;
     font-size: 19px !important;
@@ -115,7 +130,6 @@
     }
     .welcome__subtitle{
         font-size: 22px !important;
-        height: 190px;
     }
     
     .welcome__item {
