@@ -9,7 +9,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   height: 80px;
-  background-color: var(--darck-blue);
+  background-color: var(--dark-blue);
 }
 
 .header__nav {

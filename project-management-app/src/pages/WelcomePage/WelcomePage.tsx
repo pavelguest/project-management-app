@@ -9,36 +9,41 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 export const WelcomePage = () => {
   return (
     <div className="welcome">
-      <Parallax pages={4} style={{ top: '0', left: '0' }}>
+      <Parallax pages={2.2} style={{ top: '0', left: '0' }}>
         <ParallaxLayer
           offset={0}
-          speed={1}
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          speed={0.8}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'var(--peach)',
+          }}
         >
           <CardMedia
             className="welcome__mainfoto"
             component="img"
-            image="./pngegg3.png"
+            image="./pngegg1.png"
             alt="green iguana"
           />
         </ParallaxLayer>
-        <ParallaxLayer offset={0.8} speed={1.5} style={{ opacity: 0.5 }}>
+        <ParallaxLayer offset={0.4} speed={1.5} style={{ opacity: 0.7 }}>
           <CardMedia
             component="img"
-            image="./pngegg10.png"
+            image="./pngegg41.png"
             style={{ display: 'block', width: '20%', marginLeft: '75%' }}
             alt="green iguana"
           />
           <CardMedia
             component="img"
-            image="./pngegg11.png"
-            style={{ display: 'block', width: '10%', marginLeft: '10%' }}
+            image="./sumo.png"
+            style={{ display: 'block', width: '15%', marginLeft: '10%' }}
             alt="green iguana"
           />
         </ParallaxLayer>
 
         <ParallaxLayer
-          offset={1.5}
+          offset={1}
           speed={2}
           style={{
             display: 'flex',
@@ -65,28 +70,27 @@ export const WelcomePage = () => {
           </Box>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.7 }}>
+        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.8 }}>
           <CardMedia
             component="img"
-            image="./pngegg8.png"
+            image="./sumo2.png"
             style={{
               display: 'block',
-              width: '20%',
-              marginLeft: '55%',
+              width: '25%',
+              marginLeft: '69%',
             }}
             alt="green iguana"
           />
           <CardMedia
             component="img"
-            image="./pngegg8.png"
+            image="./sumo3.png"
             style={{ display: 'block', width: '10%', marginLeft: '15%' }}
             alt="green iguana"
           />
         </ParallaxLayer>
 
         <ParallaxLayer
-          offset={2.5}
-          speed={1.5}
+          sticky={{ start: 1.85, end: 1.85 }}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -179,6 +183,17 @@ export const WelcomePage = () => {
               </div>
             </div>
           </div>
+          <CardMedia
+            component="img"
+            image="./pngegg47.png"
+            style={{
+              display: 'block',
+              width: '35%',
+              marginLeft: '65%',
+              marginTop: -350,
+            }}
+            alt="green iguana"
+          />
         </ParallaxLayer>
       </Parallax>
     </div>
