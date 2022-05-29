@@ -1,8 +1,12 @@
-import { Modal, Typography } from '@mui/material';
+import { IconButton, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { ITaskObj } from '../../types/tasksSliceType';
+import EditIcon from '@mui/icons-material/Edit';
 import EditTask from '../EditTask';
+import './TaskModal.css';
+import { useAppSelector } from '../../hooks/redux';
 
 const style = {
   position: 'absolute',
@@ -17,8 +21,8 @@ const style = {
   p: 4,
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
-  gap: 10,
+  justifyContent: 'flex-start',
+  gap: 5,
 };
 
 export const TaskModal = (props: {
@@ -29,6 +33,7 @@ export const TaskModal = (props: {
 }) => {
   const [isEditInputTitle, setIsEditInputTitle] = useState(false);
   const [isEditInputDescription, setIsEditInputDescription] = useState(false);
+  const { auth } = useAppSelector((state) => state.authReducers);
   return (
     <div>
       <Modal
@@ -38,39 +43,56 @@ export const TaskModal = (props: {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {isEditInputTitle ? (
-            <EditTask
-              title={props.task.title}
-              type={'title'}
-              closeContainer={() => setIsEditInputTitle(false)}
-              editTaskHandle={props.editInput}
-            />
-          ) : (
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-              onClick={() => setIsEditInputTitle(true)}
-            >
-              Title: {props.task.title}
+          <div>
+            <Typography id="modal-modal-description" sx={{ mt: 2, margin: 0 }}>
+              <FormattedMessage id="task_modal_user" />
+              {auth.name}
             </Typography>
-          )}
-          {isEditInputDescription ? (
-            <EditTask
-              title={props.task.description}
-              type={'description'}
-              closeContainer={() => setIsEditInputDescription(false)}
-              editTaskHandle={props.editInput}
-            />
-          ) : (
-            <Typography
-              id="modal-modal-description"
-              sx={{ mt: 2 }}
-              onClick={() => setIsEditInputDescription(true)}
-            >
-              Description: {props.task.description}
-            </Typography>
-          )}
+          </div>
+          <div className="task-input__container">
+            {isEditInputTitle ? (
+              <EditTask
+                title={props.task.title}
+                type={'title'}
+                closeContainer={() => setIsEditInputTitle(false)}
+                editTaskHandle={props.editInput}
+              />
+            ) : (
+              <div className="task__input">
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <FormattedMessage id="task_modal_title" />
+                  {props.task.title}
+                </Typography>
+                <IconButton type="submit" size={'small'} onClick={() => setIsEditInputTitle(true)}>
+                  <EditIcon />
+                </IconButton>
+              </div>
+            )}
+          </div>
+          <div>
+            {isEditInputDescription ? (
+              <EditTask
+                title={props.task.description}
+                type={'description'}
+                closeContainer={() => setIsEditInputDescription(false)}
+                editTaskHandle={props.editInput}
+              />
+            ) : (
+              <div className="task__input">
+                <Typography id="modal-modal-description" sx={{ mt: 2, margin: 0 }}>
+                  <FormattedMessage id="task_modal_description" />
+                  {props.task.description}
+                </Typography>
+                <IconButton
+                  type="submit"
+                  size={'small'}
+                  onClick={() => setIsEditInputDescription(true)}
+                >
+                  <EditIcon />
+                </IconButton>
+              </div>
+            )}
+          </div>
         </Box>
       </Modal>
     </div>
