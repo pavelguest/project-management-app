@@ -15,6 +15,7 @@ import { IEditProps } from '../../types/editPropsTypes';
 import { useNavigate } from 'react-router-dom';
 import Preload from '../../components/Preload';
 import { FormattedMessage } from 'react-intl';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -91,11 +92,14 @@ const Edit = () => {
   const submit = (data: IEditProps) => {
     dispatch(
       fetchEdit({ name: data.name, login: data.login, password: data.password, id: auth.id })
-    );
-    setNewPass(data.password);
-    setNewLog(data.login);
-    !auth.error && setIsOpenСonfirmation(true);
-    !!auth.error && setIsOpen(true);
+    )
+      .then(unwrapResult)
+      .then(() => {
+        setNewPass(data.password);
+        setNewLog(data.login);
+        !auth.error && setIsOpenСonfirmation(true);
+        !!auth.error && setIsOpen(true);
+      });
     reset();
   };
 
