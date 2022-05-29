@@ -67,10 +67,9 @@ const Auth = () => {
 
   const submit = (data: FormInputsTypes) => {
     if (registrationMatches) {
-      dispatch(fetchRegistr({ name: data.name, login: data.login, password: data.password }));
-      dispatch(fetchLogin({ login: data.login, password: data.password, name: '' }))
+      dispatch(fetchRegistr({ name: data.name, login: data.login, password: data.password }))
         .then(unwrapResult)
-        .then(() => {})
+        .then(() => dispatch(fetchLogin({ login: data.login, password: data.password, name: '' })))
         .catch(() => setIsOpen(true));
       // setCookie('login', auth.login, { path: '/', maxAge: 5000 });
       // setCookie('password', auth.password, { path: '/', maxAge: 5000 });
