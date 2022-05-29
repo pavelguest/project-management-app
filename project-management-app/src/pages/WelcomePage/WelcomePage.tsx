@@ -105,14 +105,14 @@ export const WelcomePage = () => {
             <div className="welcome__centr">
               <div className="welcome__wrap">
                 <Card className="welcome__1">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./Pavel2-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
                         <FormattedMessage id="first_member_name" />
                       </Typography>
@@ -123,21 +123,21 @@ export const WelcomePage = () => {
                       >
                         <FormattedMessage id="first_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/pavelguest">
+                      <a href="https://github.com/pavelguest" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>
                   </CardActionArea>
                 </Card>
                 <Card className="welcome__2">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./alena_edite-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
                         <FormattedMessage id="second_member_name" />
                       </Typography>
@@ -148,23 +148,23 @@ export const WelcomePage = () => {
                       >
                         <FormattedMessage id="second_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/ElemartA">
+                      <a href="https://github.com/ElemartA" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>
                   </CardActionArea>
                 </Card>
                 <Card className="welcome__3">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./sergei-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
-                       <FormattedMessage id="third_member_name" />
+                        <FormattedMessage id="third_member_name" />
                       </Typography>
                       <Typography
                         className="welcome__subtitle"
@@ -173,7 +173,7 @@ export const WelcomePage = () => {
                       >
                         <FormattedMessage id="third_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/Essonti">
+                      <a href="https://github.com/Essonti" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>
