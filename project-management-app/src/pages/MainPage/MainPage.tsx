@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import './MainPage.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import {
-  // fetchAllUsers,
-  fetchBoardsGetAll,
-  fetchGetBoardId,
-} from '../../redux/reducers/ActionCreators';
+import { fetchBoardsGetAll, fetchGetBoardId } from '../../redux/reducers/ActionCreators';
 import {
   addAllBoards,
   toggleDeleteModalOpen,
