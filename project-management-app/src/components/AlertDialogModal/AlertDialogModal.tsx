@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleDeleteModalOpen } from '../../redux/reducers/boardsSlice';
 import { fetchBoardDelete } from '../../redux/reducers/ActionCreators';
 import { deleteBoard } from '../../redux/reducers/boardsSlice';
+import { FormattedMessage } from 'react-intl';
 
 interface IProps {
   open: boolean;
@@ -35,16 +36,20 @@ export const AlertDialogModal = (props: IProps) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{'Whould you like to delete that board?'}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">
+        <FormattedMessage id="alert_dialog_boards_title" />
+      </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          After deleting you won&apos;t be able to restore all that board&apos;s data!
+          <FormattedMessage id="alert_dialog_boards_description" />
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleClose('')}>Cancel</Button>
+        <Button onClick={() => handleClose('')}>
+          <FormattedMessage id="disagree_btn" />
+        </Button>
         <Button onClick={() => handleClose('confirm')} autoFocus>
-          Confirm
+          <FormattedMessage id="agree_btn" />
         </Button>
       </DialogActions>
     </Dialog>

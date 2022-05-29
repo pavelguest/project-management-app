@@ -5,6 +5,8 @@ import { CreateBoardBtn } from '../CreateBoard';
 import { useAppSelector } from '../../hooks/redux';
 import EditBtn from '../EditBth/EditBtn';
 import HeaderMenu from '../HeaderMenu';
+import LocalizationSelect from '../LocalizationSelect';
+import { FormattedMessage } from 'react-intl';
 
 export const Header = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
@@ -15,7 +17,7 @@ export const Header = () => {
         <HeaderMenu type={'nav-menu'} />
         <nav className="header__nav">
           <NavLink to="/" className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}>
-            Welcome
+            <FormattedMessage id="welcome_route" />
           </NavLink>
           {auth.isAuth && (
             <>
@@ -23,13 +25,13 @@ export const Header = () => {
                 to="/main"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
               >
-                Main
+                <FormattedMessage id="main_route" />
               </NavLink>
               <NavLink
                 to="/board"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
               >
-                Board
+                <FormattedMessage id="board_route" />
               </NavLink>
               <NavLink
                 to="/edit"
@@ -42,6 +44,7 @@ export const Header = () => {
         </nav>
         <CreateBoardBtn />
       </div>
+      <LocalizationSelect />
       <AuthorizationBtn />
     </header>
   );

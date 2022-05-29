@@ -52,20 +52,20 @@ export const WelcomePage = () => {
             backgroundColor: 'var(--light-blue)',
           }}
         >
-          <h2 className="welcome__title">О проекте</h2>
+          <h2 className="welcome__title">
+            <FormattedMessage id="project_about" />
+          </h2>
           <Box className="welcome__box2" sx={{ width: '100%' }}>
             <Typography className="welcome__item" variant="body2" color="text.secondary">
-              <DoneOutlineIcon /> This is a web-based, Kanban-style, list-making application.
+              <DoneOutlineIcon /> <FormattedMessage id="app_feature_1" />
               <br />
-              <DoneOutlineIcon /> This application helps teams move work forward.
+              <DoneOutlineIcon /> <FormattedMessage id="app_feature_2" />
               <br />
-              <DoneOutlineIcon /> Start with a board, lists, and cards.
+              <DoneOutlineIcon /> <FormattedMessage id="app_feature_3" />
               <br />
-              <DoneOutlineIcon />
-              Customize and expand with more features as your teamwork grows.
+              <DoneOutlineIcon /> <FormattedMessage id="app_feature_4" />
               <br />
-              <DoneOutlineIcon />
-              Manage projects, organize tasks, and build team spirit—all in one place.
+              <DoneOutlineIcon /> <FormattedMessage id="app_feature_5" />
             </Typography>
           </Box>
         </ParallaxLayer>
@@ -105,14 +105,14 @@ export const WelcomePage = () => {
             <div className="welcome__centr">
               <div className="welcome__wrap">
                 <Card className="welcome__1">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./Pavel2-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
                         <FormattedMessage id="first_member_name" />
                       </Typography>
@@ -123,58 +123,57 @@ export const WelcomePage = () => {
                       >
                         <FormattedMessage id="first_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/pavelguest">
+                      <a href="https://github.com/pavelguest" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>
                   </CardActionArea>
                 </Card>
                 <Card className="welcome__2">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./alena_edite-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
-                        Alena
+                        <FormattedMessage id="second_member_name" />
                       </Typography>
                       <Typography
                         className="welcome__subtitle"
                         variant="body2"
                         color="text.secondary"
                       >
-                        Autorization/registration, ability to change the pasword/login, deploy BE,
-                        welcome page
+                        <FormattedMessage id="second_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/ElemartA">
+                      <a href="https://github.com/ElemartA" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>
                   </CardActionArea>
                 </Card>
                 <Card className="welcome__3">
-                  <CardActionArea>
+                  <CardActionArea className="welcome__card-wrapper">
                     <CardMedia
                       className="welcome__foto"
                       component="img"
                       image="./sergei-round.png"
                       alt="green iguana"
                     />
-                    <CardContent>
+                    <CardContent className="welcome__card-text-wrapper">
                       <Typography gutterBottom variant="h5" component="div">
-                        Sergei
+                        <FormattedMessage id="third_member_name" />
                       </Typography>
                       <Typography
                         className="welcome__subtitle"
                         variant="body2"
                         color="text.secondary"
                       >
-                        Create/delete board, Main Page
+                        <FormattedMessage id="third_member_contribution" />
                       </Typography>
-                      <a href="https://github.com/Essonti">
+                      <a href="https://github.com/Essonti" target="_blank" rel="noreferrer">
                         <GitHubIcon />
                       </a>
                     </CardContent>

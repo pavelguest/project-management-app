@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import './AuthorizationBtn.css';
 import { updateIsAuth } from '../../redux/reducers/authSlice';
 import HeaderMenu from '../HeaderMenu';
+import { FormattedMessage } from 'react-intl';
 
 export const AuthorizationBtn = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export const AuthorizationBtn = () => {
             }}
             onClick={logOut}
           >
-            Sign Out
+            <FormattedMessage id="sign_out_btn" />
           </Button>
         )}
         {!auth.isAuth && !mainMatches && (
@@ -41,13 +42,13 @@ export const AuthorizationBtn = () => {
               to="/registration"
               className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
             >
-              Sign&nbsp;Up
+              <FormattedMessage id="sign_up_route" />
             </NavLink>
             <NavLink
               to="/login"
               className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
             >
-              Sign&nbsp;In
+              <FormattedMessage id="sign_in_route" />
             </NavLink>
           </>
         )}
@@ -61,7 +62,7 @@ export const AuthorizationBtn = () => {
             }}
             onClick={() => navigate('/main')}
           >
-            Go to main page
+            <FormattedMessage id="go_to_main_btn" />
           </Button>
         )}
       </div>

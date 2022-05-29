@@ -14,6 +14,7 @@ import { Alert, Snackbar } from '@mui/material';
 import { FormInputsTypes } from '../../types/formInputsTypes';
 import { unwrapResult } from '@reduxjs/toolkit';
 import Preload from '../../components/Preload';
+import { FormattedMessage } from 'react-intl';
 // import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -97,7 +98,10 @@ const Auth = () => {
         <Preload />
       ) : (
         <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Login App" />
+          <CardHeader
+            className={classes.header}
+            title={<FormattedMessage id="auth_header_title" />}
+          />
           <CardContent>
             <div>
               {registrationMatches && (
@@ -106,14 +110,16 @@ const Auth = () => {
                     fullWidth
                     id="name"
                     type="text"
-                    label="Name"
+                    label={<FormattedMessage id="auth_name_label" />}
                     placeholder="Name"
                     margin="normal"
                     {...register('name', {
-                      required: 'Поле обязательно к заполнению',
+                      required: (
+                        <FormattedMessage id="auth_required_error" />
+                      ) as unknown as string,
                       minLength: {
                         value: 5,
-                        message: 'Длинна не менее 5 символов',
+                        message: (<FormattedMessage id="auth_length_error" />) as unknown as string,
                       },
                     })}
                   />
@@ -127,14 +133,14 @@ const Auth = () => {
                 fullWidth
                 id="login"
                 type="text"
-                label="Login"
+                label={<FormattedMessage id="auth_login_label" />}
                 placeholder="Login"
                 margin="normal"
                 {...register('login', {
-                  required: 'Поле обязательно к заполнению',
+                  required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
                   minLength: {
                     value: 5,
-                    message: 'Длинна не менее 5 символов',
+                    message: (<FormattedMessage id="auth_length_error" />) as unknown as string,
                   },
                 })}
               />
@@ -146,14 +152,16 @@ const Auth = () => {
                 fullWidth
                 id="password"
                 type="password"
-                label="Password"
+                label={<FormattedMessage id="auth_password_label" />}
                 placeholder="Password"
                 margin="normal"
                 {...register('password', {
-                  required: 'Поле обязательно к заполнению',
+                  required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
                   minLength: {
                     value: 3,
-                    message: 'Длинна не менее 3 символов',
+                    message: (
+                      <FormattedMessage id="auth_length_password_error" />
+                    ) as unknown as string,
                   },
                 })}
               />
@@ -170,7 +178,7 @@ const Auth = () => {
               size="large"
               className={classes.loginBtn}
             >
-              Login
+              <FormattedMessage id="auth_btn" />
             </Button>
           </CardActions>
           <Snackbar

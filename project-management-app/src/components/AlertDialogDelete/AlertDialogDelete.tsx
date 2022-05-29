@@ -7,6 +7,7 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -55,10 +56,16 @@ export const AlertDialogDelete = (props: IDelete) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{'Are you sure you want to delete?'}</DialogTitle>
+        <DialogTitle>
+          <FormattedMessage id="alert_dialog_board_title" />
+        </DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleDelete}>Agree</Button>
+          <Button onClick={handleClose}>
+            <FormattedMessage id="disagree_btn" />
+          </Button>
+          <Button onClick={handleDelete}>
+            <FormattedMessage id="agree_btn" />
+          </Button>
         </DialogActions>
       </Dialog>
     </>

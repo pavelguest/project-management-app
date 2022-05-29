@@ -5,6 +5,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, TextField } from '@mui/material';
 import './ChangeTitleColumn.css';
+import { FormattedMessage } from 'react-intl';
 
 interface IInitialValues {
   name: string;
@@ -39,7 +40,7 @@ export const ChangeTitleColumn = (props: IPropsChangeTitle) => {
         fullWidth
         id="name"
         name="name"
-        label="Enter Title"
+        label={<FormattedMessage id="create_modal_title" />}
         type="name"
         value={formik.values.name}
         onChange={formik.handleChange}

@@ -13,6 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 interface IProps {
   open: boolean;
@@ -71,25 +72,28 @@ export const RenderModalCreateBoard = (props: IProps) => {
         //   paper: classes.dialog,
         // }}
       >
-        <DialogTitle>Create a board</DialogTitle>
+        <DialogTitle>
+          <FormattedMessage id="create_board_title" />
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            A board is an aggregation of cards, arranged in lists. Use it for project managment,
-            tracking or organizing of whatever you want.
+            <FormattedMessage id="create_board_description" />
           </DialogContentText>
           <form /* className="create-board-modal"*/ onSubmit={handleSubmit(onSubmit)}>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Board name"
+              label={<FormattedMessage id="create_board_name_label" />}
               type="text"
               fullWidth
               variant="standard"
               value={boardName}
               placeholder="Name"
               {...register('name', {
-                required: 'Have to be filled.',
+                required: (
+                  <FormattedMessage id="create_board_required_message" />
+                ) as unknown as string,
               })}
               onChange={(event) => handleChangeNameValue(event)}
             />
@@ -97,13 +101,15 @@ export const RenderModalCreateBoard = (props: IProps) => {
             <TextField
               margin="dense"
               id="description"
-              label="Board description"
+              label={<FormattedMessage id="create_board_description_label" />}
               type="text"
               fullWidth
               variant="standard"
               value={boardDescription}
               {...register('description', {
-                required: 'Have to be filled.',
+                required: (
+                  <FormattedMessage id="create_board_required_message" />
+                ) as unknown as string,
               })}
               onChange={(event) => handleChangeDescriptionValue(event)}
             />
@@ -113,8 +119,12 @@ export const RenderModalCreateBoard = (props: IProps) => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit(onSubmit)}>Create</Button>
+          <Button onClick={handleClose}>
+            <FormattedMessage id="cancel_btn" />
+          </Button>
+          <Button onClick={handleSubmit(onSubmit)}>
+            <FormattedMessage id="create_btn" />
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

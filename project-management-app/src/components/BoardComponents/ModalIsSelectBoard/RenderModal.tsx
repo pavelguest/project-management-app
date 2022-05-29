@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { FormattedMessage } from 'react-intl';
 
 const style = {
   position: 'absolute',
@@ -30,11 +31,11 @@ export const RenderModal = (props: IModalProps) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Attention!
+          <FormattedMessage id="is_selected_board_modal" />
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Select board
-        </Typography>
+        </Typography> */}
       </Box>
     </Modal>
   );
