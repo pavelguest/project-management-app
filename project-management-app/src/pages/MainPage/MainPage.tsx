@@ -57,7 +57,7 @@ export const MainPage = () => {
       return;
     }
     dispatch(fetchGetBoardId(id));
-    navigate('../board');
+    navigate(`../board/${id}`);
   };
 
   return (

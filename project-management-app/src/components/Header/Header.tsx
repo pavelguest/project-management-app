@@ -28,12 +28,6 @@ export const Header = () => {
                 <FormattedMessage id="main_route" />
               </NavLink>
               <NavLink
-                to="/board"
-                className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
-              >
-                <FormattedMessage id="board_route" />
-              </NavLink>
-              <NavLink
                 to="/edit"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
               >
