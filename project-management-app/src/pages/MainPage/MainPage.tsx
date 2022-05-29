@@ -57,7 +57,7 @@ export const MainPage = () => {
       return;
     }
     dispatch(fetchGetBoardId(id));
-    navigate('../board');
+    navigate(`../board/${id}`);
   };
 
   return (
@@ -90,20 +90,3 @@ export const MainPage = () => {
     </div>
   );
 };
-
-// const boardToDelete = (event.target as HTMLDivElement).closest('div') ? (event.target as HTMLDivElement).closest('div') : false;
-// console.log(
-//   (event.target as HTMLDivElement).closest('div') !== null
-//     ? (event.target as HTMLDivElement).closest('div').id
-//     : false
-// );
-
-// const handleDeleteBoard = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-//   if ((event.target as HTMLDivElement).closest('div')) {
-//     const boardToDelete = (event.target as HTMLDivElement).closest('div') as HTMLDivElement;
-//     dispatch(fetchBoardDelete(boardToDelete.id)).then((result) => {
-//       console.log(result.meta.arg);
-//       dispatch(deleteBoard(result.meta.arg));
-//     });
-//   }
-// };

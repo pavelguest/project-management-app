@@ -13,7 +13,6 @@ import {
   fetchPutColumnId,
   fetchPutTaskId,
 } from '../../../redux/reducers/ActionCreators';
-import Preload from '../../Preload';
 import {
   addColumns,
   addMovedTasks,
@@ -27,7 +26,7 @@ import { IColumnsArr } from '../../../types/boardsSliceTypes';
 
 export const BoardContainer = () => {
   const { auth } = useAppSelector((state) => state.authReducers);
-  const { currentBoard, statusApi } = useAppSelector((state) => state.boardReducers);
+  const { currentBoard } = useAppSelector((state) => state.boardReducers);
   const userId = auth.id;
   const columnsArr = currentBoard.columns;
   const dispatch = useAppDispatch();
@@ -55,11 +54,11 @@ export const BoardContainer = () => {
   const moveColumnHandler = (dragIndex: number, hoverIndex: number) => {
     const dragItem = columnsArr[dragIndex];
     if (dragItem) {
-      const coppiedStateArray = [...columnsArr];
-      const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
-      coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+      const copyStateArray = [...columnsArr];
+      const prevItem = copyStateArray.splice(hoverIndex, 1, dragItem);
+      copyStateArray.splice(dragIndex, 1, prevItem[0]);
 
-      dispatch(addColumns(coppiedStateArray));
+      dispatch(addColumns(copyStateArray));
 
       fetchPutColumnId({
         props: { boardId: currentBoard.id, columnId: dragItem.id },
@@ -73,11 +72,11 @@ export const BoardContainer = () => {
 
     const dragItem = currentColumn.tasks[dragIndex];
     if (dragItem) {
-      const coppiedStateArray = [...currentColumn.tasks];
-      const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
-      coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+      const copyStateArray = [...currentColumn.tasks];
+      const prevItem = copyStateArray.splice(hoverIndex, 1, dragItem);
+      copyStateArray.splice(dragIndex, 1, prevItem[0]);
 
-      dispatch(addTasks({ columnId: currentColumn.id, tasksArr: coppiedStateArray }));
+      dispatch(addTasks({ columnId: currentColumn.id, tasksArr: copyStateArray }));
 
       fetchPutTaskId({
         props: { boardId: currentBoard.id, columnId: currentColumnId, taskId: dragItem.id },
@@ -162,11 +161,7 @@ export const BoardContainer = () => {
     <div className="board-container">
       <ModalCreateItem type={'column'} create={createColumn} />
       <div className="columns-container">
-        {statusApi.isLoading && <Preload />}
-        {statusApi.error ? (
-          <div>{statusApi.error}</div>
-        ) : (
-          columnsArr &&
+        {columnsArr &&
           columnsArr.map((elem, index) => (
             <ColumnsContainer
               moveColumnHandler={moveColumnHandler}
@@ -197,8 +192,7 @@ export const BoardContainer = () => {
                 ))}
               </Column>
             </ColumnsContainer>
-          ))
-        )}
+          ))}
       </div>
     </div>
   );

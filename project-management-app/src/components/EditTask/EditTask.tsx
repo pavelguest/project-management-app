@@ -1,10 +1,12 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { validationSchemaForColumn } from '../BoardComponents/ModalCreateItem/ModalCreateItem';
+import * as yup from 'yup';
+// import { validationSchemaForColumn } from '../BoardComponents/ModalCreateItem/ModalCreateItem';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton, TextareaAutosize, TextField } from '@mui/material';
+import { IconButton, TextField } from '@mui/material';
 import './EditTask.css';
+import { FormattedMessage } from 'react-intl';
 
 interface IInitialValues {
   name: string;
@@ -20,9 +22,31 @@ export const EditTask = (props: IPropsChangeTitle) => {
   const initialValues: IInitialValues = {
     name: props.title,
   };
+
   const formik = useFormik({
     initialValues,
-    validationSchema: validationSchemaForColumn,
+    validationSchema: yup.object({
+      name: yup
+        .string()
+        .trim()
+        .required((<FormattedMessage id="board_elem_validate_text" />) as unknown as string)
+        .test(
+          'only letters',
+          (<FormattedMessage id="board_elem_validate_text_test" />) as unknown as string,
+          (value) => {
+            return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
+          }
+        )
+        .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
+        .max(
+          props.type === 'title' ? 10 : 20,
+          (props.type === 'title' ? (
+            <FormattedMessage id="board_elem_validate_text_max" />
+          ) : (
+            <FormattedMessage id="board_elem_validate_description_max" />
+          )) as unknown as string
+        ),
+    }),
     onSubmit: (values) => {
       props.editTaskHandle(values.name, props.type);
       props.closeContainer();
@@ -41,7 +65,7 @@ export const EditTask = (props: IPropsChangeTitle) => {
           fullWidth
           id="name"
           name="name"
-          label="Enter Title"
+          label={<FormattedMessage id="create_modal_title" />}
           type="name"
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -51,15 +75,18 @@ export const EditTask = (props: IPropsChangeTitle) => {
           size="small"
         />
       ) : (
-        <TextareaAutosize
+        <TextField
+          fullWidth
           id="name"
           name="name"
-          aria-label="minimum height"
-          minRows={3}
-          placeholder="Minimum 3 rows"
+          label={<FormattedMessage id="create_modal_description" />}
+          type="name"
           value={formik.values.name}
           onChange={formik.handleChange}
-          style={{ width: 200 }}
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+          variant="standard"
+          size="small"
         />
       )}
     </form>

@@ -49,6 +49,12 @@ export const messages = {
     create_board_elem_btn: `create {type}`,
     add_board_elem_btn: `add {type}`,
     board_elem_validate_text: `Title is required`,
+    board_elem_validate_text_min: `Title must be 3 or more characters`,
+    board_elem_validate_text_max: `Title must be 10 or less characters`,
+    board_elem_validate_text_test: `Title should contain only letters and numbers`,
+    board_elem_validate_description: `Description is required`,
+    board_elem_validate_description_min: `Description must be 3 or more characters`,
+    board_elem_validate_description_max: `Description must be 20 or less characters`,
     create_modal_title: `Enter title`,
     create_modal_description: `Enter description`,
     is_selected_board_modal: `Please select your board`,
@@ -70,7 +76,11 @@ export const messages = {
     more_btn: `More`,
     go_to_main_btn_cut: `Go to main`,
     // COMMON
-    cancel_btn: `cansel`,
+    cancel_btn: `cancel`,
+    // TaskModal
+    task_modal_title: `Title: `,
+    task_modal_description: `Description: `,
+    task_modal_user: `User: `,
   },
   [LOCALES.RUSSIAN]: {
     // Pages=============================================
@@ -117,6 +127,12 @@ export const messages = {
     create_board_elem_btn: 'создать {type}',
     add_board_elem_btn: `Добавить {type}`,
     board_elem_validate_text: `Введите название`,
+    board_elem_validate_text_min: `Название должно состоять из 3 и более символов`,
+    board_elem_validate_text_max: `Название должно содержать не более 10 символов`,
+    board_elem_validate_text_test: `Название должно содержать только буквы и цифры`,
+    board_elem_validate_description: `Введите описание`,
+    board_elem_validate_description_min: `Описание должно состоять из 3 и более символов`,
+    board_elem_validate_description_max: `Описание должно содержать не более 20 символов`,
     create_modal_title: `Введите название`,
     create_modal_description: `Введите описание`,
     is_selected_board_modal: `Выберите свою доску`,
@@ -139,5 +155,9 @@ export const messages = {
     go_to_main_btn_cut: `На главную`,
     // COMMON
     cancel_btn: `Отменить`,
+    // TaskModal
+    task_modal_title: `Заглавие: `,
+    task_modal_description: `Описание: `,
+    task_modal_user: `Пользователь: `,
   },
 };

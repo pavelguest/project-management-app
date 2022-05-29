@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  // FormControl,
-  // InputLabel,
-  // MenuItem,
-  Modal,
-  // Select,
-  TextField,
-} from '@mui/material';
+import { Box, Button, Modal, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -31,37 +22,43 @@ const style = {
 interface IInitialValues {
   name: string;
   description: string;
-  // select: string;
 }
 
 export const validationSchemaForColumn = yup.object({
   name: yup
     .string()
+    .trim()
     .required((<FormattedMessage id="board_elem_validate_text" />) as unknown as string)
-    .test('only letters', 'Name should contain only letters and numbers', (value) => {
-      return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
-    })
-    .min(3, 'Title must be 3 or more characters')
-    .max(20, 'Title must be 20 or less characters'),
+    .test(
+      'only letters',
+      (<FormattedMessage id="board_elem_validate_text_test" />) as unknown as string,
+      (value) => {
+        return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
+      }
+    )
+    .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
+    .max(10, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
 });
 export const validationSchemaForTask = yup.object({
   name: yup
     .string()
-    .required('Title is required')
-    .test('only letters', 'Name should contain only letters and numbers', (value) => {
-      return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
-    })
-    .min(3, 'Title must be 3 or more characters')
-    .max(20, 'Title must be 20 or less characters'),
+    .trim()
+    .required((<FormattedMessage id="board_elem_validate_text" />) as unknown as string)
+    .test(
+      'only letters',
+      (<FormattedMessage id="board_elem_validate_text_test" />) as unknown as string,
+      (value) => {
+        return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
+      }
+    )
+    .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
+    .max(10, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
   description: yup
     .string()
-    .required('Description is required')
-    .test('only letters', 'Name should contain only letters and numbers', (value) => {
-      return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
-    })
-    .min(3, 'Description must be 3 or more characters')
-    .max(20, 'Description must be 20 or less characters'),
-  // select: yup.string().required('This field is required'),
+    .trim()
+    .required((<FormattedMessage id="board_elem_validate_description" />) as unknown as string)
+    .min(3, (<FormattedMessage id="board_elem_validate_description_min" />) as unknown as string)
+    .max(20, (<FormattedMessage id="board_elem_validate_description_max" />) as unknown as string),
 });
 
 interface IModalCreateItem {
@@ -70,8 +67,6 @@ interface IModalCreateItem {
 }
 
 export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
-  // const { auth } = useAppSelector((state) => state.authReducers);
-  // const users = auth.allUsers;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -81,7 +76,6 @@ export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
   const initialValues: IInitialValues = {
     name: '',
     description: '',
-    // select: '',
   };
   const formik = useFormik({
     initialValues,
@@ -109,7 +103,6 @@ export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
         fullWidth
         onClick={handleOpen}
       >
-        {/* {`create ${type}`} */}
         <FormattedMessage
           id="create_board_elem_btn"
           values={
@@ -154,24 +147,6 @@ export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
                   error={formik.touched.description && Boolean(formik.errors.description)}
                   helperText={formik.touched.description && formik.errors.description}
                 />
-                {/* <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Select User</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="select"
-                    name="select"
-                    label="Select User"
-                    value={formik.values.select}
-                    onChange={formik.handleChange}
-                    error={formik.touched.select && Boolean(formik.errors.select)}
-                  >
-                    {users.map((elem, index) => {
-                      console.log(elem);
-                      console.log(elem.name);
-                      return <MenuItem key={index}>{elem.name}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl> */}
               </>
             ) : (
               ''
@@ -186,7 +161,6 @@ export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
                 }}
                 type="submit"
               >
-                {/* {`Add ${type}`} */}
                 <FormattedMessage
                   id="add_board_elem_btn"
                   values={
