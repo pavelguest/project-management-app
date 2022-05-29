@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
+import Footer from './components/Footer';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { fetchCheck, ICheckTocken } from './redux/reducers/ActionCreators';
 import jwt_decode from 'jwt-decode';
@@ -35,6 +36,7 @@ const App = () => {
       <IntlProvider messages={messages[currentLocale]} locale="en">
         <Header />
         <Main />
+        <Footer />
       </IntlProvider>
     </div>
   );

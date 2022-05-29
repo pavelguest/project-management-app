@@ -24,7 +24,7 @@ export const messages = {
     first_member_name: 'Pavel',
     first_member_contribution: `Team-lead, 'Board' page, drag-and-drop, code quality`,
     second_member_name: 'Alena',
-    second_member_contribution: `Autorization & registration, 'Welcome' & 'Edit profile' pages deploy BE`,
+    second_member_contribution: `Autorization & registration, 'Welcome' & 'Edit profile' pages, deploy BE`,
     third_member_name: 'Sergei',
     third_member_contribution: `'Main' page, adaptive header, localization`,
     app_feature_1: `Based on Japanese kanban method, web application to manage and improve work`,
