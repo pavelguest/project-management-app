@@ -2,6 +2,10 @@
   background-color: var(--light-blue) ;
 }
 
+.flag {
+  width: 30px;
+}
+
 /* .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
   width: auto !important;
 }

@@ -11,6 +11,10 @@
   display: none;
 }
 
+.nav__link {
+  white-space: nowrap;
+}
+
 @media (max-width: 1025px) {
   
   .authorization-wrapper {

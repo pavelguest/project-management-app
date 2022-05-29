@@ -20,11 +20,42 @@ export const messages = {
     app_feature_4: `Customize and expand with more features as your teamwork grows`,
     app_feature_5: `Manage projects, organize tasks and build team spirit — everything in one place`,
     // Components=========================================
-    // AlertDialogDelete
+    // AlertDialogDelete | AlertDialogModal
+    alert_dialog_board_title: `Whould you like to delete that?`,
+    disagree_btn: `Disagree`,
+    agree_btn: `Agree`,
+    // AlertDialogModal
+    alert_dialog_boards_title: `Whould you like to delete that board?`,
+    alert_dialog_boards_description: `After deleting you won&apos;t be able to restore all that board&apos;s data!`,
+    // AuthorizationBtn
+    sign_out_btn: `Sign Out`,
+    go_to_main_btn: `Go to main page`,
+    sign_up_route: `Sign Up`,
+    sign_in_route: `Sign In`,
+    // Board | ChangeTitleColumn
+    create_board_elem_btn: `create {type}`,
+    add_board_elem_btn: `add {type}`,
+    board_elem_validate_text: `Title is required`,
+    create_modal_title: `Enter title`,
     // Header
     welcome_route: `Welcome`,
+    main_route: `Main`,
+    board_route: `Board`,
     // CreateBoard
     create_btn: `Create`,
+    create_board_title: `Create a board`,
+    create_board_description: `A board is an aggregation of cards, arranged in lists. Use it for project managment,
+    tracking or organizing of whatever you want.`,
+    create_board_name_label: `Board name`,
+    create_board_description_label: `Board description`,
+    create_board_required_message: `Have to be filled`,
+    // EditBtn
+    edit_route: `Edit profile`,
+    // HeaderMenu
+    more_btn: `More`,
+    go_to_main_btn_cut: `Go to main`,
+    // COMMON
+    cancel_btn: `cansel`,
   },
   [LOCALES.RUSSIAN]: {
     // Pages=============================================
@@ -42,9 +73,41 @@ export const messages = {
     app_feature_4: `Настраивайте и расширяйте рабочее пространство на пути продвижения к общей цели`,
     app_feature_5: `Управляйте проектами, организуйте задачи и укрепляйте командный дух — все в одном месте`,
     // Components=========================================
+    // AlertDialogDelete | AlertDialogModal
+    alert_dialog_board_title: `Действительно хотите хотите удалить?`,
+    disagree_btn: `Отказаться`,
+    agree_btn: `Принять`,
+    // AlertDialogModal
+    alert_dialog_boards_title: `Действительно хотите удалить этоу доску?`,
+    alert_dialog_boards_description: `Все данные на доске будут безвозвратно утеряны!`,
+    // AuthorizationBtn
+    sign_out_btn: `Выйти`,
+    go_to_main_btn: `На главную`,
+    sign_up_route: `Регистрация`,
+    sign_in_route: `Войти`,
+    // Board
+    create_board_elem_btn: 'создать {type}',
+    add_board_elem_btn: `Добавить {type}`,
+    board_elem_validate_text: `Введите название`,
+    create_modal_title: `Введите название`,
     // Header
-    welcome_route: `Приветствие`,
+    welcome_route: `Гостевая`,
+    main_route: `Главная`,
+    board_route: `Доска`,
     // CreateBoard
     create_btn: `Создать`,
+    create_board_title: `Создать доску`,
+    create_board_description: `Доска представляет собой совокупность карточек, объединенных в списки.
+    Используйте ее для управления проектом, отслеживания или чего угодно.`,
+    create_board_name_label: `Название доски`,
+    create_board_description_label: `Описание доски`,
+    create_board_required_message: `Заполните поле`,
+    // EditBtn
+    edit_route: `Профиль`,
+    // HeaderMenu
+    more_btn: `Больше`,
+    go_to_main_btn_cut: `На главную`,
+    // COMMON
+    cancel_btn: `Отменить`,
   },
 };

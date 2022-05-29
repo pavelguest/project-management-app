@@ -25,13 +25,13 @@ export const Header = () => {
                 to="/main"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
               >
-                Main
+                <FormattedMessage id="main_route" />
               </NavLink>
               <NavLink
                 to="/board"
                 className={({ isActive }) => 'nav__link' + (isActive ? ' active' : '')}
               >
-                Board
+                <FormattedMessage id="board_route" />
               </NavLink>
               <NavLink
                 to="/edit"

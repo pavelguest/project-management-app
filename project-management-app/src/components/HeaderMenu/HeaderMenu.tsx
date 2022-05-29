@@ -7,6 +7,7 @@ import { matchPath, useNavigate, useLocation } from 'react-router-dom';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { updateIsAuth } from '../../redux/reducers/authSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { FormattedMessage } from 'react-intl';
 
 interface IHeaderMenu {
   type: string;
@@ -84,7 +85,7 @@ export const HeaderMenu = (props: IHeaderMenu) => {
             color: 'white',
           }}
         >
-          More
+          <FormattedMessage id="more_btn" />
         </Button>
       )}
       {props.type === 'auth-menu' && (
@@ -108,28 +109,28 @@ export const HeaderMenu = (props: IHeaderMenu) => {
             onClick={() => handleClose('welcome')}
             selected={location.pathname === '/' ? true : false}
           >
-            Welcome
+            <FormattedMessage id="welcome_route" />
           </MenuItem>
           <MenuItem
             onClick={() => handleClose('main')}
             selected={location.pathname === '/main' ? true : false}
             disabled={!auth.isAuth ? true : false}
           >
-            Main
+            <FormattedMessage id="main_route" />
           </MenuItem>
           <MenuItem
             onClick={() => handleClose('board')}
             selected={location.pathname === '/board' ? true : false}
             disabled={!auth.isAuth ? true : false}
           >
-            Board
+            <FormattedMessage id="board_route" />
           </MenuItem>
           <MenuItem
             onClick={() => handleClose('edit-profile')}
             selected={location.pathname === '/edit' ? true : false}
             disabled={!auth.isAuth ? true : false}
           >
-            Edit profile
+            <FormattedMessage id="edit_route" />
           </MenuItem>
         </Menu>
       )}
@@ -147,25 +148,25 @@ export const HeaderMenu = (props: IHeaderMenu) => {
             onClick={() => handleCloseAuth('sign-up')}
             disabled={auth.isAuth ? true : false}
           >
-            Sign Up
+            <FormattedMessage id="sign_up_route" />
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('sign-in')}
             disabled={auth.isAuth ? true : false}
           >
-            Sign In
+            <FormattedMessage id="sign_in_route" />
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('sign-out')}
             disabled={!auth.isAuth ? true : false}
           >
-            Sign Out
+            <FormattedMessage id="sign_out_btn" />
           </MenuItem>
           <MenuItem
             onClick={() => handleCloseAuth('go-to-main')}
             disabled={mainMatches || !auth.isAuth ? true : false}
           >
-            Main page
+            <FormattedMessage id="go_to_main_btn_cut" />
           </MenuItem>
         </Menu>
       )}

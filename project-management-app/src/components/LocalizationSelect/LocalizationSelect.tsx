@@ -1,11 +1,11 @@
 import React from 'react';
-// import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import './LocalizationSelect.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setLocale } from '../../redux/reducers/localizatonSlice';
+import { GB, RU } from 'country-flag-icons/react/3x2';
 
 export const LocalizationSelect = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +32,12 @@ export const LocalizationSelect = () => {
           }}
           // label="Age"
         >
-          <MenuItem value={'en'}>EN</MenuItem>
-          <MenuItem value={'ru'}>RU</MenuItem>
+          <MenuItem value={'en'}>
+            <GB className="flag" />
+          </MenuItem>
+          <MenuItem value={'ru'}>
+            <RU className="flag" />
+          </MenuItem>
         </Select>
       </FormControl>
     </div>

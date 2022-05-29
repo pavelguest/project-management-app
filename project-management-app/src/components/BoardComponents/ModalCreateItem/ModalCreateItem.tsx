@@ -4,6 +4,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import AddIcon from '@mui/icons-material/Add';
 import './ModalCreateItem.css';
+import { FormattedMessage } from 'react-intl';
+import { useAppSelector } from '../../../hooks/redux';
 
 const style = {
   position: 'absolute',
@@ -24,7 +26,7 @@ interface IInitialValues {
 export const validationSchema = yup.object({
   name: yup
     .string()
-    .required('Title is required')
+    .required((<FormattedMessage id="board_elem_validate_text" />) as unknown as string)
     .test('only letters', 'Name should contain only letters and numbers', (value) => {
       return !/[\&!@#$%\^\*\)\(\[\]\{\}<>,/\/\+\\]/.test(value as string);
     })
@@ -55,6 +57,7 @@ export const ModalCreateItem = ({
       handleClose();
     },
   });
+  const { locale } = useAppSelector((state) => state.localizationReducers);
 
   return (
     <div>
@@ -68,7 +71,17 @@ export const ModalCreateItem = ({
         fullWidth
         onClick={handleOpen}
       >
-        {`create ${type}`}
+        {/* {`create ${type}`} */}
+        <FormattedMessage
+          id="create_board_elem_btn"
+          values={
+            locale === 'en'
+              ? { type: type }
+              : type === 'task'
+              ? { type: 'задачу' }
+              : { type: 'колонку' }
+          }
+        />
         <AddIcon sx={{ color: 'var(--peach)', fontSize: 'medium' }} />
       </Button>
       <Modal
@@ -83,7 +96,7 @@ export const ModalCreateItem = ({
               fullWidth
               id="name"
               name="name"
-              label="Enter Title"
+              label={<FormattedMessage id="create_modal_title" />}
               type="name"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -100,7 +113,17 @@ export const ModalCreateItem = ({
                 }}
                 type="submit"
               >
-                {`Add ${type}`}
+                {/* {`Add ${type}`} */}
+                <FormattedMessage
+                  id="add_board_elem_btn"
+                  values={
+                    locale === 'en'
+                      ? { type: type }
+                      : type === 'task'
+                      ? { type: 'задачу' }
+                      : { type: 'колонку' }
+                  }
+                />
               </Button>
               <Button
                 variant="contained"
@@ -111,7 +134,7 @@ export const ModalCreateItem = ({
                 }}
                 onClick={handleClose}
               >
-                Close
+                <FormattedMessage id="cancel_btn" />
               </Button>
             </div>
           </form>
