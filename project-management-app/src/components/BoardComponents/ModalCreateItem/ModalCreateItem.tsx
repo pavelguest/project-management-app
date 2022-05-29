@@ -147,7 +147,7 @@ export const ModalCreateItem = ({ type, create }: IModalCreateItem) => {
                   fullWidth
                   id="description"
                   name="description"
-                  label="Enter Description"
+                  label={<FormattedMessage id="create_modal_description" />}
                   type="description"
                   value={formik.values.description}
                   onChange={formik.handleChange}

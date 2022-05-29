@@ -50,6 +50,8 @@ export const messages = {
     add_board_elem_btn: `add {type}`,
     board_elem_validate_text: `Title is required`,
     create_modal_title: `Enter title`,
+    create_modal_description: `Enter description`,
+    is_selected_board_modal: `Please select your board`,
     // Header
     welcome_route: `Welcome`,
     main_route: `Main`,
@@ -116,6 +118,8 @@ export const messages = {
     add_board_elem_btn: `Добавить {type}`,
     board_elem_validate_text: `Введите название`,
     create_modal_title: `Введите название`,
+    create_modal_description: `Введите описание`,
+    is_selected_board_modal: `Выберите свою доску`,
     // Header
     welcome_route: `Гостевая`,
     main_route: `Главная`,
