@@ -30,12 +30,14 @@ export const ChangeTitleColumn = (props: IPropsChangeTitle) => {
   });
   return (
     <form onSubmit={formik.handleSubmit} className={'title__form-container'}>
-      <IconButton type="submit" size={'small'}>
-        <CheckIcon />
-      </IconButton>
-      <IconButton size={'small'} onClick={props.closeContainer}>
-        <CloseIcon />
-      </IconButton>
+      <div className="form__change-button">
+        <IconButton type="submit" size={'small'}>
+          <CheckIcon />
+        </IconButton>
+        <IconButton size={'small'} onClick={props.closeContainer}>
+          <CloseIcon />
+        </IconButton>
+      </div>
       <TextField
         fullWidth
         id="name"

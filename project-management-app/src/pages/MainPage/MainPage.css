@@ -3,16 +3,17 @@
 }
 
 .main-page {
-  min-height: calc(100vh - 140px);
+  height: calc(100vh - 140px);
   background-color: var(--light-blue);
 }
 
 .boards-wrapper {
   display: flex;
-  gap: 20px;
-  padding: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 20px;
+
+  gap: 20px;
 }
 
 .board {
@@ -21,13 +22,14 @@
   flex-direction: column;
   align-items: center;
   width: 200px;
-  word-break: break-all;
   min-height: 96px;
   padding: 10px;
-  /* border: solid 1px black; */
+  word-break: break-all;
+
+/* border: solid 1px black; */
   background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
-  box-shadow: rgb(0 0 0 / 67%) 1px 1px 10px 1px;
   border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 67%) 1px 1px 10px 1px;
   cursor: pointer;
 }
 
@@ -42,21 +44,21 @@
 }
 
 .board h3 {
+  width: fit-content;
   color: var(--dark-blue);
   border-bottom: 1px solid var(--dark-blue);
-  width: fit-content;
 }
 
 .board svg {
-  opacity: 0;
   background: none;
+  opacity: 0;
   transition-duration: 0.5s;
   transition-property: opacity, transform;
 }
 
 .board svg.active {
-  opacity: 1;
   transform: translateX(-20px);
+  opacity: 1;
 }
 
 .create-board-modal__delete:hover {

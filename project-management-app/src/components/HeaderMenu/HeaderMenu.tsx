@@ -119,13 +119,6 @@ export const HeaderMenu = (props: IHeaderMenu) => {
             <FormattedMessage id="main_route" />
           </MenuItem>
           <MenuItem
-            onClick={() => handleClose('board')}
-            selected={location.pathname === '/board' ? true : false}
-            disabled={!auth.isAuth ? true : false}
-          >
-            <FormattedMessage id="board_route" />
-          </MenuItem>
-          <MenuItem
             onClick={() => handleClose('edit-profile')}
             selected={location.pathname === '/edit' ? true : false}
             disabled={!auth.isAuth ? true : false}
