@@ -8,6 +8,7 @@ import {
   IMovedTasks,
   IDeleteTask,
   IChangeColumnTitle,
+  IChangeTask,
 } from '../../types/boardsSliceTypes';
 import { ITaskObj } from '../../types/tasksSliceType';
 import { fetchCreateColumn, fetchCreateTask, fetchGetBoardId } from './ActionCreators';
@@ -81,6 +82,19 @@ export const boardsSlice = createSlice({
       );
       state.currentBoard.columns[indexColumnChange].title = action.payload.title;
     },
+    changeTask: (state, action: PayloadAction<IChangeTask>) => {
+      const indexColumn = state.currentBoard.columns.findIndex(
+        (elem) => elem.id === action.payload.columnId
+      );
+      const indexTask = state.currentBoard.columns[indexColumn].tasks.findIndex(
+        (elem) => elem.id === action.payload.taskId
+      );
+      if (action.payload.type === 'title') {
+        state.currentBoard.columns[indexColumn].tasks[indexTask].title = action.payload.value;
+      } else {
+        state.currentBoard.columns[indexColumn].tasks[indexTask].description = action.payload.value;
+      }
+    },
     delColumn: (state, action: PayloadAction<string>) => {
       const indexDeleteColumn = state.currentBoard.columns.findIndex(
         (elem) => elem.id === action.payload
@@ -101,8 +115,11 @@ export const boardsSlice = createSlice({
     [fetchGetBoardId.fulfilled.type]: (state, action: PayloadAction<ICurrentBoard>) => {
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`get`, action.payload);
-      state.currentBoard = action.payload;
+      const sortColumnsArr = action.payload.columns.sort((a, b) => a.order - b.order);
+      sortColumnsArr.map((elem) => elem.tasks.sort((a, b) => a.order - b.order));
+      const copyArr = action.payload;
+      copyArr.columns = [...sortColumnsArr];
+      state.currentBoard = copyArr;
     },
     [fetchGetBoardId.pending.type]: (state) => {
       state.statusApi.isLoading = true;
@@ -115,7 +132,6 @@ export const boardsSlice = createSlice({
       const { id, title, order } = action.payload;
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`set`, action.payload);
       state.currentBoard.columns.push({ id: id, title: title, order: order, tasks: [] });
     },
     [fetchCreateColumn.pending.type]: (state) => {
@@ -129,7 +145,6 @@ export const boardsSlice = createSlice({
       const { columnId } = action.payload;
       state.statusApi.isLoading = false;
       state.statusApi.error = '';
-      console.log(`set`, action.payload);
       state.currentBoard.columns.forEach((elem) => {
         if (elem.id === columnId) {
           elem.tasks.push(action.payload);
@@ -156,6 +171,7 @@ export const {
   addNewColumn,
   addColumns,
   changeColumnTitle,
+  changeTask,
   delColumn,
   delTask,
   addTasks,

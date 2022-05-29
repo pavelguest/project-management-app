@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
-import { Alert, Box, Modal, Snackbar, Typography } from '@mui/material';
+import { Alert, Box, CardMedia, Modal, Snackbar, Typography } from '@mui/material';
 import { fetchEdit } from '../../redux/reducers/ActionCreators';
 import { IEditProps } from '../../types/editPropsTypes';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       display: 'flex',
       flexWrap: 'wrap',
-      width: 400,
       margin: `${theme.spacing(0)} auto`,
+      [theme.breakpoints.down('sm')]: {
+        width: 300,
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 400,
+      },
     },
     loginBtn: {
       marginTop: theme.spacing(2),
@@ -36,7 +41,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       marginTop: theme.spacing(10),
-      width: 400,
+      [theme.breakpoints.down('sm')]: {
+        width: 300,
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 400,
+      },
     },
   })
 );
@@ -47,7 +57,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  border: '2px solid var(--darck-blue)',
+  border: '2px solid var(--dark-blue)',
   backgroundColor: 'var(--light-blue)',
   boxShadow: 24,
   p: 4,
@@ -91,6 +101,13 @@ const Edit = () => {
 
   return (
     <div className="edit">
+      <CardMedia
+        component="img"
+        image="./pngegg40.png"
+        style={{ width: '25%', marginLeft: 0 }}
+        className="img"
+        alt="green iguana"
+      />
       <form onSubmit={handleSubmit(submit)} className={classes.container} autoComplete="off">
         {auth.isLoading ? (
           <Preload />

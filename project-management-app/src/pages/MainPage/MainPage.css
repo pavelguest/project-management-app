@@ -42,8 +42,8 @@
 }
 
 .board h3 {
-  color: var(--darck-blue);
-  border-bottom: 1px solid var(--darck-blue);
+  color: var(--dark-blue);
+  border-bottom: 1px solid var(--dark-blue);
   width: fit-content;
 }
 

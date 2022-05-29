@@ -20,6 +20,7 @@ export const messages = {
     change_btn: `Change`,
     // Welcome
     project_creators: `Our team`,
+    project_about: `About project`,
     first_member_name: 'Pavel',
     first_member_contribution: `Team-lead, 'Board' page, drag-and-drop, code quality`,
     second_member_name: 'Alena',
@@ -73,6 +74,7 @@ export const messages = {
     // Pages=============================================
     // welcome
     project_creators: `Наша команда`,
+    project_about: `О проекте`,
     first_member_name: 'Павел',
     first_member_contribution: `Лидер команды, страница "Доска", перетаскивание, качество кода`,
     second_member_name: 'Алена',

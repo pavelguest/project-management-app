@@ -39,7 +39,6 @@ export const ColumnsContainer = ({
       if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
         return;
       }
-      console.log(dragIndex, hoverIndex);
 
       moveColumnHandler(dragIndex, hoverIndex);
       item.index = hoverIndex;

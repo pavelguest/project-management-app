@@ -13,7 +13,7 @@ interface IProps {
   columnId: string;
   boardId: string;
   children: ReactNode;
-  createTask: (value: string, currentColumnId: string) => void;
+  createTask: (value: string, description: string, currentColumnId: string) => void;
   deleteColumn: (columnId: string) => void;
   changeTitle: (columnId: string, title: string) => void;
 }
@@ -39,8 +39,8 @@ export const Column = ({
     }),
   });
 
-  const setTask = (value: string) => {
-    createTask(value, columnId);
+  const setTask = (value: string, description?: string) => {
+    createTask(value, description as string, columnId);
   };
   const deleteItem = () => {
     deleteColumn(columnId);
@@ -67,29 +67,31 @@ export const Column = ({
   };
 
   return (
-    <div className={'columns__item'}>
-      <div className={'column__controls'}>
-        <div className={'column-title__container'}>
-          {isEditTitle ? (
-            <ChangeTitleColumn
-              title={title}
-              closeContainer={handleCloseTitleChange}
-              changeTitleColumn={changeTitleColumn}
-            />
-          ) : (
-            <h3 onClick={handleOpenTitleChange}>{title}</h3>
-          )}
+    <>
+      <div className={'columns__item'}>
+        <div className={'column__controls'}>
+          <div className={'column-title__container'}>
+            {isEditTitle ? (
+              <ChangeTitleColumn
+                title={title}
+                closeContainer={handleCloseTitleChange}
+                changeTitleColumn={changeTitleColumn}
+              />
+            ) : (
+              <h3 onClick={handleOpenTitleChange}>{title}</h3>
+            )}
+          </div>
+          <AlertDialogDelete deleteItem={deleteItem} />
         </div>
-        <AlertDialogDelete deleteItem={deleteItem} />
+        <div
+          className="columns-wrapper"
+          ref={drop}
+          style={{ backgroundColor: isOver ? 'coral' : 'white' }}
+        >
+          {children}
+        </div>
+        <ModalCreateItem type={'task'} create={setTask} />
       </div>
-      <div
-        className="columns-wrapper"
-        ref={drop}
-        style={{ backgroundColor: isOver ? 'coral' : 'white' }}
-      >
-        {children}
-      </div>
-      <ModalCreateItem type={'task'} create={setTask} />
-    </div>
+    </>
   );
 };
