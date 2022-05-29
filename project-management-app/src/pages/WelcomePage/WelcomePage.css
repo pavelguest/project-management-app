@@ -1,9 +1,18 @@
 .welcome {
     max-width: 1920px;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 140px);
     background-color: var(--blue);
     
 }
+.wrapper__parallax {
+    height: calc(100vh - 140px) !important;
+    margin-top: 80px;
+}
+
+.welcome__name {
+    color: var(--dark-blue);
+}
+
 .welcome__title {
     color: var(--beige);
     padding-top: 15px;
@@ -97,6 +106,7 @@
 .welcome__subtitle{
     font-size: 19px !important;
     height: auto;
+    font-family: 'Reggae One', cursive !important;
 }
 
 .welcome__box {
@@ -109,6 +119,7 @@
     display: flex;
     justify-content: center;
     padding: 0 10px 20px 10px;
+
 }
 
 .welcome__item {
@@ -121,6 +132,7 @@
     background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 1) 0%, rgba(242, 226, 206, 1) 100%);
     text-align: left;
     padding-left: 1%;
+    font-family: 'Reggae One', cursive !important;
 }
 
 @keyframes show {
