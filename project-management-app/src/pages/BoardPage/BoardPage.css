@@ -1,4 +1,4 @@
 .board-page {
-  min-height: calc(100vh - 85px);
+  height: calc(100vh - 140px);
   background-color: var(--blue);
 }

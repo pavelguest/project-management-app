@@ -8,3 +8,6 @@
 
   gap: 5px;
 }
+.form__change-button {
+  display: flex;
+}
