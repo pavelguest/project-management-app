@@ -1,7 +1,21 @@
 .footer {
+  display: flex;
+  gap: 20px;
   height: 60px;
+  width: 100%;
+  padding: 10px 20px;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  background-color: var(--dark-blue);
 }
 
-.footer__item.footer__item_right svg {
-  height: 40px;
+.footer a {
+  color: #1976d2;
+}
+
+.footer__item.footer__item_right {
+  text-decoration: none;
+  margin-left: auto;
 }
