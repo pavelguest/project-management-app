@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="footer">
       <span className="footer__item">© 2022</span>
-      <span className="footer__item">Pavel</span>
+      <span className="footer__item teammate_name">Pavel</span>
       <a
         className="footer__item"
         href="https://github.com/pavelguest"
@@ -14,7 +14,7 @@ export const Footer = () => {
       >
         <GitHubIcon />
       </a>
-      <span className="footer__item">Alena</span>
+      <span className="footer__item teammate_name">Alena</span>
       <a
         className="footer__item"
         href="https://github.com/ElemartA"
@@ -23,7 +23,7 @@ export const Footer = () => {
       >
         <GitHubIcon />
       </a>
-      <span className="footer__item">Sergei</span>
+      <span className="footer__item teammate_name">Sergei</span>
       <a
         className="footer__item"
         href="https://github.com/Essonti"
