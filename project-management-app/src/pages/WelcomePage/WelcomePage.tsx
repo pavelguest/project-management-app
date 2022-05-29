@@ -9,17 +9,19 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 export const WelcomePage = () => {
   return (
     <div className="welcome">
-      <Parallax pages={2.2} style={{ top: '0', left: '0' }}>
+      <Parallax pages={2.2} style={{ top: '0', left: '0' }} className="wrapper__parallax">
         <ParallaxLayer
           offset={0}
           speed={0.8}
           style={{
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: 'var(--peach)',
           }}
         >
+          <h1 className="welcome__name">SumoKan</h1>
           <CardMedia
             className="welcome__mainfoto"
             component="img"
@@ -70,14 +72,14 @@ export const WelcomePage = () => {
           </Box>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.8 }}>
+        <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.7 }}>
           <CardMedia
             component="img"
             image="./sumo2.png"
             style={{
               display: 'block',
-              width: '25%',
-              marginLeft: '69%',
+              width: '24.5%',
+              marginLeft: '75%',
             }}
             alt="green iguana"
           />
@@ -113,7 +115,12 @@ export const WelcomePage = () => {
                       alt="green iguana"
                     />
                     <CardContent className="welcome__card-text-wrapper">
-                      <Typography gutterBottom variant="h5" component="div">
+                      <Typography
+                        style={{ fontFamily: 'Reggae One' }}
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                      >
                         <FormattedMessage id="first_member_name" />
                       </Typography>
                       <Typography
@@ -138,7 +145,12 @@ export const WelcomePage = () => {
                       alt="green iguana"
                     />
                     <CardContent className="welcome__card-text-wrapper">
-                      <Typography gutterBottom variant="h5" component="div">
+                      <Typography
+                        style={{ fontFamily: 'Reggae One' }}
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                      >
                         <FormattedMessage id="second_member_name" />
                       </Typography>
                       <Typography
@@ -163,7 +175,12 @@ export const WelcomePage = () => {
                       alt="green iguana"
                     />
                     <CardContent className="welcome__card-text-wrapper">
-                      <Typography gutterBottom variant="h5" component="div">
+                      <Typography
+                        style={{ fontFamily: 'Reggae One' }}
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                      >
                         <FormattedMessage id="third_member_name" />
                       </Typography>
                       <Typography

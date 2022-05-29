@@ -24,6 +24,11 @@
   .footer {
     font-size: 1rem;
   }
+@media (max-width: 342px) {
+  .footer {
+    font-size: 0.9rem;
+  }
+}
 
   .teammate_name {
     display: none;
