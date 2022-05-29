@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import Auth from '../../pages/Auth';
-import BoardPage from '../../pages/BoardPage';
 import Edit from '../../pages/Edit/Edit';
 import MainPage from '../../pages/MainPage';
 import NotFoundPage from '../../pages/NotFoundPage';
