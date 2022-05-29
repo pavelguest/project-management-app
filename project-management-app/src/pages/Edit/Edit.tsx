@@ -14,6 +14,7 @@ import { fetchEdit } from '../../redux/reducers/ActionCreators';
 import { IEditProps } from '../../types/editPropsTypes';
 import { useNavigate } from 'react-router-dom';
 import Preload from '../../components/Preload';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,22 +96,25 @@ const Edit = () => {
           <Preload />
         ) : (
           <Card className={classes.card}>
-            <CardHeader className={classes.header} title="Login App" />
+            <CardHeader
+              className={classes.header}
+              title={<FormattedMessage id="auth_header_title" />}
+            />
             <CardContent>
               <div>
                 <TextField
                   fullWidth
                   id="name"
                   type="text"
-                  label="Name"
+                  label={<FormattedMessage id="auth_name_label" />}
                   placeholder="Name"
                   margin="normal"
                   defaultValue={auth.name}
                   {...register('name', {
-                    required: 'Поле обязательно к заполнению',
+                    required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
                     minLength: {
                       value: 5,
-                      message: 'Длинна не менее 5 символов',
+                      message: (<FormattedMessage id="auth_length_error" />) as unknown as string,
                     },
                   })}
                 />
@@ -122,14 +126,14 @@ const Edit = () => {
                   fullWidth
                   id="login"
                   type="text"
-                  label="New Login"
+                  label={<FormattedMessage id="auth_new_login_label" />}
                   placeholder="New Login"
                   margin="normal"
                   {...register('login', {
-                    required: 'Поле обязательно к заполнению',
+                    required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
                     minLength: {
                       value: 5,
-                      message: 'Длинна не менее 5 символов',
+                      message: (<FormattedMessage id="auth_length_error" />) as unknown as string,
                     },
                   })}
                 />
@@ -141,14 +145,16 @@ const Edit = () => {
                   fullWidth
                   id="password"
                   type="password"
-                  label="New Password"
+                  label={<FormattedMessage id="auth_new_password_label" />}
                   placeholder="New Password"
                   margin="normal"
                   {...register('password', {
-                    required: 'Поле обязательно к заполнению',
+                    required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
                     minLength: {
                       value: 3,
-                      message: 'Длинна не менее 3 символов',
+                      message: (
+                        <FormattedMessage id="auth_length_password_error" />
+                      ) as unknown as string,
                     },
                   })}
                 />
@@ -165,7 +171,7 @@ const Edit = () => {
                 size="large"
                 className={classes.loginBtn}
               >
-                Change
+                <FormattedMessage id="change_btn" />
               </Button>
             </CardActions>
             <Modal

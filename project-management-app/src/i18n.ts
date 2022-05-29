@@ -6,7 +6,19 @@ export const LOCALES = {
 export const messages = {
   [LOCALES.ENGLISH]: {
     // Pages=============================================
-    // welcome
+    // Auth | Edit
+    auth_header_title: `Login App`,
+    auth_required_error: `Have to be filled`,
+    auth_length_error: `Enter at least 5 characters`,
+    auth_name_label: `Name`,
+    auth_login_label: `Login`,
+    auth_password_label: `Password`,
+    auth_length_password_error: `Enter at least 3 characters`,
+    auth_btn: `Login`,
+    auth_new_login_label: `New login`,
+    auth_new_password_label: `New password`,
+    change_btn: `Change`,
+    // Welcome
     project_creators: `Our team`,
     first_member_name: 'Pavel',
     first_member_contribution: `Team-lead, 'Board' page, drag-and-drop, code quality`,
@@ -64,7 +76,7 @@ export const messages = {
     first_member_name: 'Павел',
     first_member_contribution: `Лидер команды, страница "Доска", перетаскивание, качество кода`,
     second_member_name: 'Алена',
-    second_member_contribution: `Авторизация и регистрация, страница "Гостевая" и "Профиль", деплой бэкенда`,
+    second_member_contribution: `Авторизация и регистрация, страницы "Гостевая" и "Профиль", деплой бэкенда`,
     third_member_name: 'Сергей',
     third_member_contribution: `"Главная" страница, адаптивность хедера, локализация`,
     app_feature_1: `Веб приложение, основанное на японском Канбан методе, для управления и улучшения рабочего процесса`,
@@ -72,6 +84,18 @@ export const messages = {
     app_feature_3: `Начните с доски, добавляйте ваши колонки и задачи`,
     app_feature_4: `Настраивайте и расширяйте рабочее пространство на пути продвижения к общей цели`,
     app_feature_5: `Управляйте проектами, организуйте задачи и укрепляйте командный дух — все в одном месте`,
+    // Auth
+    auth_header_title: `Рагистрация`,
+    auth_required_error: `Поле обязательно к заполнению`,
+    auth_length_error: `Длинна не менее 5 символов`,
+    auth_name_label: `Имя`,
+    auth_login_label: `Логин`,
+    auth_password_label: `Пароль`,
+    auth_length_password_error: `Длинна не менее 3 символов`,
+    auth_btn: `Регистраация`,
+    auth_new_login_label: `Новый логин`,
+    auth_new_password_label: `Новый пароль`,
+    change_btn: `Поменять`,
     // Components=========================================
     // AlertDialogDelete | AlertDialogModal
     alert_dialog_board_title: `Действительно хотите хотите удалить?`,
