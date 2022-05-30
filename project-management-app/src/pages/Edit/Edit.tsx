@@ -117,10 +117,7 @@ const Edit = () => {
           <Preload />
         ) : (
           <Card className={classes.card}>
-            <CardHeader
-              className={classes.header}
-              title={<FormattedMessage id="auth_header_title" />}
-            />
+            <CardHeader className={classes.header} title={<FormattedMessage id="edit_title" />} />
             <CardContent>
               <div>
                 <TextField

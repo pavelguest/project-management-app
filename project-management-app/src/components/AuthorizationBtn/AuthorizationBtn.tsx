@@ -30,7 +30,7 @@ export const AuthorizationBtn = () => {
               whiteSpace: 'nowrap',
               boxShadow: '1px 1px 10px 1px #000a',
               backgroundColor: 'var(--blue)',
-              fontFamily: 'Reggae One',
+              fontFamily: 'HanZi',
             }}
             onClick={logOut}
           >
@@ -60,7 +60,7 @@ export const AuthorizationBtn = () => {
               whiteSpace: 'nowrap',
               boxShadow: '1px 1px 10px 1px #000a',
               backgroundColor: 'var(--blue)',
-              fontFamily: 'Reggae One',
+              fontFamily: 'HanZi',
             }}
             onClick={() => navigate('/main')}
           >
