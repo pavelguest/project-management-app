@@ -166,12 +166,3 @@ export const HeaderMenu = (props: IHeaderMenu) => {
     </div>
   );
 };
-
-// PaperProps={{
-//   style: {
-//     color: 'white',
-//   },
-// }}
-// (props.type === 'auth-done-main' ||
-//         props.type === 'auth-done-not-main' ||
-//         props.type === 'auth-not-done')
