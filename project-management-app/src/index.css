@@ -1,0 +1,22 @@
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* font-family: 'Reggae One', cursive; */
+  font-family: "HanZi";
+}
+.App {
+  text-align: center;
+}
+
+@font-face {
+  font-family: "HanZi"; 
+  src: url("./fonts/HanZi.ttf") format("truetype"); 
+  font-style: normal; 
+  font-weight: normal; 
+} 

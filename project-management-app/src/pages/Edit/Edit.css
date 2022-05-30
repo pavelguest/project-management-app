@@ -1,0 +1,17 @@
+.edit{
+  min-height: calc(100vh - 140px);
+  background-color: var(--beige);
+}
+
+.img {
+  position: absolute;
+  top: 8%;
+  left: 0;
+}
+
+
+@media (max-width: 413px){
+  .makeStyles-container-13 {
+    width: 300px !important;
+  }
+}

@@ -1,0 +1,4 @@
+.board-page {
+  height: calc(100vh - 140px);
+  background-color: var(--blue);
+}

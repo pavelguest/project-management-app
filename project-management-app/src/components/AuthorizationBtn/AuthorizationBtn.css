@@ -1,0 +1,32 @@
+.authorization-wrapper {
+  /* width: 380px; */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  /* justify-content: space-between; */
+  /* margin-left: 900px; */
+}
+
+.account-box-icon {
+  display: none;
+}
+
+.nav__link {
+  white-space: nowrap;
+  font-family: 'HanZi' !important;
+}
+
+@media (max-width: 1025px) {
+  
+  .authorization-wrapper {
+    display: none;
+  }
+
+  .account-box-icon {
+    display: inline-block;
+  }
+}
+
+/* .sign-out-btn {
+  display: inline-flex;
+} */

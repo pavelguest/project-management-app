@@ -1,0 +1,55 @@
+.create-board-modal {
+  position: absolute;
+  top: 66px;
+}
+
+.create-board-modal__label {
+  font-size: 1.6rem;
+}
+
+.create-board-modal__input {
+  border: solid 1px black;
+}
+
+.create-board-modal__btn {
+  width: 60px;
+}
+
+.errors-message {
+  color: red;
+  font-size: .6rem;
+}
+
+.create__btn {
+  padding: 5px;
+  height: 37px;
+  font-size: 20px;
+  color: #000000;
+  text-decoration: none;
+  box-shadow: 1px 1px 10px 1px #000a;
+  background-color: var(--light-blue);
+  font-family:"Roboto";
+}
+
+.create__btn:hover {
+  color: var(--beige);
+}
+
+.create__btn:active {
+  background-color: var(--peach);
+}
+
+/* border: solid 1px black;
+color: black;
+background-color: white;
+z-index: 2; */
+  /* display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+padding: 10px;
+width: 300px; */
+
+/* .create-board-wrapper {
+  position: relative;
+} */

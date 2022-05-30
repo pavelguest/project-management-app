@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  gap: 20px;
+  height: 60px;
+  width: 100%;
+  padding: 10px 20px;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  background-color: var(--dark-blue);
+}
+
+.footer a {
+  color: #1976d2;
+}
+
+.footer__item.footer__item_right {
+  text-decoration: none;
+  margin-left: auto;
+}
+
+@media (max-width: 1025px) {
+  .footer {
+    font-size: 1rem;
+  }
+@media (max-width: 342px) {
+  .footer {
+    font-size: 0.9rem;
+  }
+}
+
+  .teammate_name {
+    display: none;
+  }
+  
+}

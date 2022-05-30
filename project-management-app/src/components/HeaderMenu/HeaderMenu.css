@@ -1,0 +1,28 @@
+.more-menu {
+  display: none;
+  transform: 0.3s;
+  border-radius: 4px;
+  color: white;
+}
+
+.more-menu:hover {
+  background-color: var(--light-blue) ;
+}
+
+#basic-menu li,
+#basic-menu-auth li {
+  display: flex  !important;
+  min-height: 48px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  justify-content: flex-start !important;
+}
+
+@media (max-width: 1025px) {
+  
+  .more-menu {
+    display: block;
+  }
+}
