@@ -12,7 +12,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  minWidth: 300,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -37,7 +37,7 @@ export const validationSchemaForColumn = yup.object({
       }
     )
     .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
-    .max(10, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
+    .max(12, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
 });
 export const validationSchemaForTask = yup.object({
   name: yup
@@ -52,7 +52,7 @@ export const validationSchemaForTask = yup.object({
       }
     )
     .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
-    .max(10, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
+    .max(12, (<FormattedMessage id="board_elem_validate_text_max" />) as unknown as string),
   description: yup
     .string()
     .trim()

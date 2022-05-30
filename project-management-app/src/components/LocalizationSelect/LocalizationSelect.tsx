@@ -13,7 +13,6 @@ export const LocalizationSelect = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     dispatch(setLocale(event.target.value));
-    console.log(locale);
   };
 
   return (

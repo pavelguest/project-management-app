@@ -224,7 +224,7 @@ const fetchPutTaskId = async (task: IPutTask) => {
     );
     return response;
   } catch (e) {
-    return console.log(e);
+    return e;
   }
 };
 const fetchPutColumnId = async (column: IPutColumn) => {
@@ -238,7 +238,7 @@ const fetchPutColumnId = async (column: IPutColumn) => {
     );
     return response;
   } catch (e) {
-    return console.log(e);
+    return e;
   }
 };
 

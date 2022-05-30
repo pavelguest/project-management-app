@@ -4,6 +4,7 @@
 
 .main-page {
   height: calc(100vh - 140px);
+  overflow: auto;
   background-color: var(--light-blue);
 }
 
