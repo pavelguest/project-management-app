@@ -128,7 +128,7 @@ const Edit = () => {
                   id="name"
                   type="text"
                   label={<FormattedMessage id="auth_name_label" />}
-                  placeholder="Name"
+                  // placeholder="Name"
                   margin="normal"
                   defaultValue={auth.name}
                   {...register('name', {
@@ -148,7 +148,7 @@ const Edit = () => {
                   id="login"
                   type="text"
                   label={<FormattedMessage id="auth_new_login_label" />}
-                  placeholder="New Login"
+                  // placeholder="New Login"
                   margin="normal"
                   {...register('login', {
                     required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
@@ -167,7 +167,7 @@ const Edit = () => {
                   id="password"
                   type="password"
                   label={<FormattedMessage id="auth_new_password_label" />}
-                  placeholder="New Password"
+                  // placeholder="New Password"
                   margin="normal"
                   {...register('password', {
                     required: (<FormattedMessage id="auth_required_error" />) as unknown as string,

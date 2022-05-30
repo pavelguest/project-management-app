@@ -129,7 +129,7 @@ const Auth = () => {
                       id="name"
                       type="text"
                       label={<FormattedMessage id="auth_name_label" />}
-                      placeholder="Name"
+                      // placeholder="Name"
                       margin="normal"
                       {...register('name', {
                         required: (
@@ -154,7 +154,7 @@ const Auth = () => {
                   id="login"
                   type="text"
                   label={<FormattedMessage id="auth_login_label" />}
-                  placeholder="Login"
+                  // placeholder="Login"
                   margin="normal"
                   {...register('login', {
                     required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
@@ -173,7 +173,7 @@ const Auth = () => {
                   id="password"
                   type="password"
                   label={<FormattedMessage id="auth_password_label" />}
-                  placeholder="Password"
+                  // placeholder="Password"
                   margin="normal"
                   {...register('password', {
                     required: (<FormattedMessage id="auth_required_error" />) as unknown as string,
