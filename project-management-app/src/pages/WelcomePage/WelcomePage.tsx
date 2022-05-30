@@ -116,7 +116,7 @@ export const WelcomePage = () => {
                     />
                     <CardContent className="welcome__card-text-wrapper">
                       <Typography
-                        style={{ fontFamily: 'Reggae One' }}
+                        style={{ fontFamily: 'HanZi' }}
                         gutterBottom
                         variant="h5"
                         component="div"
@@ -146,7 +146,7 @@ export const WelcomePage = () => {
                     />
                     <CardContent className="welcome__card-text-wrapper">
                       <Typography
-                        style={{ fontFamily: 'Reggae One' }}
+                        style={{ fontFamily: 'HanZi' }}
                         gutterBottom
                         variant="h5"
                         component="div"
@@ -176,7 +176,7 @@ export const WelcomePage = () => {
                     />
                     <CardContent className="welcome__card-text-wrapper">
                       <Typography
-                        style={{ fontFamily: 'Reggae One' }}
+                        style={{ fontFamily: 'HanZi' }}
                         gutterBottom
                         variant="h5"
                         component="div"

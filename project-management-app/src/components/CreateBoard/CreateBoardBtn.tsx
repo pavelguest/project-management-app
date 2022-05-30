@@ -20,12 +20,13 @@ export function CreateBoardBtn() {
     <div className="create-board-wrapper">
       {location.pathname === '/main' && (
         <Button
+          className="create__button"
           variant="contained"
           style={{
             whiteSpace: 'nowrap',
             boxShadow: '1px 1px 10px 1px #000a',
             backgroundColor: 'var(--blue)',
-            fontFamily: 'Reggae One',
+            fontFamily: 'HanZi',
           }}
           onClick={handleToggleModal}
         >

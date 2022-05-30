@@ -83,6 +83,7 @@ export const HeaderMenu = (props: IHeaderMenu) => {
           onClick={handleClick}
           style={{
             color: 'white',
+            fontFamily: 'HanZi',
           }}
         >
           <FormattedMessage id="more_btn" />

@@ -118,7 +118,13 @@ const Auth = () => {
           <Card className={classes.card}>
             <CardHeader
               className={classes.header}
-              title={<FormattedMessage id="auth_header_title" />}
+              title={
+                registrationMatches ? (
+                  <FormattedMessage id="auth_header_title" />
+                ) : (
+                  <FormattedMessage id="auth_header_title_autoriz" />
+                )
+              }
             />
             <CardContent>
               <div>
@@ -198,7 +204,11 @@ const Auth = () => {
                 size="large"
                 className={classes.loginBtn}
               >
-                <FormattedMessage id="auth_btn" />
+                {registrationMatches ? (
+                  <FormattedMessage id="auth_btn" />
+                ) : (
+                  <FormattedMessage id="auth_btn_autoriz" />
+                )}
               </Button>
             </CardActions>
             <Snackbar
