@@ -43,21 +43,3 @@ export const Header = () => {
     </header>
   );
 };
-
-// type Timeout = ReturnType<typeof setTimeout>;
-
-// window.addEventListener('resize', resizeThrottler, false);
-
-// let resizeTimeout: null | Timeout;
-// function resizeThrottler() {
-//   if (!resizeTimeout) {
-//     resizeTimeout = setTimeout(function () {
-//       resizeTimeout = null;
-//       actualResizeHandler();
-//     }, 66);
-//   }
-// }
-
-// function actualResizeHandler() {
-//   console.log('resized' + window.screen.width);
-// }

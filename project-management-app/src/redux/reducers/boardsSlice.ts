@@ -134,9 +134,9 @@ export const boardsSlice = createSlice({
       state.statusApi.error = '';
       state.currentBoard.columns.push({ id: id, title: title, order: order, tasks: [] });
     },
-    [fetchCreateColumn.pending.type]: (state) => {
-      state.statusApi.isLoading = true;
-    },
+    // [fetchCreateColumn.pending.type]: (state) => {
+    //   state.statusApi.isLoading = true;
+    // },
     [fetchCreateColumn.rejected.type]: (state, action: PayloadAction<string>) => {
       state.statusApi.isLoading = false;
       state.statusApi.error = action.payload;
@@ -151,9 +151,9 @@ export const boardsSlice = createSlice({
         }
       });
     },
-    [fetchCreateTask.pending.type]: (state) => {
-      state.statusApi.isLoading = true;
-    },
+    // [fetchCreateTask.pending.type]: (state) => {
+    //   state.statusApi.isLoading = true;
+    // },
     [fetchCreateTask.rejected.type]: (state, action: PayloadAction<string>) => {
       state.statusApi.isLoading = false;
       state.statusApi.error = action.payload;

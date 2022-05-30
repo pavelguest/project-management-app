@@ -39,7 +39,7 @@ export const EditTask = (props: IPropsChangeTitle) => {
         )
         .min(3, (<FormattedMessage id="board_elem_validate_text_min" />) as unknown as string)
         .max(
-          props.type === 'title' ? 10 : 20,
+          props.type === 'title' ? 12 : 20,
           (props.type === 'title' ? (
             <FormattedMessage id="board_elem_validate_text_max" />
           ) : (

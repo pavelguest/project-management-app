@@ -125,7 +125,7 @@ export const Task = ({
         style={{ backgroundColor: isDragging ? 'red' : 'white' }}
         onClick={(event) => handleOpenTask(event)}
       >
-        {taskObj.title}
+        <div className="task__title">{taskObj.title}</div>
         <AlertDialogDelete deleteItem={deleteItem} />
       </div>
       <TaskModal

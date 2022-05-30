@@ -78,7 +78,9 @@ export const Column = ({
                 changeTitleColumn={changeTitleColumn}
               />
             ) : (
-              <h3 onClick={handleOpenTitleChange}>{title}</h3>
+              <h3 className="column__title" onClick={handleOpenTitleChange}>
+                {title}
+              </h3>
             )}
           </div>
           <AlertDialogDelete deleteItem={deleteItem} />

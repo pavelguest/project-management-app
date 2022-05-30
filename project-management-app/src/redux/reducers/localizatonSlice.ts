@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IInitialState } from '../../types/localizationSliceType';
 
 const initialState: IInitialState = {
-  locale: 'en',
+  locale: localStorage.getItem('localization')
+    ? (localStorage.getItem('localization') as string)
+    : 'en',
 };
 
 export const localizationSlice = createSlice({
@@ -10,6 +12,7 @@ export const localizationSlice = createSlice({
   initialState,
   reducers: {
     setLocale: (state, action: PayloadAction<string>) => {
+      localStorage.setItem('localization', action.payload);
       state.locale = action.payload;
     },
   },
