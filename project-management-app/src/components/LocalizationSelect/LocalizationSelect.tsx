@@ -29,7 +29,6 @@ export const LocalizationSelect = () => {
           style={{
             color: 'white',
           }}
-          // label="Age"
         >
           <MenuItem value={'en'}>
             <GB className="flag" />

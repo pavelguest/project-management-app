@@ -66,6 +66,16 @@
   color: black;
 }
 
+@media (max-width: 1025px) {
+
+  .board svg {
+    transform: translateX(-6px) translateY(-10px);
+    opacity: 0.7;
+  }
+
+}
+
+
 /* .create-board-modal__delete {
   float: right;
   margin-left: 25px;
@@ -80,3 +90,9 @@
 
 /* overflow-wrap: break-word; */
 /* transition-delay: 0.5s; */
+  
+/* .create-board-modal__delete {
+  float: right;
+  margin-left: 25px;
+  cursor: pointer;
+} */

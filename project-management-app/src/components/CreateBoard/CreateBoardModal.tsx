@@ -19,14 +19,6 @@ interface IProps {
   open: boolean;
 }
 
-// const useStyles = makeStyles({
-//   dialog: {
-//     position: 'absolute',
-//     top: -150,
-//     left: 0,
-//   },
-// });
-
 export const RenderModalCreateBoard = (props: IProps) => {
   const dispatch = useAppDispatch();
   const [boardName, setBoardName] = useState('');
@@ -47,8 +39,6 @@ export const RenderModalCreateBoard = (props: IProps) => {
     );
   };
 
-  // const classes = useStyles();
-
   const handleClose = () => {
     dispatch(toggleCreateBoardModalOpen(false));
   };
@@ -65,13 +55,7 @@ export const RenderModalCreateBoard = (props: IProps) => {
 
   return (
     <div className="create-board-modal">
-      <Dialog
-        open={props.open}
-        onClose={handleClose}
-        // classes={{
-        //   paper: classes.dialog,
-        // }}
-      >
+      <Dialog open={props.open} onClose={handleClose}>
         <DialogTitle>
           <FormattedMessage id="create_board_title" />
         </DialogTitle>
@@ -79,7 +63,7 @@ export const RenderModalCreateBoard = (props: IProps) => {
           <DialogContentText>
             <FormattedMessage id="create_board_description" />
           </DialogContentText>
-          <form /* className="create-board-modal"*/ onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               autoFocus
               margin="dense"

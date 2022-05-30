@@ -9,7 +9,6 @@
   background-color: var(--light-blue) ;
 }
 
-/* .MuiButtonBase-root */
 #basic-menu li,
 #basic-menu-auth li {
   display: flex  !important;
