@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import './Edit.css';
 import { useForm } from 'react-hook-form';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
-import { Alert, Box, CardMedia, Modal, Snackbar, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Modal,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { fetchEdit } from '../../redux/reducers/ActionCreators';
 import { IEditProps } from '../../types/editPropsTypes';
 import { useNavigate } from 'react-router-dom';

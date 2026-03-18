@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
+import { createStyles, makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
+import {
+  Alert,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Snackbar,
+  TextField,
+} from '@mui/material';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchLogin, fetchRegistr } from '../../redux/reducers/ActionCreators';
-import { Alert, CardMedia, Snackbar } from '@mui/material';
 import { FormInputsTypes } from '../../types/formInputsTypes';
 import { unwrapResult } from '@reduxjs/toolkit';
 import Preload from '../../components/Preload';

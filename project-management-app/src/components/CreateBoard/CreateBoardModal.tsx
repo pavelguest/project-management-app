@@ -80,7 +80,9 @@ export const RenderModalCreateBoard = (props: IProps) => {
               })}
               onChange={(event) => handleChangeNameValue(event)}
             />
-            <div style={{ color: 'red' }}>{errors?.name && <p>{errors?.name?.message}</p>}</div>
+            <div style={{ color: 'red' }}>
+              {errors?.name?.message ? <p>{String(errors.name.message)}</p> : null}
+            </div>
             <TextField
               margin="dense"
               id="description"
@@ -97,7 +99,7 @@ export const RenderModalCreateBoard = (props: IProps) => {
               onChange={(event) => handleChangeDescriptionValue(event)}
             />
             <div style={{ color: 'red' }}>
-              {errors?.description && <p>{errors?.description?.message}</p>}
+              {errors?.description?.message ? <p>{String(errors.description.message)}</p> : null}
             </div>
           </form>
         </DialogContent>
